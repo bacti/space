@@ -1,0 +1,177 @@
+<link rel="stylesheet" href="../assets/style.css" />
+
+<h1 id="mathematics-for-machine-learning">Mathematics for Machine Learning</h1>
+
+<h2 id="notation">Notation</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><img src="https://latex.codecogs.com/svg.latex?\mathbb{R}" /></td>
+      <td>set of real numbers</td>
+    </tr>
+    <tr>
+      <td><img src="https://latex.codecogs.com/svg.latex?\mathbb{R}^{n}" /></td>
+      <td>set (vector space) of <img src="https://latex.codecogs.com/svg.latex?n" />-tuples of real numbers, endowed with the usual inner product</td>
+    </tr>
+    <tr>
+      <td><img src="https://latex.codecogs.com/svg.latex?\mathbb{R}^{m\times%20n}" /></td>
+      <td>set (vector space) of <img src="https://latex.codecogs.com/svg.latex?m" />-by-<img src="https://latex.codecogs.com/svg.latex?n" /> matrices</td>
+    </tr>
+    <tr>
+      <td><img src="https://latex.codecogs.com/svg.latex?\delta_{ij}" /></td>
+      <td>Kronecker delta, i.e. <img src="https://latex.codecogs.com/svg.latex?\delta_{ij}=1" /> if <img src="https://latex.codecogs.com/svg.latex?i=j" />, 0 otherwise</td>
+    </tr>
+    <tr>
+      <td><img src="https://latex.codecogs.com/svg.latex?\nabla%20f(\textbf{x})" /></td>
+      <td>gradient of the function <img src="https://latex.codecogs.com/svg.latex?f" /> at <img src="https://latex.codecogs.com/svg.latex?\textbf{x}" /></td>
+    </tr>
+    <tr>
+      <td><img src="https://latex.codecogs.com/svg.latex?\nabla^2%20f(\textbf{x})" /></td>
+      <td>Hessian of the function <img src="https://latex.codecogs.com/svg.latex?f" /> at <img src="https://latex.codecogs.com/svg.latex?\textbf{x}" /></td>
+    </tr>
+    <tr>
+      <td><img src="https://latex.codecogs.com/svg.latex?\textbf{A}^\top" /></td>
+      <td>transpose of the matrix <img src="https://latex.codecogs.com/svg.latex?\textbf{A}" /></td>
+    </tr>
+    <tr>
+      <td><img src="https://latex.codecogs.com/svg.latex?\Omega" /></td>
+      <td>sample space</td>
+    </tr>
+    <tr>
+      <td><img src="https://latex.codecogs.com/svg.latex?\mathbb{P}(A)" /></td>
+      <td>probability of event <img src="https://latex.codecogs.com/svg.latex?A" /></td>
+    </tr>
+    <tr>
+      <td><img src="https://latex.codecogs.com/svg.latex?p(X)" /></td>
+      <td>distribution of random variable <img src="https://latex.codecogs.com/svg.latex?X" /></td>
+    </tr>
+    <tr>
+      <td><img src="https://latex.codecogs.com/svg.latex?p(x)" /></td>
+      <td>probability density/mass function evaluated at <img src="https://latex.codecogs.com/svg.latex?x" /></td>
+    </tr>
+    <tr>
+      <td><img src="https://latex.codecogs.com/svg.latex?A^\textsc{C}" /></td>
+      <td>complement of event <img src="https://latex.codecogs.com/svg.latex?A" /></td>
+    </tr>
+    <tr>
+      <td><img src="https://latex.codecogs.com/svg.latex?A\bigcup^{\cdot}B" /></td>
+      <td>union of <img src="https://latex.codecogs.com/svg.latex?A" /> and <img src="https://latex.codecogs.com/svg.latex?B" />, with the extra requirement that <img src="https://latex.codecogs.com/svg.latex?A\cap%20B=\varnothing" /></td>
+    </tr>
+    <tr>
+      <td><img src="https://latex.codecogs.com/svg.latex?\mathbb{E}[X]" /></td>
+      <td>expected value of random variable <img src="https://latex.codecogs.com/svg.latex?X" /></td>
+    </tr>
+    <tr>
+      <td><img src="https://latex.codecogs.com/svg.latex?\text{Var}(X)" /></td>
+      <td>variance of random variable <img src="https://latex.codecogs.com/svg.latex?X" /></td>
+    </tr>
+    <tr>
+      <td><img src="https://latex.codecogs.com/svg.latex?\text{Cov}(X,Y)" /></td>
+      <td>covariance of random variables <img src="https://latex.codecogs.com/svg.latex?X" /> and <img src="https://latex.codecogs.com/svg.latex?Y" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="linear-algebra">Linear Algebra</h2>
+
+<h2 id="calculus-and-optimization">Calculus and Optimization</h2>
+
+<h2 id="probability">Probability</h2>
+
+<p>Probability theory provides powerful tools for modeling and dealing with uncertainty.</p>
+
+<h3 id="basics">Basics</h3>
+
+<p>Suppose we have some sort of randomized experiment (e.g. a coin toss, die roll) that has a fixed set of possible outcomes. This set is called the <strong><em>sample space</em></strong> and denoted <img src="https://latex.codecogs.com/svg.latex?\Omega" />.</p>
+
+<p>We would like to define probabilities for some <strong>events</strong>, which are subsets of <img src="https://latex.codecogs.com/svg.latex?\Omega" />. The set of events is denoted <img src="https://latex.codecogs.com/svg.latex?\mathcal{F}" />. The complement of the event <img src="https://latex.codecogs.com/svg.latex?A" /> is another event, <img src="https://latex.codecogs.com/svg.latex?A^\textsc{C}=\Omega\setminus%20A" />.</p>
+
+<h4 id="proposition-28">Proposition 28.</h4>
+<p style="font-style: italic">
+  If <img src="https://latex.codecogs.com/svg.latex?\left\{A_i\right\}\subseteq\mathcal{F}" /> is a countable set of events, disjoint or not, then
+  <p style="text-align: center">
+    <img src="https://latex.codecogs.com/svg.latex?\mathbb{P}\left(\bigcup_{i}A_i\right)\leq\sum_{i}\mathbb{P}(A_i)" />
+  </p>
+</p>
+
+<p>This inequality is sometimes referred to as <strong>Boole’s inequality</strong> or the <strong>union bound</strong>.</p>
+
+<p><em>Proof.</em> Define <img src="https://latex.codecogs.com/svg.latex?B_1=A_1" /> and <img src="https://latex.codecogs.com/svg.latex?B_i=A_i\setminus\left(\cup_{j&lt;i}A_j\right)" /> for <img src="https://latex.codecogs.com/svg.latex?i&gt;1" />, noting that <img src="https://latex.codecogs.com/svg.latex?\cup_{j\leq%20i}B_j=\cup_{j\leq%20i}A_j" /> for all <img src="https://latex.codecogs.com/svg.latex?i" /> and the <img src="https://latex.codecogs.com/svg.latex?B_i" /> are disjoint. Then</p>
+
+<p style="text-align: center">
+  <img src="https://latex.codecogs.com/svg.latex?\mathbb{P}\left(\bigcup_{i}A_i\right)=\mathbb{P}\left(\bigcup_{i}B_i\right)=\sum_{i}\mathbb{P}(B_i)\leq\sum_{i}\mathbb{P}(A_i)" />
+</p>
+
+<p>where the last inequality follows by monotonicity since <img src="https://latex.codecogs.com/svg.latex?B_i\subseteq%20A_i" /> for all <img src="https://latex.codecogs.com/svg.latex?i" />.
+<span style="float: right">
+  <img src="https://latex.codecogs.com/svg.latex?\square" />
+</span></p>
+
+<h4 id="conditional-probability">Conditional probability</h4>
+
+<p>The <strong>conditional probability</strong> of event <img src="https://latex.codecogs.com/svg.latex?A" /> given that event <img src="https://latex.codecogs.com/svg.latex?B" /> has occurred is written <img src="https://latex.codecogs.com/svg.latex?\mathbb{P}(A|B)" /> and defined as</p>
+
+<p style="text-align: center">
+  <img src="https://latex.codecogs.com/svg.latex?\mathbb{P}(A|B)=\frac{\mathbb{P}(A\cap%20B)}{\mathbb{P}(B)}" />
+</p>
+
+<p>assuming <img src="https://latex.codecogs.com/svg.latex?\mathbb{P}(B)&gt;0" />.</p>
+
+<h4 id="chain-rule">Chain rule</h4>
+
+<p>Another very useful tool, the <strong>chain rule</strong>, follows immediately from this definition:</p>
+
+<p style="text-align: center">
+  <img src="https://latex.codecogs.com/svg.latex?\mathbb{P}(A\cap%20B)=\mathbb{P}(A|B)\mathbb{P}(B)=\mathbb{P}(B|A)\mathbb{P}(A)" />
+</p>
+
+<h4 id="bayes-rule">Bayes’ rule</h4>
+
+<p>Taking the equality from above one step further, we arrive at the simple but crucial <strong>Bayes’ rule</strong>:</p>
+
+<p style="text-align: center">
+  <img src="https://latex.codecogs.com/svg.latex?\mathbb{P}(A|B)=\frac{\mathbb{P}(B|A)\mathbb{P}(A)}{\mathbb{P}(B)}" />
+</p>
+
+<p>It is sometimes beneficial to omit the normalizing constant and write</p>
+
+<p style="text-align: center">
+  <img src="https://latex.codecogs.com/svg.latex?\mathbb{P}(A|B)\propto\mathbb{P}(A)\mathbb{P}(B|A)" />
+</p>
+
+<p>Under this formulation, <img src="https://latex.codecogs.com/svg.latex?\mathbb{P}(A)" /> is often referred to as the <strong>prior</strong>, <img src="https://latex.codecogs.com/svg.latex?\mathbb{P}(A|B)" /> as the <strong>posterior</strong>, and <img src="https://latex.codecogs.com/svg.latex?\mathbb{P}(B|A)" /> as the <strong>likelihood</strong>.</p>
+
+<p>In the context of machine learning, we can use Bayes’ rule to update our “beliefs” (e.g. values of our model parameters) given some data that we’ve observed.</p>
+
+<h3 id="random-variables">Random variables</h3>
+
+<h3 id="joint-distributions">Joint distributions</h3>
+
+<h3 id="great-expectations">Great Expectations</h3>
+
+<h3 id="variance">Variance</h3>
+
+<h3 id="covariance">Covariance</h3>
+
+<h3 id="random-vectors">Random vectors</h3>
+
+<h3 id="estimation-of-parameters">Estimation of Parameters</h3>
+
+<h3 id="the-gaussian-distribution">The Gaussian distribution</h3>
+
+<p>Known as the <strong>normal distribution</strong>. It is a continuous distribution, parameterized by its mean <img src="https://latex.codecogs.com/svg.latex?\mu\in\mathbb{R}^d" /> and positive-definite covariance matrix <img src="https://latex.codecogs.com/svg.latex?\Sigma\in\mathbb{R}^{d\times%20d}" />, with density</p>
+
+<p style="text-align: center">
+  <img src="https://latex.codecogs.com/svg.latex?p(\textbf{x};\mu,\Sigma)=\frac{1}{\sqrt{(2\pi)^d\det(\Sigma)}}\exp\left(-\frac{1}{2}(\textbf{x}-\mu)^\top\Sigma^{-1}(\textbf{x}-\mu)\right)" />
+</p>
+
+<p>Note that in the special case <img src="https://latex.codecogs.com/svg.latex?d=1" />, the density is written in the more recognizable form</p>
+
+<p style="text-align: center">
+  <img src="https://latex.codecogs.com/svg.latex?p(x;\mu,\sigma^2)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)" />
+</p>
+
+<p>We write <img src="https://latex.codecogs.com/svg.latex?\textbf{X}\sim\mathcal{N}(\mu,\Sigma)" /> to denote that <img src="https://latex.codecogs.com/svg.latex?\textbf{X}" /> is normally distributed with mean <img src="https://latex.codecogs.com/svg.latex?\mu" /> and variance <img src="https://latex.codecogs.com/svg.latex?\Sigma" />.</p>
+
+<h4 id="the-geometry-of-multivariate-gaussians">The geometry of multivariate Gaussians</h4>

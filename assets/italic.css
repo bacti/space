@@ -1,0 +1,6 @@
+@import url(./style.css);
+@font-face { font-family: 'Computer Modern'; src: url("./cmunti.otf") format("opentype"); }
+
+@font-face { font-family: 'Computer Modern'; font-weight: bold; src: url("./cmunbi.otf") format("opentype"); }
+
+/*# sourceMappingURL=italic.css.map */

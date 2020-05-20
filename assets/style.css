@@ -278,7 +278,7 @@ table td { border: 1px solid #e8e8e8; }
 
 @font-face { font-family: 'Computer Modern'; font-weight: bold; src: url("./cmunbx.otf") format("opentype"); }
 
-body { margin: 0 20vw 5vw; font-family: 'Computer Modern' !important; font-size: 1.2em; }
+body { margin: 0 20vw 5vw; font-family: 'Computer Modern'; font-size: 1.2em; }
 
 h1, h2, h3, h4, h5, h6 { font-weight: bold; }
 

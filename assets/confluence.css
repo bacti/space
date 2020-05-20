@@ -278,9 +278,9 @@ table td { border: 1px solid #e8e8e8; }
 
 @font-face { font-family: 'Computer Modern'; font-weight: bold; src: url("./cmunbx.otf") format("opentype"); }
 
-.wiki-content { font-family: 'Computer Modern'; margin: 0 0 15px 0; }
+.wiki-content { font-family: 'Computer Modern'; }
 
-.wiki-content h1, .wiki-content h2, .wiki-content h3, .wiki-content h4, .wiki-content h5, .wiki-content h6 { font-weight: bold; }
+.wiki-content h1, .wiki-content h2, .wiki-content h3, .wiki-content h4, .wiki-content h5, .wiki-content h6 { font-weight: bold; margin: 0 0 15px 0 !important; }
 
 .wiki-content h1 { font-size: 2.4em; }
 

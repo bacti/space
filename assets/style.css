@@ -278,7 +278,9 @@ table td { border: 1px solid #e8e8e8; }
 
 @font-face { font-family: 'Computer Modern'; font-weight: bold; src: url("./cmunbx.otf") format("opentype"); }
 
-body { margin: 0 20vw 5vw; font-family: 'Computer Modern'; }
+body { font-family: 'Computer Modern'; font-size: 1.2em; }
+
+body #sidebar { position: fixed; margin-top: 1vh; padding-left: 8px; width: 20vw; height: 94vh; max-width: 20vw; }
 
 body h1, body h2, body h3, body h4, body h5, body h6 { font-weight: bold; }
 
@@ -288,6 +290,18 @@ body h2 { font-size: 2em; }
 
 body h3 { font-size: 1.6em; }
 
-body h4, body p { font-size: 1.2em; }
+body ul { margin: 0; }
+
+body strong { color: red; }
+
+.scrollbar::-webkit-scrollbar { width: 4px; }
+
+.scrollbar::-webkit-scrollbar-thumb { background-color: #0CC; }
+
+.scrollbar::-webkit-scrollbar-thumb:hover, .scrollbar::-webkit-scrollbar-thumb:active { background-color: #055; }
+
+[data-tooltip]:before { /* needed - do not touch */ content: attr(data-tooltip); position: absolute; opacity: 0; /* customizable */ transition: all 0.15s ease; padding: 2px 8px; font-weight: bold; color: #FFF; border-radius: 4px; margin-left: -8px; }
+
+[data-tooltip]:hover:before { /* needed - do not touch */ opacity: 1; /* customizable */ background: #555; }
 
 /*# sourceMappingURL=style.css.map */

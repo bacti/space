@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bayesian Statistics:<br/> From Concept to Data Analysis</title>
+    <script id="MathJax-script" async src="../../assets/tex-chtml.js"></script>
+</head>
+<body class='scrollbar'>
+    
+    <div style='display: flex; flex-direction: row; margin: 2vh 2vw 5vh; justify-content: center;'>
+        <div id='sideleft' style='flex: 1; max-width: 20vw'>
+            <div id='sidebar' class='scrollbar'>
+                    
+    <ul>
+    
+    </ul>
+            </div>
+        </div>
+        <div style='flex: 3; max-width: 72vw; padding-left: 20px;'>
+            <h1 style='text-align: center; text-transform: uppercase;'>Bayesian Statistics:<br/> From Concept to Data Analysis</h1>
+            <link rel="stylesheet" href="../../assets/style.css" />
+
+<style>#sideleft { display: none }</style>
+
+<h3 id="rules-of-probability">Rules of Probability</h3>
+
+<p>Probabilities are defined for events.<br />
+An <strong>event</strong> is some outcome that we could potentially or hypothetically observe or experience.<br />
+In mathematical notation, we often write an event as a capital letter.<br />
+Probabilities must be between zero and one, i.e., <strong>\(0 ≤ P(A) ≤ 1\)</strong> for any event \(A\).<br />
+Probabilities add to one, i.e., if we add up the probabilities of all possible events, those probabilities must add to one.<br />
+The <strong>complement of an event</strong>, \(A^\mathsf{c}\), means that the event does not happen. Since probabilities must add to one, <strong>\(P(A^\mathsf{c}) = 1 − P(A)\)</strong>.<br />
+If \(A\) and \(B\) are two events, the probability that \(A\) or \(B\) happens (inclusive) is the probability of the union of the events <strong>\(P(A ∪ B) = P(A) + P(B) − P(A ∩ B)\)</strong>.<br />
+If a set of events \(A_i\) for \(i = 1,\dots,m\) are mutually exclusive, then <strong>\(P\left(\bigcup_{i=1}^{m}A_i\right)=\sum_{i=1}^{m}P(A_i)\)</strong>.<br /></p>
+
+<h3 id="odds">Odds</h3>
+
+<p>The odds for event A, denoted \(\mathcal{O}(A)\) is defined as <strong>\(\mathcal{O}(A) = {P(A) \over P(A^\mathsf{c})} = {P(A) \over 1\, −\, P(A)}\)</strong>.</p>
+
+<h3 id="expectation">Expectation</h3>
+
+<p>The <strong>expected value</strong> of a random variable \(X\) is a weighted average of values \(X\) can take, with weights given by the probabilities of those values.<br />
+If \(X\) can take on only a finite number of values (say, \(x_1, x_2, \dots , x_n\)), we can calculate the expected value as <strong>\(E(X)=\sum_{i=1}^{n}x_i \cdot P(X=x_i)\)</strong>.<br /></p>
+
+<h3 id="bayes-theorem">Bayes’ Theorem</h3>
+
+<p>The simple form of <strong>Bayes Theorem</strong> involves two discrete events
+<strong>\(P(A|B) = {P(A ∩ B) \over P(B)} = {P(B|A) \cdot P(A) \over P(B|A) \cdot P(A) + P(B|A^\mathsf{c}) \cdot P(A^\mathsf{c})}\)</strong>.<br />
+If the events \(A_1, \dots, A_m\) are mutually exclusive and \(\sum_{i=1}^{m}P(A_i)=1\), then we can write Bayes Theorem as
+<strong>\(P(A_1|B) = {P(B|A_1) \cdot P(A_1) \over \sum_{i=1}^{m} P(B|A_i) \cdot P(A_i)}\)</strong>.<br /></p>
+
+<p>When dealing with a continuous random variable \(θ\), we can write the conditional density for \(θ\) given \(y\) as
+<strong>\(f(\theta|y) = {P(y|\theta) \cdot P(\theta) \over \int P(y|\theta) \cdot P(\theta) d\theta}\)</strong>.<br /></p>
+
+<h3 id="indicator-functions">Indicator Functions</h3>
+
+<p><strong>Indicator function</strong> (Heaviside function  or unit step function) is a function that takes the value one if its argument is true, and the value zero if its argument is false.
+Written as <strong>\(I_{\{A\}}(x)\)</strong> or <strong>\(1_{\{A\}}(x)\)</strong>.<br />
+If the context is obvious, we can also simply write <strong>\(I_{\{A\}}\)</strong>.<br /></p>
+
+<h3 id="expected-values">Expected Values</h3>
+
+<p>The expected value, also known as the <strong>expectation</strong> or <strong>mean</strong>, of a random variable \(X\) is denoted <strong>\(E(X)\)</strong>.<br />
+It is the weighed average of all values X could take, with weights given by the probabilities of those values.<br />
+If X is discrete-valued, then <strong>\(E(X) = \sum_x x\cdot P(X=x) = \sum_x x\cdot f(x)\)</strong>.<br />
+If X is a continuous random variable with <strong>probability density function (PDF)</strong> f(x), we replace the summation with an integral
+<strong>\(E(X) = \int_{-\infty}^{\infty} x\cdot f(x)dx\)</strong>.<br /></p>
+
+<p>Let \(X\) and \(Y\) be random variables with \(E(X) = µX\) and \(E(Y ) = µY\).<br />
+The mean of a new random variable \(Z = aX + bY +c\) is <strong>\(E(Z) = E(aX +bY +c) = aE(X) + bE(Y ) + c = aµX + bµY + c\)</strong> where \(a, b, c\) are any real constants.<br />
+We also have <strong>\(E(g(X)) = \int_{-\infty}^{\infty} g(x)\cdot f(x)dx\)</strong>.<br />
+In general, <strong>\(E(g(X)) \ne g(E(X))\)</strong>.<br /></p>
+
+<h3 id="variance">Variance</h3>
+
+<p>The <strong>variance</strong> of random variable measures how spread out its values are.<br />
+For \(X\) is a random variable with mean \(E(X) = µ\), the variance is <strong>the expected value of the squared deviation of X from its mean</strong> <strong>\(E[(X − µ)^2]\)</strong>.<br />
+The square root of variance is called the <strong>standard deviation</strong>.<br /></p>
+
+<p>If \(X\) is discrete, it is calculated as <strong>\(Var(X) = \sum_x (x - \mu)^2 \cdot P(X = x)\)</strong>.<br />
+If \(X\) is continuous, it is <strong>\(Var(X) = \int_{-\infty}^{\infty} (x - \mu)^2 \cdot f(x)dx\)</strong><br />
+A convenient formula for the variance is <strong>\(Var(X) = E[X^2] − (E[X])^2\)</strong>.<br /></p>
+
+<p>Let \(X\) and \(Y\) be random independent variables with \(Var(X) = σ^2_X\) and \(Var(Y) = σ^2_Y\).<br />
+The variance of \(Z = aX + bY + c\) is then <strong>\(Var(Z) = Var(aX + bY + c) = a^2Var(X) + b^2Var(Y) + 0 = a^2σ^2_X + b^2σ^2_Y\)</strong> where \(a, b, c\) are any real constants.<br /></p>
+
+<h3 id="discrete-distributions">Discrete Distributions</h3>
+
+<p>The <strong>Bernoulli distribution</strong> is the distribution of the outcome of a single Bernoulli trial.<br />
+\(X \sim \text{B}(p)\)<br />
+<strong>\(P(X=x|p) = f(x|p) = p^x(1-p)^{1-x}I_{\{x\in\{0,1\}\}}(x)\)</strong><br />
+\(E[X] = p\)<br />
+\(Var[X] = p(1-p)\)<br /></p>
+
+<p>The <strong>binomial distribution</strong> is just the sum of the \(n\) independent Bernoullis.<br />
+\(X \sim \text{Bin}(n,p)\)<br />
+<strong>\(P(X=x|p) = f(x|p) = \binom{n}{x}p^x(1-p)^{n-x}\)</strong> for \(x=1,2,\dots,n\)<br />
+\(E[X] = np\)<br />
+\(Var[X] = np(1-p)\)<br /></p>
+
+<p>The <strong>geometric distribution</strong> is the number of trials needed to get the first success, i.e., the number of Bernoulli events until a success is observed.<br />
+\(X \sim \text{Geo}(p)\)<br />
+<strong>\(P(X=x|p) = p(1-p)^{x-1}\)</strong> for \(x=1,2,\dots\)<br />
+\(E[X] = {1 \over p}\)<br /></p>
+
+<p>The <strong>multinomial distribution</strong> is like a binomial when there are more than two possible outcomes, eg. we have \(n\) trials and there are \(k\) different possible outcomes which occur with probabilities \(p_1, \dots, p_k\).<br />
+<strong>\(f(x_1, \dots, x_k | p_1, \dots, p_k) = {n! \over x_1!\dots x_k!}p_1^{x_1} \dots p_k^{x_k}\)</strong><br />
+The expected number of observations in category \(i\) is \(np_i\).<br /></p>
+
+<p>The <strong>Poisson distribution</strong> is used for counts, and arises in a variety of situations.<br />
+The parameter \(λ &gt; 0\) is the rate at which we expect to observe the thing we are counting.<br />
+\(X \sim \text{Pois}(\lambda)\)<br />
+<strong>\(P(X=x|\lambda) = {\lambda^x\exp(-\lambda) \over x!}\)</strong> for \(x=0,1,2,\dots\)<br />
+\(E[X] = \lambda\)<br />
+\(Var[X] = \lambda\)<br />
+A <strong>Poisson process</strong> is a process wherein events occur on average at rate \(λ\), events occur one at a time, and events occur independently of each other.<br /></p>
+
+<h3 id="continuous-distributions">Continuous Distributions</h3>
+
+<p>The <strong>exponential distribution</strong> is often used to model the waiting time between random events.<br />
+Indeed, if the waiting times between successive events are independent from an \(\text{Exp}(λ)\) distribution, then for any fixed time window of length \(t\), the number of events occurring in that window will follow a Poisson distribution with mean \(tλ\).<br />
+\(X \sim \text{Exp}(\lambda)\)<br />
+<strong>\(f(x|\lambda) = \lambda e^{-\lambda x} I_{\{x\ge0\}}(x)\)</strong><br />
+\(E[X] = {1 \over \lambda}\)<br />
+\(Var[X] = {1 \over \lambda^2}\)<br />
+Similar to the Poisson distribution, the parameter \(λ\) is interpreted as the rate at which the events occur.<br /></p>
+
+<p>If \(X_1, X_2, \dots, X_n\) are independent (and identically distributed \(\text{Exp}(\lambda)\)) waiting times between successive events, then the total waiting time for all \(n\) events to occur \(Y = \sum_{i=1}^n X_i\) will follow a <strong>gamma distribution</strong> with shape parameter \(α = n\) and rate parameter \(β = λ\).<br />
+\(Y \sim \text{Gamma}(\alpha,\beta)\)<br />
+<strong>\(f(y|\alpha,\beta) = {\beta^{\alpha} \over \Gamma(\alpha)} y^{\alpha-1}e^{-\beta y} I_{\{y\ge0\}}(y)\)</strong><br />
+\(E[Y] = {\alpha \over \beta}\)<br />
+\(Var[Y] = {\alpha \over \beta^2}\)<br />
+\(\Gamma(·)\) is the gamma function, a generalization of the factorial function which can accept non-integer arguments.<br />
+If n is a positive integer, then \(Γ(n) = (n − 1)!\).<br />
+The exponential distribution is a special case of the gamma distribution with \(α = 1\).<br />
+As \(α\) increases, the gamma distribution more closely resembles the normal distribution.<br /></p>
+
+<p>The <strong>uniform distribution</strong> is used for random variables whose possible values are equally likely over an interval.<br />
+If the interval is \((a, b)\), then the uniform probability density function (PDF) \(f(x)\) is flat for all values in that interval and 0 everywhere else.<br />
+\(X \sim \text{Uniform}(a,b)\)<br />
+<strong>\(f(x|a,b) = { 1 \over b\,-\,a} I_{\{a\ge x\ge b\}}(x)\)</strong><br />
+\(E[X] = {a\,+\,b \over 2}\)<br />
+\(Var[X] = {(b\,-\,a)^2 \over 12}\)<br />
+The <strong>standard uniform distribution</strong> is obtained when \(a = 0\) and \(b = 1\).<br /></p>
+
+<p>The <strong>beta distribution</strong> is used for random variables which take on values between 0 and 1.<br />
+\(X \sim \text{Beta}(\alpha,\beta)\)<br />
+<strong>\(f(x|\alpha,\beta) = {Γ(\alpha+\beta) \over Γ(\alpha)Γ(\beta)} x^{\alpha-1}(1-x)^{\beta-1} I_{\{0&lt;x&lt;1\}}(x)\)</strong><br />
+\(E[X] = {\alpha \over \alpha+\beta}\)<br />
+\(Var[X] = {\alpha\beta \over (\alpha+\beta)^2(\alpha+\beta+1)}\)<br />
+The standard Uniform(0, 1) distribution is a special case of the beta distribution with \(α = β = 1\).<br /></p>
+
+<p>The <strong>normal, or Gaussian distribution</strong> arises as the limiting distribution of sums (and averages) of random variables, due to the Central Limit Theorem.<br />
+It is often used to model the “errors,” or unexplained variation of individual observations in regression models.<br />
+\(Z \sim \text{N}(0,1)\)<br />
+<strong>\(f(z) = {1 \over \sqrt{2\pi}} \exp(-{z^2 \over 2})\)</strong><br />
+\(E[Z] = 0\)<br />
+\(Var[Z] = 1\)<br />
+For \(σ &gt; 0\) and \(µ\) is any real constant, \(X = σZ+µ\) follows a normal distribution with mean \(µ\) and variance \(σ^2\) (standard deviation \(σ\)).<br />
+\(X \sim \text{N}(\mu,\sigma^2)\)<br />
+<strong>\(f(x|\mu,\sigma^2) = {1 \over \sqrt{2\pi\sigma^2}} \exp\left(-{(x-\mu)^2 \over 2\sigma^2}\right)\)</strong><br />
+\(E(X) = E(σZ+µ) = σE(Z) + µ = σ · 0 + µ = µ\)<br />
+\(Var(X) = Var(σZ + µ) = σ^2Var(Z) + 0 = σ^2·1 = σ^2\)<br />
+If \(X_1 ∼ N(µ_1, σ^2_1)\) and \(X_2 ∼ N(µ_2, σ^2_2)\) are independent, then \(X_1+X_2 ∼ N(µ_1+µ_2, σ^2_1+σ^2_2)\).<br />
+If \(\overline{X}={1 \over n}\sum_{i=1}^{n}X_i\) the average of n independent and identically distributed (iid) normal random variables
+\(X_i \overset{\text{iid}}{\sim} N(µ, σ^2)\) for \(i=1,\dots,n\) then \(\overline{X} \sim \text{N}(\mu,{\sigma^2 \over n})\).<br /></p>
+
+<p>If \(\sigma\) replaced by the sample standard deviation \(S=\sqrt{\sum_i(X_i-\overline{X})^2/(n-1)}\), \({\overline{X}-\mu \over \sigma/\sqrt{n}} \sim \text{N}(0,1)\) is no longer distributed as standard normal, but as a <strong>standard t distribution</strong> with <strong>degrees of freedom</strong> \(\nu=n−1\).<br />
+\(Y \sim \text{t}_{\nu}\)<br />
+<strong>\(f(y) = {\Gamma({\nu+1\over2}) \over \Gamma({\nu\over2})\sqrt{\nu\pi}} \left(1+{y^2\over\nu}\right)^{-({\nu+1\over2})}\)</strong><br />
+\(E[Y] = 0\) if \(\nu &gt; 1\)<br />
+\(Var[Y] = {\nu\over\nu\,-\,2}\) if \(\nu &gt; 2\)<br />
+The t distribution is symmetric and resembles the normal distribution, but with thicker tails.<br />
+As the degrees of freedom increase, the t distribution looks more and more like the standard normal distribution.<br /></p>
+
+<h3 id="central-limit-theorem">Central Limit Theorem</h3>
+
+<p>The <strong>Central Limit Theorem</strong> is saying that with sufficiently large sample sizes, the sample average approximately follows a normal distribution.<br />
+Let \(X_1, \dots, X_n\) be independent and identically distributed with \(E[X_i] = µ\) and \(Var(X_i) = σ^2, 0 &lt; σ^2 &lt; ∞\),
+then <strong>\({\sqrt{n}(\overline{X}-\mu)\over\sigma}\Rightarrow\text{N}(0,1)\)</strong>.<br />
+That is, \(\overline{X}_n\) is approximately normally distributed with mean \(µ\) and variance \(σ^2/n\) or standard deviation \(σ/\sqrt{n}\).<br /></p>
+
+<h3 id="argmax">Argmax</h3>
+
+<p>When we want to maximize a function \(f(x)\), there are two things we may be interested in:<br />
+    1. The value \(f(x)\) achieves when it is maximized, which we denote \(\max_x f(x)\).<br />
+    2. The x-value that results in maximizing \(f(x)\), which we denote <strong>\(\hat{x} = \arg\max_x f(x)\)</strong>.<br />
+Thus \(\max_x f(x) = f(\hat{x})\).<br /></p>
+
+<h3 id="cumulative-distribution-function">Cumulative Distribution Function</h3>
+
+<p>The <strong>cumulative distribution function (CDF)</strong> is defined as \(F(x) = P(X ≤ x)\) for random variable \(X\), exists for every distribution.<br />
+If \(X\) is discrete-valued, then the CDF is computed \(F(x) = \sum_{t=−∞}^{x} f(t)\) where \(f(t) = P(X = t)\) is the <strong>probability mass function (PMF)</strong>.<br />
+If \(X\) is continuous, the CDF is computed with an integral \(F(x) = \int_{−∞}^x f(t)dt\) where \(f(t)\) is the probability density function (PDF).<br />
+Let \(a\) and \(b\) be any real numbers with \(a &lt; b\), the probability that \(X\) falls between \(a\) and \(b\) is equal to \(P(a&lt; X≤b)=P(X≤b)−P(X≤a)=F(b)−F(a)\).<br /></p>
+
+<h3 id="quantile-function">Quantile Function</h3>
+
+<p>The value x which satisfies equation \(P(X ≤ x) = p\) is called the <strong>\(p\) quantile</strong> (or <strong>\(100_p\) percentile</strong>) of the distribution of X.<br /></p>
+
+<h3 id="likelihood">Likelihood</h3>
+
+<p>The <strong>likelihood</strong> function measures the goodness of fit of a statistical model to a sample of data for given values of the unknown parameters.<br />
+It is formed from the joint probability distribution of the sample, but viewed and used as a function of the parameters only, thus treating the random variables as fixed at the observed values.<br />
+<strong>\(\mathcal{L}(\theta|x)=P(X=x|\theta)\)</strong></p>
+
+<p><strong>Log-likelihood</strong> function is a logarithmic transformation of the likelihood function, often denoted by a lowercase \(l\) or \(\ell\).<br />
+<strong>\(\ell(\theta)=\log\mathcal{L}(\theta|x)\)</strong><br />
+Because logarithms are strictly increasing functions, maximizing the likelihood is equivalent to maximizing the log-likelihood.<br /></p>
+
+<h3 id="maximum-likelihood-estimation">Maximum Likelihood Estimation</h3>
+
+<p>The <strong>maximum likelihood estimation (MLE)</strong> is a method of estimating the parameters of a probability distribution by maximizing a likelihood function, so that under the assumed statistical model the observed data is most probable.<br />
+<strong>\(\hat{\theta} = \arg\max_{\theta\in\Theta} \mathcal{L}(\theta|y)\)</strong><br /></p>
+
+<h3 id="normalizing-constants-and-proportionality">Normalizing Constants and Proportionality</h3>
+
+<p>The full expression for a posterior distribution of some parameter \(\theta\) is given by</p>
+
+\[f(\theta\mid x) = { f(x\mid\theta)f(\theta) \over \int_{-\infty}^{\infty}f(x\mid\theta)f(\theta)d\theta}\]
+
+<p>It is often more convenient to work with the numerator only: \(f(\theta\mid x) \propto f(x\mid\theta)f(\theta)\), which is the likelihood times the prior.<br />
+We can multiply a function of \(\theta\) by any constant and maintain proportionality.</p>
+
+<p>The reason we can write \(f(\theta\mid x) \propto f(x\mid\theta)f(\theta)\) is because the denominator \(\int_{-\infty}^{\infty}f(x\mid\theta)f(\theta)d\theta\) is free of \(\theta\). It is just a normalizing constant.<br />
+To evaluate posterior quantities such as posterior probabilities, we will eventually need to find the normalizing constant.</p>
+
+<h3 id="conjugate-posterior-for-the-normal-mean">Conjugate Posterior for the Normal Mean</h3>
+
+<p>Specifically, the model is \(x_1, x_2, \dots, x_n \overset{\text{iid}}{\sim} \text{N}(\mu,\sigma^2_0)\), \(\mu\sim\text{N}(m_0,s^2_0)\) with \(\sigma^2_0\), \(m_0\) and \(s^2_0\) known. First consider the case in which we have only one data point x. The posterior is then<br />
+\(f(\mu\mid x) = {f(x\mid\mu)f(\mu) \over \int_{-\infty}^{\infty}f(x\mid\mu)f(\mu)d\mu} \propto f(x\mid\mu)f(\mu) = {1\over\sqrt{2\pi\sigma^2_0}}\exp\{-{1\over2\sigma^2_0}(x-\mu)^2\}{1\over\sqrt{2\pi s^2_0}}\exp\{-{1\over2s^2_0}(\mu-m_0)^2\}\)<br />
+\(\propto \exp\{-{1\over2\sigma^2_0}(x-\mu)^2\}\exp\{-{1\over2s^2_0}(\mu-m_0)^2\}\)<br />
+\(= \exp\left\{-{1\over2\sigma^2_0}(x-\mu)^2 -{1\over2s^2_0}(\mu-m_0)^2\right\}\)<br />
+\(= \exp\left\{-{1\over2}\left[{1\over\sigma^2_0}(x^2-2x\mu+\mu^2)+{1\over s^2_0}(\mu^2-2\mu m_0+m_0^2)\right]\right\}\)<br />
+\(= \exp\left\{-{1\over2}\left[{\mu^2\over\sigma^2_0}+{\mu^2\over s^2_0}+{-2x\over\sigma^2_0}\mu+{-2m_0\over s^2_0}\mu+{x^2\over\sigma^2_0}+{m_0^2\over s^2_0}\right]\right\}\)<br />
+\(= \exp\left\{-{1\over2}\left[\left({1\over\sigma^2_0}+{1\over s^2_0}\right)\mu^2-2\left({x\over\sigma^2_0}+{m_0\over s^2_0}\right)\mu+{x^2\over\sigma^2_0}+{m_0^2\over s^2_0}\right]\right\}\)<br />
+\(= \exp\left\{-{1\over2}\left[\left({1\over\sigma^2_0}+{1\over s^2_0}\right)\mu^2-2\left({x\over\sigma^2_0}+{m_0\over s^2_0}\right)\mu\right]\right\}\cdot\exp\left\{-{1\over2}\left[{x^2\over\sigma^2_0}+{m_0^2\over s^2_0}\right]\right\}\)<br />
+\(\propto \exp\left\{-{1\over2}\left[\left({1\over\sigma^2_0}+{1\over s^2_0}\right)\mu^2-2\left({x\over\sigma^2_0}+{m_0\over s^2_0}\right)\mu\right]\right\}\)<br />
+\(= \exp\left\{-{1\over2}\left[{1\over s_1^2}\mu^2-2\left({x\over\sigma^2_0}+{m_0\over s^2_0}\right)\mu\right]\right\}\)
+where \(s_1^2=\left({1\over\sigma^2_0}+{1\over s^2_0}\right)^{-1}\)<br />
+\(= \exp\left\{-{1\over2}\left[{1\over s_1^2}\mu^2-2{s_1^2\over s_1^2}\left({x\over\sigma^2_0}+{m_0\over s^2_0}\right)\mu\right]\right\}\)<br />
+\(= \exp\left\{-{1\over2s_1^2}[\mu^2-2m_1\mu]\right\}\) where \(m_1=s_1^2\left({x\over\sigma^2_0}+{m_0\over s^2_0}\right)\)<br /></p>
+
+<p>The next step is to “complete the square” in the exponent:<br />
+\(f(\mu\mid x) \propto \exp\left\{-{1\over2s_1^2}[\mu^2-2m_1\mu]\right\}\)<br />
+\(= \exp\left\{-{1\over2s_1^2}[\mu^2-2m_1\mu+m_1^2-m_1^2]\right\}\)<br />
+\(= \exp\left\{-{1\over2s_1^2}[\mu^2-2m_1\mu+m_1^2]\right\}\cdot\exp\left\{m_1^2\over2s_1^2\right\}\)<br />
+\(\propto \exp\left\{-{1\over2s_1^2}[\mu^2-2m_1\mu+m_1^2]\right\}\)<br />
+\(= \exp\left\{-{1\over2s_1^2}(\mu-m_1)^2\right\}\)<br />
+which, except for a normalizing constant not involving \(\mu\), is the PDF of a normal distribution with mean \(m_1\) and variance \(s_1^2\).</p>
+
+<p>The final step is to extend this result to accommodate \(n\) independent data points. The likelihood in this case is<br />
+\(f(x\mid\mu) = \prod_{i=1}^n {1\over\sqrt{2\pi\sigma_0^2}} \exp\left\{-{1\over2\sigma_0^2}(x_i-\mu)^2\right\}\)<br />
+\(= (2\pi\sigma_0^2)^{-n/2} \exp\left\{-{1\over2\sigma_0^2}\sum_{i=1}^n(x_i-\mu)^2\right\}\)<br />
+\(\propto \exp\left\{-{1\over2\sigma_0^2}\left[\sum_{i=1}^n x_i^2 - 2\mu\sum_{i=1}^n x_i+n\mu^2\right]\right\}\)<br />
+\(\propto \exp\left\{-{1\over2\sigma_0^2}\left[-2n\overline{x}\mu+n\mu^2\right]\right\}\)<br /></p>
+
+<p>We can repeat the steps above <em>or</em> notice that the data contribute only through the sample mean \(\overline{x}\) (and \(n\) which we assume is known). This means that \(\overline{x}\) is a “sufficient statistic” for \(\mu\), allowing us to use the distribution of \(\overline{x}\) as the likelihood (analogous to using a binomial likelihood in place of a sequence of Bernoullis). The model then becomes
+\(\overline{x}\!\mid\!\mu \sim \text{N}(\mu,{\sigma_0^2\over n}),\,\,\, \mu \sim \text{N}(m_0,s_0^2)\)
+We now apply our result derived above, replacing \(x\) with \(\overline{x}\) and \(\sigma_0^2\) with \(\sigma_0^2/n\). This yields the update equation presented in Lesson 10.1.</p>
+
+<h3 id="quizz">QUIZZ</h3>
+
+<p><b>
+If you randomly guess on this question, you have a .25 probability of being correct. Which probabilistic paradigm from Lesson 1 does this argument best demonstrate?<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> Classical<br />
+☐ <code class="highlighter-rouge">WRONG</code> Frequentist<br />
+☐ <code class="highlighter-rouge">WRONG</code> Bayesian<br />
+☐ <code class="highlighter-rouge">WRONG</code> None of the above<br /></p>
+
+<p><b>
+On a multiple choice test, you do not know the answer to a question with three alternatives. One of the options, however, contains a keyword which the professor used disproportionately often during lecture. Rather than randomly guessing, you select the option containing the keyword, supposing you have a better than 1/3 chance of being correct.<br />
+Which probabilistic paradigm from Lesson 1 does this argument best demonstrate?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> Classical<br />
+☐ <code class="highlighter-rouge">WRONG</code> Frequentist<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> Bayesian<br /></p>
+
+<p><b>
+On average, one in three students at your school participates in extracurricular activities. You conclude that the probability that a randomly selected student from your school participates is 1/3.<br />
+Which probabilistic paradigm from Lesson 1 does this argument best demonstrate?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> Classical<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> Frequentist<br />
+☐ <code class="highlighter-rouge">WRONG</code> Bayesian<br /></p>
+
+<p><b>
+For Questions 4-6, consider the following scenario:<br />
+Your friend offers a bet that she can beat you in a game of chess. If you win, she owes you $5, but if she wins, you owe her $3.<br />
+Suppose she is 100% confident that she will beat you. What is her expected return for this game? (Report your answer without the $ symbol.)<br />
+</b>
+Enter answer here <strong>3</strong> <em>This is \(3\cdot(1) - 5\cdot(0)\) If she is certain she will win, then she expects to receive the $3.</em></p>
+
+<p><b>
+Chess:<br />
+Suppose she is only 50% confident that she will beat you (her personal probability of winning is p=0.5). What is her expected return now? (Report your answer without the $ symbol.)<br />
+</b>
+Enter answer here <strong>-1</strong> <em>This is \(3\cdot(0.5) - 5\cdot(0.5)\). Clearly, she wouldn’t have offered this bet if she was only 50% confident that she would win.</em></p>
+
+<p><b>
+Chess:<br />
+Now assuming your friend will only agree to fair bets (expected return of $0), find her personal probability that she will win. Report your answer as a simplified fraction.
+Hint: Use the expected return of her proposed bet.<br />
+</b>
+Enter math expression here <strong>\(5 \over 8\)</strong> <em>Any value of \(p\) (the probability of her winning) lower than 5/8 would result in a negative expected return for your friend. She would not have offered these odds for such a \(p\).</em></p>
+
+<p><b>
+For Questions 7-8, consider the following “Dutch book” scenario:<br />
+Suppose your friend offers a pair of bets:<br />
+(i) if it rains or is overcast tomorrow, you pay him $4, otherwise he pays you $6;<br />
+(ii) if it is sunny you pay him $5, otherwise he pays you $5.<br />
+Suppose rain, overcast, and sunny are the only events in consideration. If you make both bets simultaneously, this is called a “Dutch book,” as you are guaranteed to win money. How much do you win regardless of the outcome? (Report your answer without the $ symbol.)<br />
+</b>
+Enter answer here <strong>1</strong> <em>-4 + 5 if rain or overcast, 6 - 5 if sunny</em></p>
+
+<p><b>
+Dutch book:<br />
+Apparently your friend doesn’t understand the laws of probability. Let’s examine the bets he offered.<br />
+For bet (i) to be fair, his probability that it rains or is overcast must be .6 (you can verify this by calculating his expected return and setting it equal to $0).<br />
+For bet (ii) to be fair, his probability that it will be sunny must be .5.<br />
+This results in a “Dutch book” because your friend’s probabilities are not coherent. They do not add up to 1. What do they add up to?<br />
+</b>
+Enter answer here <strong>\(0.6 + 0.5 = 1.1\)</strong></p>
+
+<p><b>
+Which of the following (possibly more than one) must be true if random variable XX is continuous with PDF \(f(x)\)?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> \(\lim_{x \to \infty} f(x) = \infty\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(X &gt;= 0\) always<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(f(x)\) is a continuous function <em>One counter-example is the Uniform(0,1) PDF, which has jumps at 0 and 1.</em><br />
+⚡ <code class="highlighter-rouge">CORRECT</code> \(\int_{-\infty}^\infty f(x) dx = 1\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(f(x)\) is an increasing function of \(x\)<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> \(f(x) \ge 0\) always<br /></p>
+
+<p><b>
+If \(X \sim \text{Exp}(3)\), what is the value of \(P(X&gt;1/3)\)? Round your answer to two decimal places.<br />
+</b>
+Enter answer here <strong>0.37</strong> <em>Check \(P(X&gt;1/3) = \int_{1/3}^\infty 3e^{-3x} dx = -e^{-3x} \rvert_{1/3}^\infty = 0 - (-e^{-3/3}) = e^{-1} = 0.368\)</em></p>
+
+<p><b>
+Suppose \(X \sim \text{Uniform}(0,2)\) and \(Y \sim \text{Uniform}(8,10)\). What is the value of \(E(4X + Y)\)?<br />
+</b>
+Enter answer here <strong>13</strong> <em>Check \(E(4X+Y)=4E(X)+E(Y)=4(1)+9\)</em></p>
+
+<p><b>
+For Questions 4-7, consider the following:<br />
+Suppose \(X \sim \text{N}(1, 5^2)\) and \(Y \sim \text{N}(-2, 3^2)\) and that \(X\) and \(Y\) are independent. We have \(Z = X + Y \sim \text{N}(\mu, \sigma^2)\) because the sum of normal random variables also follows a normal distribution.<br />
+What is the value of \(\mu\)?<br />
+</b>
+Enter answer here <strong>-1</strong> <em>Check \(μ=E(Z)=E(X+Y)=E(X)+E(Y)=1+(−2)\)</em></p>
+
+<p><b>
+Adding normals:<br />
+What is the value of \(\sigma^2\)?<br />
+Hint: If two random variables are independent, the variance of their sum is the sum of their variances.<br />
+</b>
+Enter answer here <strong>34</strong> <em>Check \(σ^2 =Var(Z)=Var(X+Y)=Var(X)+Var(Y)=25+9\)</em></p>
+
+<p><b>
+Adding normals:<br />
+If random variables \(X\) and \(Y\) are not independent, we still have \(E(X+Y) = E(X) + E(Y)\), but now <strong>\(Var(X + Y) = Var(X) + Var(Y) + 2Cov(X, Y)\)</strong> where <strong>\(Cov(X,Y) = E[ (X - E[X]) (Y - E[Y]) ]\) is called the covariance between \(X\) and \(Y\)</strong>.<br />
+A convenient formula for calculating variance was given in the supplementary material: \(Var(X) = E[ (X - E[X])^2 ] = E[X^2] - (E[X])^2\). Which of the following is an analogous expression for the covariance of \(X\) and \(Y\)?<br />
+Hint: Expand the terms inside the expectation in the definition of \(Cov(X,Y)\) and recall that \(E(X)\) and \(E(Y)\) are just constants.<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> \(E[Y^2] - (E[Y])^2\)<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> <strong>\(E(XY) - E(X)E(Y)\)</strong> <br />
+☐ <code class="highlighter-rouge">WRONG</code> \((E[X^2] - (E[X])^2) \cdot (E[Y^2] - (E[Y])^2)\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(E[X^2] - (E[X])^2 + E[Y^2] - (E[Y])^2\) <br /></p>
+
+<p>Check \(Cov(X,Y)\)<br />
+\(=E[(X−E[X])(Y−E[Y])]\)<br />
+\(=E[XY−XE(Y)−E(X)Y+E(X)E(Y)]\)<br />
+\(=E[XY]−E[XE(Y)]−E[E(X)Y]+E[E(X)E(Y)]\)<br />
+\(=E[XY]−E(X)E(Y)−E(X)E(Y)+E(X)E(Y)\)<br /></p>
+
+<p><b>
+Adding normals:<br />
+Consider again \(X \sim \text{N}(1, 5^2)\) and \(Y \sim \text{N}(-2, 3^2)\), but this time \(X\) and \(Y\) are not independent. Then \(Z = X+Y\) is still normally distributed with the same mean found in Question 4. What is the variance of \(Z\) if \(E(XY) = -5\)?<br />
+Hint: Use the formulas introduced in Question 6.<br />
+</b>
+Enter answer here <strong>28</strong></p>
+
+<p><b>
+Free point:<br />
+1) Use the definition of conditional probability to show that for events \(A\) and \(B\), we have \(P(A \cap B) = P(B|A)P(A) = P(A|B)P(B)\).<br />
+2) Show that the two expressions for independence \(P(A | B) = P(A)\) and \(P(A \cap B) = P(A) P(B)\) are equivalent.<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> Solution (1) <em>Write \(P(B|A) = {P(A \cap B) \over P(A)}\) and multiply both sides by \(P(A)\).</em><br />
+⚡ <code class="highlighter-rouge">CORRECT</code> Solution (2) <em>Plug these expressions into those from (1).</em><br /></p>
+
+<p><b>
+For Questions 1-3, consider the following scenario:<br />
+In the example from Lesson 4.1 of flipping a coin 100 times, suppose instead that you observe 47 heads and 53 tails.<br />
+Report the value of \(\hat{p}\), the MLE (Maximum Likelihood Estimate) of the probability of obtaining heads.<br />
+</b>
+Enter answer here <strong>0.47</strong> <em>This is simply 47/100, the number of successes divided by the number of trials.</em></p>
+
+<p><b>
+Coin flip:<br />
+Using the central limit theorem as an approximation, and following the example of Lesson 4.1, construct a 95% confidence interval for \(p\), the probability of obtaining heads.<br />
+Report the lower end of this interval and round your answer to two decimal places.<br />
+</b>
+Enter answer here <strong>0.37</strong> <em>We have \(\hat{p} - 1.96\sqrt{\hat{p}(1-\hat{p})/n} =.47 - 1.96\sqrt{(.47)(.53)/100} = .372\), which is the lower end of a 95% confidence interval for \(p\).</em></p>
+
+<p><b>
+Coin flip:<br />
+Report the upper end of this interval and round your answer to two decimal places.<br />
+</b>
+Enter answer here <strong>0.57</strong> <em>We have \(\hat{p} + 1.96\sqrt{\hat{p}(1-\hat{p})/n} =.47 + 1.96\sqrt{(.47)(.53)/100} = .568\), which is the upper end of a 95% confidence interval for \(p\).</em></p>
+
+<p><b>
+The likelihood function for parameter \(\theta\) with data \(\mathbf{y}\) is based on which of the following?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> \(P(\theta \mid \mathbf{y} )\)<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> \(P(\mathbf{y} \mid \theta)\) <em>The likelihood is based on the sampling distribution of the data, given the parameter. Note that although the likelihood has the same functional form as \(P(\mathbf{y} \mid \theta)\), it is considered a function of \(\theta\).</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> \(P(\theta)\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(P(\mathbf{y})\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> None of the above.<br /></p>
+
+<p><b>
+Recall from Lesson 4.4 that if \(X_1,\ldots,X_n \overset{\text{iid}}{\sim} \text{Exponential}(\lambda)\) (iid means independent and identically distributed), then the MLE for \(\lambda\) is \(1/\overline{x}\) where \(\overline{x}\) is the sample mean. Suppose we observe the following data: \(X_1 = 2.0,\ X_2=2.5,\ X_3=4.1,\ X_4=1.8,\ X_5=4.0\).<br />
+Calculate the MLE for \(\lambda\). Round your answer to two decimal places.<br />
+</b>
+Enter answer here <strong>0.35</strong> <em>The sample mean is \(\overline{x}=2.88\).</em></p>
+
+<p><b>
+It turns out that the sample mean \(\overline{x}\) is involved in the MLE calculation for several models. In fact, if the data are independent and identically distributed from a <strong>Bernoulli(\(p\))</strong>, <strong>Poisson(\(\lambda\))</strong>, or <strong>Normal(\(\mu\), \(\sigma^2\))</strong>, then <strong>\(\overline{x}\) is the MLE for \(p\), \(\lambda\), and \(\mu\) respectively</strong>.<br />
+Suppose we observe \(n=4\) data points from a normal distribution with unknown mean \(\mu\). The data are \(\mathbf{x} = \{-1.2, 0.5, 0.8, -0.3 \}\).<br />
+What is the MLE for \(\mu\) ? Round your answer to two decimal places.<br />
+</b>
+Enter answer here <strong>-0.05</strong> <em>This is \((-1.2 + 0.5 + 0.8 - 0.3)/4\).</em></p>
+
+<p><b>
+For Questions 1-5, consider the following scenario:<br />
+You are trying to ascertain your American colleague’s political preferences. To do so, you design a questionnaire with five yes/no questions relating to current issues. The questions are all worded so that a “yes” response indicates a conservative viewpoint.<br />
+Let \(\theta\) be the unknown political viewpoint of your colleague, which we will assume can only take values \(\theta=\text{conservative}\) or \(\theta=\text{liberal}\). You have no reason to believe that your colleague leans one way or the other, so you assign the prior \(P(\theta=\text{conservative}) = 0.5\).<br />
+Assume the five questions are independent and let \(Y\) count the number of “yes” responses. If your colleague is conservative, then the probability of a “yes” response on any given question is 0.8. If your colleague is liberal, the probability of a “no” response on any given question is 0.7.<br />
+What is an appropriate likelihood for this scenario?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> \(f(y \mid \theta) = {5 \choose y} 0.3^y 0.7^{5-y} I_{\{\theta=\text{conservative}\}} + {5 \choose y} 0.8^y 0.2^{5-y} I_{\{\theta=\text{liberal}\}}\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(f(y \mid \theta) = {5 \choose y} 0.8^y 0.2^{5-y}\)<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> \(f(y \mid \theta) = {5 \choose y} 0.8^y 0.2^{5-y} I_{\{\theta=\text{conservative}\}} + {5 \choose y} 0.3^y 0.7^{5-y} I_{\{\theta=\text{liberal}\}}\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(f(y \mid \theta) = {5 \choose y} 0.2^y 0.8^{5-y}\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(f(y \mid \theta) = \theta^y e^{-\theta}/y!\)<br />
+<em>If your colleague is conservative, the number of “yes” responses will follow a Binomial(5, 0.8). If liberal, the number of “yes” responses will follow a Binomial(5, 0.3).</em><br /></p>
+
+<p><b>
+Political preferences:<br />
+Suppose you ask your colleague the five questions and he answers “no” to all of them. What is the MLE for \(\theta\)?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> \(\hat\theta=\text{conservative}\)<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> \(\hat\theta=\text{liberal}\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> None of the above. The MLE is a number.<br />
+<i>
+This is \({5\choose 0}.8^0 .2^5 I_{\{\theta=\text{conservative}\}} + {5\choose 0} .3^0 .7^5 I_{\{\theta=\text{liberal}\}} = .2^5 I_{\{\theta=\text{conservative}\}} + .7^5 I_{\{\theta=\text{liberal}\}}\) which evaluates to \(.2^5\) if \(\theta=\text{conservative}\) and \(.7^5\) if \(\theta=\text{liberal}\). Hence, \(\hat\theta=\text{liberal}\) returns a higher likelihood value.<br />
+This result is intuitive because if your colleague answered “no” to all conservative-leaning questions, he is likely not conservative.<br />
+</i></p>
+
+<p><b>
+Political preferences:<br />
+Recall that Bayes’ theorem gives \(f(\theta \mid y) = \frac{f(y\mid \theta)f(\theta)}{\sum_\theta f(y\mid \theta) f(\theta)}\). What is the corresponding expression for this problem?<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> \(f(\theta \mid y) = \frac{ {5 \choose y} 0.8^y 0.2^{5-y} (0.5) I_{\{\theta=\text{conservative}\}} + {5 \choose y} 0.3^y 0.7^{5-y} (0.5) I_{\{\theta=\text{liberal}\}} } { {5 \choose y} 0.8^y 0.2^{5-y} (0.5) + {5 \choose y} 0.3^y 0.7^{5-y} (0.5)}\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(f(\theta \mid y) = \frac{ {5 \choose y} 0.8^y 0.2^{5-y} (0.2) I_{\{\theta=\text{conservative}\}} + {5 \choose y} 0.3^y 0.7^{5-y} (0.7) I_{\{\theta=\text{liberal}\}} } { {5 \choose y} 0.8^y 0.2^{5-y} (0.2) + {5 \choose y} 0.3^y 0.7^{5-y} (0.7)}\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(f(\theta \mid y) = \frac{ {5 \choose y} 0.8^y 0.2^{5-y} (0.5)^2 } { {5 \choose y} 0.8^y 0.2^{5-y} (0.5) + {5 \choose y} 0.3^y 0.7^{5-y} (0.5)}\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(f(\theta \mid y) = \frac{ {5 \choose y} 0.8^y 0.2^{5-y} (0.5) + {5 \choose y} 0.3^y 0.7^{5-y} (0.5) } { {5 \choose y} 0.8^y 0.2^{5-y} (0.5) + {5 \choose y} 0.3^y 0.7^{5-y} (0.5)}\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(f(\theta \mid y) = \frac{ \theta^y e^{-\theta} (0.5) /y! } { 0.8^y e^{-.8} (0.5) /y! + 0.3^y e^{-.3} (0.5) /y! }\)<br />
+<i>
+The prior probability was 0.5 for both values of \(\theta\).<br />
+Notice we have added over all possibilities of \(\theta\) to get the denominator. Hence, the denominator contains no \(\theta\) and evaluates to a number when we plug in \(y\). This is the marginal probability of observing \(y\), which gives us the normalizing constant.<br />
+</i></p>
+
+<p><b>
+Political preferences:<br />
+Evaluate the expression in Question 3 for \(y=0\) and report the posterior probability that your colleague is conservative, given that he responded “no” to all of the questions. Round your answer to three decimal places.<br />
+</b>
+Enter answer here <strong>0.002</strong><br />
+<em>This is \(P(\theta = \text{conservative} \mid Y=0 ) = \frac{.2^5 (.5)}{.2^5 (.5) + .7^5 (.5)} = \frac{.2^5}{.2^5 + .7^5 }\)</em></p>
+
+<p><b>
+Political preferences:<br />
+Evaluate the expression in Question 3 for \(y=0\) and report the posterior probability that your colleague is liberal, given that he responded “no” to all of the questions. Round your answer to three decimal places.<br />
+</b>
+Enter answer here <strong>0.998</strong><br />
+<i>
+This is \(P(\theta = \text{liberal} \mid Y=0 ) = \frac{.7^5 (.5)}{.2^5 (.5) + .7^5 (.5)} = \frac{.7^5}{.2^5 + .7^5 }\)<br />
+Note that once we have calculated the posterior probability for this hypothesis, we can easily obtain the posterior probability for the opposite (complementary) hypothesis with \(P(\theta = \text{conservative} \mid Y=0 ) = 1 - P(\theta = \text{liberal} \mid Y=0 )\)<br />
+</i></p>
+
+<p><b>
+For Questions 6-9, consider again the loaded coin example from the lesson.<br />
+Recall that your brother has a fair coin which comes up heads 50% of the time and a loaded coin which comes up heads 70% of the time.<br />
+Suppose now that he has a third coin which comes up tails 70% of the time. Again, you don’t know which coin your brother has brought you, so you are going to test it by flipping it 4 times, where \(X\) counts the number of heads. Let \(\theta\) identify the coin so that there are three possibilities \(\theta=\text{fair}\), \(\theta=\text{loaded favoring heads}\), and \(\theta=\text{loaded favoring tails}\).<br />
+Suppose the prior is now \(P(\theta=\text{fair}) = 0.4\), \(P(\theta= \text{loaded heads}) = 0.3\), and \(P(\theta= \text{loaded tails}) = 0.3\). Our prior probability that the coin is loaded is still 0.6, but we do not know which loaded coin it is, so we split the probability evenly between the two options.<br />
+What is the form of the likelihood now that we have three options?<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> \(f(x \mid \theta) = {4 \choose x} 0.5^x 0.5^{4-x} I_{\{\theta=\text{fair}\}} + {4 \choose x} 0.7^x 0.3^{4-x} I_{\{\theta=\text{loaded heads}\}} + {4 \choose x} 0.3^x 0.7^{4-x} I_{\{\theta=\text{loaded tails}\}}\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(f(x \mid \theta) = {4 \choose x} 0.5^x 0.5^{4-x} I_{\{\theta=\text{fair}\}} + {4 \choose x} 0.3^x 0.7^{4-x} I_{\{\theta=\text{loaded heads}\}} + {4 \choose x} 0.7^x 0.3^{4-x} I_{\{\theta=\text{loaded tails}\}}\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(f(x \mid \theta) = {4 \choose x} \left[ 0.5^4 (0.4) I_{\{\theta=\text{fair}\}} + 0.3^x 0.7^{4-x} (0.3) I_{\{\theta=\text{loaded heads}\}} + 0.7^x 0.3^{4-x} (0.3) I_{\{\theta=\text{loaded tails}\}} \right]\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(f(x \mid \theta) = {4 \choose x} \left[ 0.5^4 (0.4) I_{\{\theta=\text{fair}\}} + 0.7^x 0.3^{4-x} (0.3) I_{\{\theta=\text{loaded heads}\}} + 0.3^x 0.7^{4-x} (0.3) I_{\{\theta=\text{loaded tails}\}} \right]\)<br />
+<em>Notice that the likelihood has been multiplied by the prior; this is the numerator for the posterior.</em><br /></p>
+
+<p><b>
+Loaded coins:<br />
+Suppose you flip the coin four times and it comes up heads twice. What is the MLE for \(\theta\)?<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> \(\hat\theta = \text{fair}\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\hat\theta = \text{loaded heads}\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\hat\theta = \text{loaded tails}\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> None of the above. The MLE is a number.<br />
+<em>\({4 \choose 2} 0.5^4\) is the highest value among the three when \(X=2\).</em></p>
+
+<p><b>
+Loaded coins:<br />
+Suppose you flip the coin four times and it comes up heads twice. What is the posterior probability that this is the fair coin? Round your answer to two decimal places.<br />
+</b>
+Enter answer here <strong>0.486</strong><br />
+<em>This is \(P(\theta = \text{fair} \mid X=2 ) = \frac{ {4 \choose 2} 0.5^2 0.5^2 (0.4) } { {4 \choose 2} \left[ 0.5^4 (0.4) + 0.7^2 0.3^{2} (0.3) + 0.3^2 0.7^{2} (0.3) \right] }\)</em></p>
+
+<p><b>
+Loaded coins:<br />
+Suppose you flip the coin four times and it comes up heads twice. What is the posterior probability that this is a loaded coin (favoring either heads or tails)? Round your answer to two decimal places.<br />
+Hint: \(P(\theta=\text{fair} \mid X=2) = 1 - P(\theta=\text{loaded} \mid X=2)\), so you can use your answer from the previous question rather than repeat the calculation from Bayes’ theorem (both approaches yield the same answer).<br />
+</b>
+Enter answer here <strong>0.514</strong><br />
+<em>This is \(1 - .486\) (from the previous question).</em></p>
+
+<p><b>
+What is the key difference between prior predictive and posterior predictive distributions? Assume that the data \(Y_1, \ldots, Y_n\) are independent.<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> The prior predictive averages (marginalizes) over \(\theta\) with respect to the prior while the posterior predictive averages with respect to the posterior. <em>They are the same procedure, except in one case you use the prior for \(\theta\) and in the other case you use the posterior.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> The prior predictive is continuous while the posterior predictive is discrete.<br />
+☐ <code class="highlighter-rouge">WRONG</code> The prior predictive is useful in selecting priors and the posterior predictive is useful in selecting posterior distributions.<br />
+☐ <code class="highlighter-rouge">WRONG</code> The prior predictive is a function of \(\theta\) and the posterior predictive is a function of \(Y\).<br /></p>
+
+<p><b>
+For Questions 1-2, consider the following experiment:<br />
+Suppose you are trying to calibrate a thermometer by testing the temperature it reads when water begins to boil. Because of natural variation, you take several measurements (experiments) to estimate \(\theta\), the mean temperature reading for this thermometer at the boiling point.<br />
+You know that at sea level, water should boil at 100 degrees Celsius, so you use a precise prior with \(P(\theta = 100) = 1\). You then observe the following five measurements: 94.6 95.4 96.2 94.9 95.9.<br />
+What will the posterior for \(\theta\) look like?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> Most posterior probability will be concentrated near the sample mean of 95.4 degrees Celsius. <em>This would be true if we used a weakly-informative or noninformative prior.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> Most posterior probability will be spread between the sample mean of 95.4 degrees Celsius and the prior mean of 100 degrees Celsius.<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> The posterior will be \(\theta = 100\) with probability 1, regardless of the data. <em>Because all prior probability is on a single point (100 degrees Celsius), the prior completely dominates any data. If we are 100% certain of the outcome before the experiment, we learn nothing by performing it. Clearly this was a poor choice of prior, especially in light of the data we collected.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> None of the above.</p>
+
+<p><b>
+Recall that for positive integer nn, the gamma function has the following property: \(\Gamma(n) = (n-1)!\).<br />
+What is the value of \(\Gamma(6)\)?<br />
+</b>
+Enter answer here <strong>120</strong><br />
+<em>This is \(\Gamma(6) = 5! = 120\).</em><br /></p>
+
+<p><b>
+Find the value of the normalizing constant, cc, which will cause the following integral to evaluate to 1 is \(\int_0^1 c \cdot z^3 (1-z)^1 dz\).<br />
+Hint: Notice that this is proportional to a beta density. We only need to find the values of the parameters \(\alpha\) and \(\beta\) and plug those into the usual normalizing constant for a beta density.<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> \(\frac{ \Gamma(3+1) }{ \Gamma(3) \Gamma(1)} = \frac{3!}{2!0!} = 3\)<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> \(\frac{ \Gamma(4+2) }{ \Gamma(4) \Gamma(2)} = \frac{5!}{3!1!} = 20\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\frac{ \Gamma(1) }{ \Gamma(z) \Gamma(1-z)} = \frac{0!}{(z-1)!1!}\)<br />
+<em>\(α=3+1\) and \(\beta=1+1β=1+1.\)</em><br /></p>
+
+<p><b>
+Consider the coin-flipping example from Lesson 5. The likelihood for each coin flip was Bernoulli with probability of heads \(\theta\), or \(f(y \mid \theta) = \theta^y (1-\theta)^{1-y}\) for \(y=0\) or \(y=1\), and we used a uniform prior on \(\theta\).<br />
+Recall that if we had observed \(Y_1=0\) instead of \(Y_1=1\), the posterior distribution for \(\theta\) would have been \(f(\theta \mid Y_1=0) = 2(1-\theta) I_{\{0 \le \theta \le 1\}}\). Which of the following is the correct expression for the posterior predictive distribution for the next flip \(Y_2 \mid Y_1=0\)?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> \(f(y_2 \mid Y_1=0) = \int_0^1 2(1-\theta) d\theta\) for \(y_2 = 0\) or \(y_2=1\).<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> \(f(y_2 \mid Y_1=0) = \int_0^1 \theta^{y_2} (1-\theta)^{1-{y_2}} 2(1-\theta) d\theta\) for \(y_2 = 0\) or \(y_2=1\).<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(f(y_2 \mid Y_1=0) = \int_0^1 2 \theta^{y_2} (1-\theta)^{1-{y_2}} d\theta\) for \(y_2 = 0\) or \(y_2=1\).<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(f(y_2 \mid Y_1=0) = \int_0^1 \theta^{y_2} (1-\theta)^{1-{y_2}} d\theta\) for \(y_2 = 0\) or \(y_2=1\).<br />
+<em>This is just the integral over likelihood \(\times\) posterior. This expression simplifies to \(\int_0^1 2 \theta^{y_2} (1-\theta)^{2-{y_2}} d\theta I_{\{y_2 \in \{0,1\} \}} = \frac{2}{\Gamma(4)}\Gamma(y_2+1)\Gamma(3-y_2) I_{\{y_2 \in \{0,1\} \}} \\ = \frac{2}{3} I_{\{y_2 = 0 \}} + \frac{1}{3} I_{\{y_2 = 1 \}}\)</em></p>
+
+<p><b>
+The prior predictive distribution for XX when \(\theta\) is continuous is given by \(\int f(x \mid \theta) \cdot f(\theta) d\theta\). The analogous expression when \(\theta\) is discrete is \(\sum_{\theta} f(x \mid \theta) \cdot f(\theta)\), adding over all possible values of \(\theta\).<br />
+Let’s return to the example of your brother’s loaded coin from Lesson 5. Recall that he has a fair coin where heads comes up on average 50% of the time (\(p=0.5\)) and a loaded coin (\(p=0.7\)). If we flip the coin five times, the likelihood is binomial: \(f(x \mid p) = {5 \choose x} p^x (1-p)^{5-x}\) where \(X\) counts the number of heads.<br />
+Suppose you are confident, but not sure that he has brought you the loaded coin, so that your prior is \(f(p) = 0.9 I_{\{ p=0.7 \}} + 0.1 I_{\{ p=0.5 \}}\). Which of the following expressions gives the prior predictive distribution of \(X\)?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> \(f(x) = {5 \choose x} .7^x (.3)^{5-x} + {5 \choose x} .5^x (.5)^{5-x}\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(f(x) = {5 \choose x} .7^x (.3)^{5-x} (.5) + {5 \choose x} .5^x (.5)^{5-x} (.5)\)<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> \(f(x) = {5 \choose x} .7^x (.3)^{5-x} (.9) + {5 \choose x} .5^x (.5)^{5-x} (.1)\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(f(x) = {5 \choose x} .7^x (.3)^{5-x} (.1) + {5 \choose x} .5^x (.5)^{5-x} (.9)\)<br />
+<em>This is a weighted average of binomials, with weights being your prior probabilities for each scenario (loaded or fair).</em><br /></p>
+
+<p><b>
+For Questions 1-5, consider the example of flipping a coin with unknown probability of heads (\thetaθ):<br />
+Suppose we use a Bernoulli likelihood for each coin flip, i.e., \(f(y_i \mid \theta) = \theta^{y_i} (1-\theta)^{1-y_i} I_{\{ 0 \le \theta \le 1 \}}\) for \(y_i=0\) or \(y_i = 1\), and a uniform prior for \(\theta\).<br />
+What is the posterior distribution for \thetaθ if we observe the following sequence: (T, T, T, T) where H denotes heads (\(Y=1\)) and T denotes tails (\(Y=0\))?<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> Beta(1, 5)<br />
+☐ <code class="highlighter-rouge">WRONG</code> Uniform(0,4)<br />
+☐ <code class="highlighter-rouge">WRONG</code> Beta(1,4)<br />
+☐ <code class="highlighter-rouge">WRONG</code> Beta(4,0)<br />
+☐ <code class="highlighter-rouge">WRONG</code> Beta(0, 4)<br />
+<em>The posterior is \(\text{Beta}(1+\sum y_i, 1 + n - \sum y_i)\) where \(\sum y_i = 0\) and \(n=4\).</em></p>
+
+<p><b>
+Coin flip:<br />
+Which of the following graphs depicts the posterior PDF of \(\theta\) if we observe the sequence (T, T, T, T)? (You may want to use R or Excel to plot the posterior.)<br />
+</b>
+<img src="./image1.svg" /><br /></p>
+
+<p><b>
+Coin flip:<br />
+What is the maximum likelihood estimate (MLE) of \(\theta\) if we observe the sequence (T, T, T, T)?<br />
+</b>
+<strong>0</strong><br />
+<em>This is \(\sum y_i / n\) where \(y_i=0\) for all \(i=1,2,3,4\)</em>.<br /></p>
+
+<p><b>
+Coin flip:<br />
+What is the posterior mean estimate of \(\theta\) if we observe the sequence (T, T, T, T)? Round your answer to two decimal places.<br />
+</b>
+<strong>0.167</strong><br />
+<em>This is the mean of the beta posterior: \(\frac{\alpha}{ \alpha + \beta} = \frac{1 + \sum y_i}{ 2 + n} = \frac{1}{6}\) where \(\alpha = 1+\sum y_i\) and \(\beta = 1 + n - \sum y_i\).</em><br /></p>
+
+<p><b>
+Coin flip:<br />
+Use R or Excel to find the posterior probability that \(\theta &lt; 0.5\) if we observe the sequence (T,T,T,T). Round your answer to two decimal places.<br />
+</b>
+<strong>0.966</strong><br />
+<em>In R: <code class="highlighter-rouge">pbeta(q=0.5, shape1=1, shape2=5)</code> where x=0.5, alpha=1, beta=5, and cumulative=TRUE.</em><br /></p>
+
+<p><b>
+For Questions 6-9, consider the following scenario:<br />
+An engineer wants to assess the reliability of a new chemical refinement process by measuring \(\theta\), the proportion of samples that fail a battery of tests. These tests are expensive, and the budget only allows 20 tests on randomly selected samples. Assuming each test is independent, she assigns a binomial likelihood where \(X\) counts the samples which fail. Historically, new processes pass about half of the time, so she assigns a Beta(2,2) prior for \thetaθ (prior mean 0.5 and prior sample size 4). The outcome of the tests is 6 fails and 14 passes.<br />
+What is the posterior distribution for \(\theta\)?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> Beta(14,6)<br />
+☐ <code class="highlighter-rouge">WRONG</code> Beta(6, 20)<br />
+☐ <code class="highlighter-rouge">WRONG</code> Beta(6,14)<br />
+☐ <code class="highlighter-rouge">WRONG</code> Beta(16,8)<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> Beta(8,16)<br /></p>
+
+<p><b>
+Chemical refinement:<br />
+Use R or Excel to calculate the upper end of an equal-tailed 95% credible interval for \(\theta\). Round your answer to two decimal places.<br />
+</b>
+Enter answer here <strong>0.5291917</strong><br />
+<em>Recall that a 95% equal-tailed credible interval can be found using the 0.025 and 0.975 quantiles of the posterior. If the posterior is Beta(a,b), then the upper end of the interval can be found with software.</em><br />
+<em>In R: <code class="highlighter-rouge">qbeta(p=0.975, shape1=8, shape2=16)</code> where probability=0.975, alpha=8, and beta=16.</em><br /></p>
+
+<p><b>
+Chemical refinement:<br />
+The engineer tells you that the process is considered promising and can proceed to another phase of testing if we are 90% sure that the failure rate is less than .35.<br />
+Calculate the posterior probability \(P(\theta &lt; .35 \mid x)\). In your role as the statistician, would you say that this new chemical should pass?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> Yes, \(P(\theta &lt; .35 \mid x) \ge 0.9\).<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> No, \(P(\theta &lt; .35 \mid x) &lt; 0.9\).<br />
+<em>This posterior probability is only 0.586 under the Beta(a,b) posterior.</em><br />
+<em>In R: <code class="highlighter-rouge">pbeta(q=0.35, shape1=a, shape2=b)</code> where x=0.5, alpha=a, beta=b, and cumulative=TRUE.</em><br /></p>
+
+<p><b>
+Chemical refinement:<br />
+It is discovered that the budget will allow five more samples to be tested. These tests are conducted and none of them fail.
+Calculate the new posterior probability \(P(\theta &lt; .35 \mid x_1, x_2)\)). In your role as the statistician, would you say that this new chemical should pass (with the same requirement as in the previous question)?<br />
+Hint: You can use the posterior from the previous analysis as the prior for this analysis. Assuming independence of tests, this yields the same posterior as the analysis in which we begin with the Beta(2,2) prior and use all 25 tests as the data.<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> Yes, \(P(\theta &lt; .35 \mid x_1, x_2) \ge 0.9\).<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> No, \(P(\theta &lt; .35 \mid x_1, x_2) &lt; 0.9\).<br />
+<em>Use the new Beta(a+0,b+5) = 0.8179064 posterior for \(\theta\) to assess this probability, where a and b were the previous posterior parameters.</em>
+<em>In R: <code class="highlighter-rouge">pbeta(q=0.35, shape1=a+0, shape2=b+5)</code> where x=0.5, alpha=a+0, beta=b+5, and cumulative=TRUE.</em></p>
+
+<p><b>
+Let \(X \mid \theta \sim \text{Binomial}(9, \theta)\) and assume a \(\text{Beta}(\alpha, \beta)\) prior for \(\theta\). Suppose your prior guess (prior expectation) for \(\theta\) is 0.4 and you wish to use a prior effective sample size of 5, what values of \(\alpha\) and \(\beta\) should you use?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> \(\alpha = 4\), \(\beta=6\)<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> \(\alpha = 2\), \(\beta=3\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\alpha = 2\), \(\beta=5\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\alpha = 4\), \(\beta=10\)<br />
+<em>Recall that the prior effective sample size is \(\alpha + \beta\) and prior mean is \(\frac{\alpha}{\alpha + \beta}.\)</em></p>
+
+<p><b>
+For Questions 1-8, consider the chocolate chip cookie example from the lesson.<br />
+As in the lesson, we use a Poisson likelihood to model the number of chips per cookie, and a conjugate gamma prior on \(\lambda\), the expected number of chips per cookie. Suppose your prior expectation for \(\lambda\) is 8.<br />
+The conjugate prior with mean 8 and effective sample size of 2 is Gamma(a,2). Find the value of a.<br />
+</b>
+<strong>16</strong><br />
+<em>The expected value is \(a/2=8\), so \(a=16\).</em><br /></p>
+
+<p><b>
+Cookies:<br />
+The conjugate prior with mean 8 and standard deviation 1 is Gamma(a,8). Find the value of a.<br />
+</b>
+<strong>64</strong><br />
+<em>The prior mean is \(a/8=64/8=8\) and prior standard deviation is \(\sqrt{a}/8=\sqrt{64}/8=1\).</em><br />
+<em>Note that this is not the prior standard deviation for number of chips per cookie. It is the prior standard deviation for \(\lambda\) the expected number of chips per cookie. It represents our level of confidence in the prior for \(\lambda\).</em><br /></p>
+
+<p><b>
+Cookies:<br />
+Suppose you are not very confident in your prior guess of 8, so you want to use a prior effective sample size of 1/100 cookies. Then the conjugate prior is Gamma(a,0.01). Find the value of a. Round your answer to two decimal places.<br />
+</b>
+<strong>0.08</strong><br />
+<em>The expected value is \(\frac{a}{0.01}=8\), so \(a=0.08\).</em><br /></p>
+
+<p><b>
+Cookies:<br />
+Suppose you decide on the prior Gamma(8, 1), which has prior mean 8 and effective sample size of one cookie.<br />
+We collect data, sampling five cookies and counting the chips in each. We find 9, 12, 10, 15, and 13 chips.<br />
+What is the posterior distribution for λ?<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> Gamma(67, 6)<br />
+☐ <code class="highlighter-rouge">WRONG</code> Gamma(59, 5)<br />
+☐ <code class="highlighter-rouge">WRONG</code> Gamma(6, 67)<br />
+☐ <code class="highlighter-rouge">WRONG</code> Gamma(8, 1)<br />
+☐ <code class="highlighter-rouge">WRONG</code> Gamma(1, 8)<br />
+☐ <code class="highlighter-rouge">WRONG</code> Gamma(5, 59)<br />
+<em>The chip total is 59 in five cookies, so we have posterior \(\alpha=8 + 59\) and \(\beta = 1 + 5\).</em><br /></p>
+
+<p><b>
+Cookies:<br />
+Continuing the previous question, what of the following graphs shows the prior density (dotted line) and posterior density (solid line) of λ?<br />
+</b>
+<img src="./image2.svg" /><br /><br />
+<em>The data sample mean (11.8) is greater than the prior mean, and consequently the posterior mean is greater than the prior mean also.</em><br /></p>
+
+<p><b>
+Cookies:<br />
+Continuing Question 4, what is the posterior mean for λ? Round your answer to one decimal place.<br />
+</b>
+<strong>11.167</strong><br />
+<em>This is \(\alpha / \beta = 67 / 6\) where \(\alpha\) and \(\beta\) are the posterior gamma parameters.</em><br /></p>
+
+<p><b>
+Cookies:<br />
+Continuing Question 4, use R or Excel to find the lower end of a 90% equal-tailed credible interval for λ. Round your answer to one decimal place.<br />
+</b>
+<strong>9.021382</strong><br />
+<em>The interval is (9.02, 13.50).</em><br />
+<em>In R: <code class="highlighter-rouge">qgamma(p=0.05, shape=67, rate=6)</code></em><br />
+<em>Where probability=0.05, alpha=67, and beta=1/6. Note that the beta in Excel’s parameterization of the gamma distribution (the shape parameter) is the reciprocal of the parameter used in this course (the rate parameter).</em><br /></p>
+
+<p><b>
+Cookies:<br />
+Continuing Question 4, suppose that in addition to the five cookies reported, we observe an additional ten cookies with 109 total chips. What is the new posterior distribution for λ, the expected number of chips per cookie?<br />
+Hint: You can either use the posterior from the previous analysis as the prior here, or you can start with the original Gamma(8,1) prior and update with all fifteen cookies. The result will be the same.<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> Gamma(109, 10)<br />
+☐ <code class="highlighter-rouge">WRONG</code> Gamma(10, 109)<br />
+☐ <code class="highlighter-rouge">WRONG</code> Gamma(16, 176)<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> Gamma(176, 16)<br />
+☐ <code class="highlighter-rouge">WRONG</code> Gamma(11, 109)<br />
+<em>This is \(\text{Gamma}(\alpha, \beta)\) with \(\alpha = 8 + 59 + 109\) and \(\beta = 1 + 5 + 10\).</em><br />
+<em>The posterior mean is now 176/16=11. The data suggest there are more than 8 chips per cookie on average.</em><br /></p>
+
+<p><b>
+For Questions 9-10, consider the following scenario:<br />
+A retailer notices that a certain type of customer tends to call their customer service hotline more often than other customers, so they begin keeping track. They decide a Poisson process model is appropriate for counting calls, with calling rate \(\theta\) calls per customer per day.<br />
+The model for the total number of calls is then \(Y \sim \text{Poisson}(n\cdot t \cdot \theta)\) where \(n\) is the number of customers in the group and \(t\) is the number of days. That is, if we observe the calls from a group with 24 customers for 5 days, the expected number of calls would be \(24\cdot 5\cdot \theta = 120\cdot \theta\).<br />
+The likelihood for \(Y\) is then \(f(y \mid \theta) = \frac{(nt\theta)^y e^{-nt\theta}}{y!} \propto \theta^y e^{-nt\theta}\).<br />
+This model also has a conjugate gamma prior \(\theta \sim \text{Gamma}(a, b)\) which has density (PDF) \(f(\theta) = \frac{b^a}{\Gamma(a)} \theta^{a-1} e^{-b\theta} \propto \theta^{a-1} e^{-b\theta}\).<br />
+Following the same procedure outlined in the lesson, find the posterior distribution for \(\theta\).<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> \(\text{Gamma}(a + y, b + nt)\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\text{Gamma}(a + y - 1, b + 1)\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\text{Gamma}(a + 1, b + y)\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\text{Gamma}(y, nt)\)<br />
+<em>If we multiply the likelihood and the prior, we get \(f(\theta \mid y) \propto \theta^y e^{-nt\theta} \theta^{a-1} e^{-b\theta} = \theta^{a+y-1} e^{-(b+nt)\theta}\), which is proportional to a gamma PDF.</em><br /></p>
+
+<p><b>
+Poisson process:<br />
+On average, the retailer receives 0.01 calls per customer per day. To give this group the benefit of the doubt, they set the prior mean for \(\theta\) at 0.01 with standard deviation 0.5. This yields a \(\text{Gamma}(\frac{1}{2500}, \frac{1}{25})\) prior for \(\theta\).<br />
+Suppose there are \(n=24\) customers in this particular group of interest, and the retailer monitors calls from these customers for \(t=5\) days. They observe a total of \(y=6\) calls from this group.<br />
+The following graph shows the resulting \(\text{Gamma}(6.0004, 120.04)\) posterior for \(\theta\), the calling rate for this group. The vertical dashed line shows the average calling rate of 0.01.<br />
+<img src="./image3.svg" /><br />
+Does this posterior inference for \(\theta\) suggest that the group has a higher calling rate than the average of 0.01 calls per customer per day?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> Yes, the posterior mean for \(\theta\) is twice the average of 0.01.<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> Yes, most of the posterior mass (probability) is concentrated on values of \(\theta\) greater than 0.01.<br />
+☐ <code class="highlighter-rouge">WRONG</code> No, the posterior mean is exactly 0.01.<br />
+☐ <code class="highlighter-rouge">WRONG</code> No, most of the posterior mass (probability) is concentrated on values of \(\theta\) less than 0.01.<br />
+<em>The posterior probability that \(\theta &gt; 0.01\) is 0.998.</em><br /></p>
+
+<p><b>
+Identify which of the following conditions (possibly more than one) must be true for the sum of \(n\) Bernoulli random variables (with success probability \(p\)) to follow a binomial distribution.<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> \(p\) must be the same for each of the Bernoulli random variables<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> each Bernoulli random variable is independent of all others<br />
+☐ <code class="highlighter-rouge">WRONG</code> the sum must be greater than zero<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(p\) must be less than .5<br />
+☐ <code class="highlighter-rouge">WRONG</code> the sum must exceed n<br /></p>
+
+<p><b>
+For Questions 2-4, consider the following:<br />
+In Lesson 6.3 we found the prior predictive distribution for a Bernoulli trial under a uniform prior on the success probability \(\theta\). We now derive the prior predictive distribution when the prior is any conjugate beta distribution.<br />
+There are two straightforward ways to do this. The first approach is the same as in the lesson. The marginal distribution of \(y\) is \(f(y) = \int_0^1 f(y|\theta) f(\theta) d\theta\). Now \(f(\theta)\) is a beta PDF, but the same principles apply: we can move constants out of the integral and find a new normalizing constant to make the integral evaluate to 1.<br />
+Another approach is to notice that we can write Bayes’ theorem as \(f(\theta | y) = \frac{f(y|\theta)f(\theta)}{f(y)}\). If we multiply both sides by \(f(y)\) and divide both sides by \(f(\theta | y)\), then we get \(f(y) = \frac{f(y|\theta)f(\theta)}{f(\theta | y)}\) where \(f(\theta)\) is the beta prior PDF and \(f(\theta | y)\) is the updated beta posterior PDF.<br />
+Both approaches yield the same answer. What is the prior predictive distribution \(f(y)\) for this model when the prior for \(\theta\) is \(\text{Beta}(a,b)\)?<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> \(f(y) = \frac{ \Gamma(a+b) }{ \Gamma(a + b + 1) } \cdot \frac{ \Gamma(a+y) }{ \Gamma(a) } \cdot \frac{ \Gamma(b + 1 - y) }{ \Gamma(b) }\) for \(y=0, 1\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(f(y) = \frac{ \Gamma(a+y) }{ \Gamma(a) } \cdot \frac{ \Gamma(b + 1 - y) }{ \Gamma(b) }\) for \(y=0, 1\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(f(y) = \frac{ \Gamma(a+b) }{ \Gamma(a + b + 1) } \theta^y (1-\theta)^{1-y}\) for \(y=0, 1\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(f(y) = \frac{ \Gamma(a+b + 1) }{ \Gamma(a+y) \Gamma(b+1-y) } \theta^{a+y-1} (1-\theta)^{b+1-y}\) for \(y=0, 1\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(f(y) = \frac{ \Gamma(a+b) }{ \Gamma(a) \Gamma(b) } \theta^{a-1} (1-\theta)^{b-1}\) for \(y=0, 1\)<br />
+<em>All the terms involving \(\theta\) cancel out as they should.</em></p>
+
+<p><b>
+Beta-Bernoulli predictive distribution:<br />
+Now suppose the prior for \(\theta\) is \(\text{Beta}(2,2)\). What is the prior predictive probability that \(y^*=1\) for a new observation \(y^*\)? Round your answer to one decimal place.<br />
+</b>
+<strong>0.5</strong><br />
+<em>\(f(y) = \frac{ \Gamma(2+2) }{ \Gamma(2 + 2 + 1) } \cdot \frac{ \Gamma(2+y) }{ \Gamma(2) } \cdot \frac{ \Gamma(2 + 1 - y) }{ \Gamma(2) }\) for \(y=0, 1\), so we have \(f(1) = \frac{ \Gamma(4) }{ \Gamma(5) } \cdot \frac{ \Gamma(3) }{ \Gamma(2) } \cdot \frac{ \Gamma(2) }{ \Gamma(2) } = \frac{3! 2! 1!}{4! 1! 1!} = \frac{12}{24}\).</em><br /></p>
+
+<p><b>
+Beta-Bernoulli predictive distribution:<br />
+After specifying our \(\text{Beta}(2,2)\) prior for \(\theta\), we observe 10 Bernoulli trials, 3 of which are successes.<br />
+What is the posterior predictive probability that \(y^*=1\) for the next (11th) observation \(y^*\)? Round your answer to two decimal places.<br />
+</b>
+<strong>0.35714285714285715</strong><br />
+We can use the same predictive distribution as before, replacing \(a\) and \(b\) with the parameters of the posterior \(\text{Beta}(5,9)\).<br />
+\(f(y) = \frac{ \Gamma(5+9) }{ \Gamma(5 + 9 + 1) } \cdot \frac{ \Gamma(5+y) }{ \Gamma(5) } \cdot \frac{ \Gamma(9 + 1 - y) }{ \Gamma(9) }\) for \(y=0, 1\), so we have \(f(1) = \frac{ \Gamma(14) }{ \Gamma(15) } \cdot \frac{ \Gamma(6) }{ \Gamma(5) } \cdot \frac{ \Gamma(9) }{ \Gamma(9) } = \frac{13! 5! 8!}{14! 4! 8!} = \frac{5}{14}\).<br /></p>
+
+<p><b>
+We can generalize the result from the lesson to more than one data point.<br />
+Suppose \(Y_1, \ldots, Y_n\) are independent and identically distributed exponential with mean \(1/\lambda\), and assume a \(\text{Gamma}(\alpha, \beta)\) prior for \(\lambda\). The likelihood is then \(f(\mathbf{y} \mid \lambda) = \lambda^n e^{-\lambda \sum y_i}\), and we can follow the same steps from the lesson to obtain the posterior distribution (try to derive it yourself)<br />
+\(\lambda \mid \mathbf{y} \sim \text{Gamma}(\alpha + n, \beta + \sum y_i)\)<br />
+What is the prior effective sample size in this model?<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> \(\alpha\) <em>The data sample size nn is added to \(\alpha\) to update the first parameter. Thus \(\alpha\) can be interpreted as the sample size equivalent in the prior.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\alpha + \beta\) <em>\(α+β\) was the prior effective sample sample size in the binomial-beta model. In this model, which parameter is updated with the data sample size \(n\)?</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\sum y_i\) <em>This is a statistic computed from the data themselves. It does not play a role in the prior.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\beta\) <em>\(\beta\) was the prior effective sample sample size in the Poisson-gamma model. In this model, which parameter is updated with the data sample size \(n\)?</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> \(n\) <em>This is the data sample size.</em><br /></p>
+
+<p><b>
+In which of the following scenarios could we most appropriately use a normal likelihood?<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> Predicting your class average score on a standardized test <em>Standardized test scores are often thought of as a continuous quantity, but more importantly, because we are predicting the class average, use of the normal distribution is justified by the central limit theorem.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> Predicting the number of correct responses on a particular student’s quiz <em>This is a count with a maximum value which would more appropriately be modeled as a binomial outcome.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> Predicting the percent of correct responses on a particular student’s quiz <em>Because they are averages, percentages are sometimes approximated with the normal distribution. However, if the quiz does not have a large number of questions, the boundaries at 0 and 1 are problematic (normal random variables are defined on all real numbers) and the normal approximation is poor.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> Predicting whether a student will be given form A or form B of an exam <em>This is a binary outcome, whereas the normal distribution is for a continuous variable.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> Predicting the number of students in your class who will be in attendance on a given Monday <em>This is a count with a maximum value which would more appropriately be modeled as a binomial outcome.</em><br /></p>
+
+<p><b>
+The prior (and posterior) predictive distribution for data is particularly simple in the conjugate normal model. If \(Y \mid \theta \sim \text{N}(\theta, \sigma^2)\) and \(\theta \sim \text{N}(m_0, s_0^2)\), then the marginal distribution for \(Y\), obtained as \(\int f(y, \theta) d\theta\), is \(\text{N}(m_0, s_0^2 + \sigma^2)\).<br />
+Suppose your data are normally distributed with mean \(\theta\) and variance 1. You select a normal prior for \(\theta\) with mean 0 and variance 2. Then the prior predictive distribution for one data point would be \(\text{N}(0, a)\). Find the value of \(a\).<br />
+</b>
+<strong>3</strong><br />
+Here we have \(m_0=0\), \(s_0^2 = 2\) and \(\sigma^2=1\), the predictive distribution is \(\text{N}(0, 2 + 1)\).<br /></p>
+
+<p><b>
+If you are collecting normal data to make inferences about the mean \(\mu\), but you don’t know the true variance \(\sigma^2\) (or standard deviation \(\sigma\)) of the data, three options available to you are:<br />
+    1. Fix \(\sigma^2\) at your best guess.<br />
+    2. Estimate \(\sigma^2\) from the data and fix it at this value.<br />
+    3. Specify a prior for \(\sigma^2\) and \(\mu\) to estimate them jointly, as presented in this lesson.<br />
+Options 1 and 2 allow you to use the methods of Lesson 10.1 by pretending you know the true value of \(\sigma^2\). This leads to a simpler posterior calculation for \(\mu\). Which of the following is a potential advantage of selecting option 3?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> The prior effective sample size in option 3 is zero. <em>In option 3, we can set the prior sample size by specifying \(w\).</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> Option 3 will always result in narrower credible intervals for \(\mu\). <em>Unless your fixed value of \(\sigma^2\) in options 1 or 2 is large (relative to the truth), option 3 will typically result in wider credible intervals for \muμ because it reflects uncertainty in both parameters.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> Option 3 makes no assumptions about the distribution of your data, thereby reducing the variance of the estimates and increasing the effective sample size. <em>Option 3 still assumes a normal model for the data. Making fewer assumptions typically increases the variance of your estimates, but can more honestly reflect the level of your uncertainty.</em><br />
+⚡ <code class="highlighter-rouge">CORRECT</code> Option 3 more honestly reflects your uncertainty in \(\sigma^2\), thereby protecting against overly (and inappropriately) confident inferences. <em>Another advantage is that option 3 provides you with a Bayesian estimate of \(\sigma^2\).</em><br /></p>
+
+<p><b>
+What does it mean for a prior to be improper?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> Its density (PDF) can take on negative values. <em>A PDF will never take negative values.</em><br />
+⚡ <code class="highlighter-rouge">CORRECT</code> It does not integrate (or sum) to 1. <em>Integrating over all possible values of \(\theta\) will return \(\infty\) instead of 1.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> The resulting prior predictive distribution is unlikely to have produced the data. <em>The prior predictive distribution will also be improper.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> It’s use will never result in a posterior distribution which integrates (or sums) to 1. <em>In some cases, the posterior is proper even if we use an improper prior.</em><br /></p>
+
+<p><b>
+In simple models, non-informative priors often produce posterior mean estimates that are equivalent to the common frequentist/MLE estimates. Why might we still use this Bayesian approach?<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> In addition to the point estimate, we have a posterior distribution for the parameter which allows us to calculate posterior probabilities and credible intervals. <em>If the posterior distribution is proper, we still enjoy the benefits of a Bayesian analysis.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> The MLE is usually more difficult to compute than a posterior mean. <em>Typically, the MLE requires an easier calculation than a posterior mean. For example, consider the MLE for a normal mean \(\overline{x}\) versus the posterior mean in the conjugate model, which is a weighted average of \(\overline{x}\) and the prior mean.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> The posterior mean is invariant to the choice of prior. <em>The posterior mean is dependent on the choice of prior.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> Posterior mean estimates are on average 50% closer to the true parameter value than the corresponding MLE estimate. Thus, the MLE is not a trustworthy estimator. <em>Posterior mean estimates can be closer to the true value, but that often depends on the accuracy of the prior.</em><br /></p>
+
+<p><b>
+Jeffreys priors are “transformation invariant” in the sense that if we calculate the Jeffreys prior for \(\theta\) and then reparameterize to use \(\phi = g(\theta)\), we get the same result as if we had first reparameterized and then found the Jeffrey’s prior for \(\phi\). Why might this property be desirable?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> No matter how we parameterize the problem, the Jeffreys prior contains the least possible prior “information.” <em>The Jeffreys prior for a binomial proportion pp has an effective sample size of one.</em><br />
+⚡ <code class="highlighter-rouge">CORRECT</code> Different investigators might parameterize a problem in different ways. Using the Jeffreys prior ensures that they both obtain the same answer. <em>Along with providing a “default” prior, this is the primary advantage of Jeffreys priors.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> The Jefferys prior is uniform on all scales. <em>The Jeffreys prior for a binomial proportion pp has a “U” shape.</em><br /></p>
+
+<p><b>
+For Questions 1-3, refer to the bus waiting time example from the lesson.<br />
+Recall that we used the conjugate gamma prior for \(\lambda\), the arrival rate in busses per minute. Suppose our prior belief about this rate is that it should have mean 1/20 arrivals per minute with standard deviation 1/5. Then the prior is \(\text{Gamma}(a, b)\) with \(a=1/16\).<br />
+Find the value of bb. Round your answer to two decimal places.<br />
+</b>
+<strong>1.25</strong><br />
+<em>This is \(b=5/4\) which results in prior mean \(a/b = 1/(16b) = 1/20\) and prior standard deviation \(\sqrt{a}/b = 1/(\sqrt{16}b) = 1/5\).
+Note that a prior expected arrival rate of 1/20 busses per minute is not equivalent to a prior expected wait time of 20 minutes per bus. Indeed, for random variables generally, \(E(1/X) \ne 1/E(X)\).</em><br /></p>
+
+<p><b>
+Bus waiting times:<br />
+Suppose that we wish to use a prior with the same mean (1/20), but with effective sample size of one arrival. Then the prior for \(\lambda\) is \(\text{Gamma}(1, 20)\).<br />
+In addition to the original \(Y_1=12\), we observe the waiting times for four additional busses: \(Y_2=15\), \(Y_3=8\), \(Y_4=13.5\), \(Y_5=25\).<br />
+Recall that with multiple (independent) observations, the posterior for \(\lambda\) is \(\text{Gamma}(\alpha, \beta)\) where \(\alpha = a + n\) and \(\beta = b + \sum y_i\).<br />
+What is the posterior mean for \(\lambda\)? Round your answer to two decimal places.<br />
+</b>
+<strong>0.064</strong><br />
+<em>This is the mean of the posterior distribution: \(\text{Gamma}(\alpha, \beta)\) with \(\alpha = a + n = 1 + 5\) and \(\beta = b + \sum y_i = 20 + 73.5\).</em><br /></p>
+
+<p><b>
+Bus waiting times:<br />
+Continuing Question 2, use R or Excel to find the posterior probability that \(\lambda &lt; 1/10\)? Round your answer to two decimal places.<br />
+</b>
+<strong>0.9039699</strong><br />
+<em>There is a fairly high posterior probability that the arrival rate is less than 1/10 busses per minute, or equivalently that the average waiting time for a bus is greater than 10 minutes.</em><br />
+<em>In R: <code class="highlighter-rouge">pgamma(q=1/10, shape=6, rate=93.5)</code> where x=1/10, alpha=6, beta=1/93.5 (in Excel, beta is a shape parameter), cumulative=TRUE.</em><br /></p>
+
+<p><b>
+For Questions 4-10, consider the following earthquake data:<br />
+The United States Geological Survey maintains a list of significant earthquakes worldwide. We will model the rate of earthquakes of magnitude 4.0+ in the state of California during 2015. An iid exponential model on the waiting time between significant earthquakes is appropriate if we assume:<br />
+    1. earthquake events are independent,
+    2. the rate at which earthquakes occur does not change during the year, and
+    3. the earthquake hazard rate does not change (i.e., the probability of an earthquake happening tomorrow is constant regardless of whether the previous earthquake was yesterday or 100 days ago).<br />
+Let \(Y_i\) denote the waiting time in days between the ith earthquake and the following earthquake. Our model is \(Y_i \overset{\text{iid}}{\sim} \text{Exponential}(\lambda)\) where the expected waiting time between earthquakes is \(E(Y) = 1/\lambda\) days.<br />
+Assume the conjugate prior \(\lambda \sim \text{Gamma}(a,b)\). Suppose our prior expectation for \(\lambda\) is 1/30, and we wish to use a prior effective sample size of one interval between earthquakes.<br />
+What is the value of aa?<br />
+</b>
+<strong>1</strong><br />
+<em>In the exponential-gamma model, aa is the prior effective sample size.</em><br /></p>
+
+<p><b>
+Earthquake data:<br />
+What is the value of bb?<br />
+</b>
+<strong>30</strong><br />
+<em>The prior mean is \(a/b = 1/30\), and since we know the effective sample size \(a=1\), we have \(b=30\).</em><br /></p>
+
+<p><b>
+Earthquake data:<br />
+The significant earthquakes of magnitude 4.0+ in the state of California during 2015 occurred on the following dates (http://earthquake.usgs.gov/earthquakes/browse/significant.php?year=2015):<br />
+January 4, January 20, January 28, May 22, July 21, July 25, August 17, September 16, December 30.<br />
+Recall that we are modeling the waiting times between earthquakes in days. Which of the following is our data vector?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> y = (3, 16, 8, 114, 60, 4, 23, 30, 105)<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> y = (16, 8, 114, 60, 4, 23, 30, 105)<br />
+☐ <code class="highlighter-rouge">WRONG</code> y = (3, 16, 8, 114, 60, 4, 23, 30, 105, 1)<br />
+☐ <code class="highlighter-rouge">WRONG</code> y = (0, 0, 4, 2, 0, 1, 1, 3)<br />
+<em>There are eight intervals between the first and last event.</em><br />
+<em>We are excluding four days of the year in which no events were observed. A more comprehensive model (e.g., censoring methods) would account for the fact that there were no major earthquakes Jan. 1 to Jan. 4 and Dec. 30 to Dec. 31. This is beyond the scope of the course.</em><br /></p>
+
+<p><b>
+Earthquake data:<br />
+The posterior distribution is \(\lambda \mid \mathbf{y} \sim \text{Gamma}(\alpha, \beta)\). What is the value of \(\alpha\)?<br />
+</b>
+<strong>9</strong><br />
+<em>This is \(\alpha = a + n = 1 + 8\)</em>.<br /></p>
+
+<p><b>
+Earthquake data:<br />
+The posterior distribution is \(\lambda \mid \mathbf{y} \sim \text{Gamma}(\alpha, \beta)\). What is the value of \(\beta\)?<br />
+</b>
+<strong>390</strong><br />
+<em>This is \(\beta = b + \sum y_i = 30 + 360\).</em><br /></p>
+
+<p><b>
+Earthquake data:<br />
+Use R or Excel to calculate the upper end of the 95% equal-tailed credible interval for \(\lambda\), the rate of major earthquakes in events per day. Round your answer to two decimal places.<br />
+</b>
+<strong>0.04041843</strong><br />
+<em>The full interval is (0.011, 0.040). Thus our posterior probability that \(0.011 &lt; \lambda &lt; 0.040\) is 0.95.</em><br />
+<em>The interval in terms of \(1 / \lambda\), the expected number of days between events is (24.7, 94.8). Note that although \(E(1/\lambda) \ne 1/E(\lambda)\), we can take the reciprocals of quantiles since \(P(X &lt; q) = P(1/q &lt; 1/X)\). Just remember that the lower end of the interval becomes the upper end and vise versa.</em><br />
+<em>In R: <code class="highlighter-rouge">qgamma(p=0.975, shape=9, rate=390)</code> where probability=0.975, alpha=9, and beta=1/390 (in Excel, beta is the shape parameter).</em><br /></p>
+
+<p><b>
+Earthquake data:<br />
+The posterior predictive density for a new waiting time \(y^*\) in days is:<br />
+\(f(y^* \mid \mathbf{y} ) = \int f(y^* \mid \lambda) \cdot f(\lambda \mid \mathbf{y}) d\lambda = \frac{ \beta^\alpha \Gamma(\alpha + 1) }{ (\beta + y^*)^{\alpha + 1} \Gamma(\alpha) } I_{\{y^* \ge 0 \}} = \frac{ \beta^\alpha \alpha}{ (\beta + y^*)^{\alpha + 1}} I_{\{y^* \ge 0 \}}\)<br />
+where \(f(\lambda \mid \mathbf{y})\) is the \(\text{Gamma}(\alpha, \beta)\) posterior found earlier. Use R or Excel to evaluate this posterior predictive PDF.<br />
+Which of the following graphs shows the posterior predictive distribution for \(y^*\)?<br />
+</b>
+<img src="./image4.svg" /><br />
+<em>Given the data, this is the distribution of the waiting time (in days) between significant earthquakes. It turns out that the first significant 4.0+ magnitude earthquake in California in 2016 occurred on January 6.</em><br /></p>
+
+<p><b>
+For Questions 1-6, consider the thermometer calibration problem from the quiz in Lesson 6.<br />
+Suppose you are trying to calibrate a thermometer by testing the temperature it reads when water begins to boil. Because of natural variation, you take nn independent measurements (experiments) to estimate \(\theta\), the mean temperature reading for this thermometer at the boiling point. Assume a normal likelihood for these data, with mean \(\theta\) and known variance \(\sigma^2 = 0.25\) (which corresponds to a standard deviation of 0.5 degrees Celsius).<br />
+Suppose your prior for \(\theta\) is (conveniently) the conjugate normal. You know that at sea level, water should boil at 100 degrees Celsius, so you set the prior mean at \(m_0=100\).<br />
+If you specify a prior variance \(s_0^2\) for \(\theta\), which of the following accurately describes the model for your measurements \(Y_i\), \(i=1,\ldots,n\)?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> \(Y_i \mid \theta \overset{\text{iid}}{\sim} \text{N}(100, 0.25)\); \(\theta \sim \text{N}(\theta, s_0^2)\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(Y_i \mid \theta, \sigma^2 \overset{\text{iid}}{\sim} \text{N}(\theta, \sigma^2)\); \(\sigma^2 \sim \text{Inverse-Gamma}(100, s_0^2)\)<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> \(Y_i \mid \theta \overset{\text{iid}}{\sim} \text{N}(\theta, 0.25)\); \(\theta \sim \text{N}(100, s_0^2)\) <em>This is a normal likelihood with known variance, and normal prior on the mean.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> \(Y_i \mid \theta \overset{\text{iid}}{\sim} \text{N}(\theta, 100)\); \(\theta \sim \text{N}(0.25, s_0^2)\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(Y_i \mid \sigma^2 \overset{\text{iid}}{\sim} \text{N}(100, \sigma^2)\); \(\sigma^2 \sim \text{Inverse-Gamma}(0.25, s_0^2)\)<br /></p>
+
+<p><b>
+Thermometer calibration:<br />
+You decide you want the prior to be equivalent (in effective sample size) to one measurement.<br />
+What value should you select for \(s_0^2\) the prior variance of \(\theta\)? Round your answer to two decimal places.<br />
+</b>
+<strong>0.25</strong><br />
+<em>The prior effective sample size is \(\frac{\sigma^2}{s_0^2} = \frac{0.25}{0.25} = 1\).</em><br /></p>
+
+<p><b>
+Thermometer calibration:<br />
+You collect the following n=5n=5 measurements: (94.6, 95.4, 96.2, 94.9, 95.9).<br />
+What is the posterior distribution for \(\theta\)?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> \(\text{N}(100, 0.250)\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\text{N}(95.41, 0.042)\)<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> \(\text{N}(96.17, 0.042)\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\text{N}(96.17, 24)\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\text{N}(95.41, 24)\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\text{N}(95.41, 0.250)\)<br />
+<em>Plugging all relevant quantities (including \(\overline{y} = 95.4\)) into the update formula in Lesson 10.1, the posterior mean is \(\frac{2308}{24}\) and the posterior variance is \(\frac{1}{24}\).</em><br /></p>
+
+<p><b>
+Thermometer calibration:<br />
+Use R or Excel to find the upper end of a 95% equal-tailed credible interval for \(\theta\).<br />
+</b>
+<strong>96.57167</strong><br />
+<em>This is the 0.975 quantile of the posterior distribution.</em><br />
+<em>In R: <code class="highlighter-rouge">qnorm(p=0.975, mean=96.17, sd=sqrt(0.042))</code> where probability=0.975, mean=96.17, and standard_dev=SQRT(0.042).</em><br /></p>
+
+<p><b>
+Thermometer calibration:<br />
+After collecting these data, is it reasonable to conclude that the thermometer is biased toward low values?<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> Yes, we have \(P(\theta &lt; 100 \mid \mathbf{y}) &gt; 0.9999\).<br />
+☐ <code class="highlighter-rouge">WRONG</code> Yes, we have \(P(\theta &gt; 100 \mid \mathbf{y}) &gt; 0.9999\).<br />
+☐ <code class="highlighter-rouge">WRONG</code> No, we have \(P(\theta &lt; 100 \mid \mathbf{y}) &lt; 0.0001\).<br />
+☐ <code class="highlighter-rouge">WRONG</code> No, we have \(P(\theta = 100 \mid \mathbf{y}) = 0\).<br />
+<em>Using the posterior distribution \(\text{N}(a,b)\),</em><br />
+<em>In R: <code class="highlighter-rouge">pnorm(q=100, mean=a, sd=sqrt(b))</code> where x=100, mean=a, standard_dev=SQRT(b), and cumulative=TRUE.</em><br /></p>
+
+<p><b>
+Thermometer calibration:<br />
+What is the posterior predictive distribution of a single future observation \(Y^*\)?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> \(\text{N}(96.17, 0.042)\) <em>This is the posterior distribution for \(\theta\). Use the expression given at the end of Lesson 10.1, using the posterior parameters in place of \(m_0\) and \(s_0^2\).</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\text{N}(95.41, 0.50)\)<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> \(\text{N}(96.17, 0.292)\) <em>This is the posterior distribution with the variance increased by the value of known data variance.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\text{N}(95.41, 0.292)\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\text{N}(100, 0.50)\) *This is the prior predictive distribution for an observation. Use the expression given at the end of Lesson 10.1, using the posterior parameters in place of \(m_0\) and \(s_0^2\).<br /></p>
+
+<p><b>
+For Questions 7-10, consider the following scenario:<br />
+Your friend moves from city A to city B and is delighted to find her favorite restaurant chain at her new location. After several meals, however, she suspects that the restaurant in city B is less generous. She decides to investigate.<br />
+She orders the main dish on 30 randomly selected days throughout the year and records each meal’s weight in grams. You still live in city A, so you assist by performing the same experiment at your restaurant. Assume that the dishes are served on identical plates (measurements subtract the plate’s weight), and that your scale and your friend’s scale are consistent.<br />
+The following histogram shows the 30 measurements from Restaurant B taken by your friend.<br />
+Is it reasonable to assume that these data are normally distributed?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> Yes, the distribution appears to follow a bell-shaped curve.<br />
+☐ <code class="highlighter-rouge">WRONG</code> Yes, the data are tightly clustered around a single number. <em>There appear to be two clusters of points</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> No, the first bar to the left of the peak is not equal in height to he first bar to the right of the peak.<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> No, there appear to be a few extreme observations (outliers). <em>The three points above 700 are about five (sample) standard deviations above the (sample) mean.</em><br /></p>
+
+<p><b>
+Restaurants:<br />
+Your friend investigates the three observations above 700 grams and discovers that she had ordered the incorrect meal on those dates. She removes these observations from the data set and proceeds with the analysis using \(n=27\).<br />
+She assumes a normal likelihood for the data with unknown mean \(\mu\) and unknown variance \(\sigma^2\). She uses the model presented in Lesson 10.2 where, conditional on \(\sigma^2\), the prior for \(\mu\) is normal with mean \(m\) and variance \(\sigma^2 / w\). Next, the marginal prior for \(\sigma^2\) is \(\text{Inverse-Gamma}(a,b)\).<br />
+Your friend’s prior guess on the mean dish weight is 500 grams, so we set \(m=500\). She is not very confident with this guess, so we set the prior effective sample size \(w=0.1\). Finally, she sets \(a=3\) and \(b=200\).<br />
+We can learn more about this inverse-gamma prior by simulating draws from it. If a random variable \(X\) follows a \(\text{Gamma}(a,b)\) distribution, then \(\frac{1}{X}\) follows an \(\text{Inverse-Gamma}(a,b)\) distribution. Hence, we can simulate draws from a gamma distribution and take their reciprocals, which will be draws from an inverse-gamma.<br />
+To simulate 1000 draws in R (replace \(a\) and \(b\) with their actual values): <code class="highlighter-rouge">z &lt;- rgamma(n=1000, shape=a, rate=b)</code>, <code class="highlighter-rouge">x &lt;- 1/z</code><br />
+Simulate a large number of draws (at least 300) from the prior for \(\sigma^2\) and report your approximate prior mean from these draws. It does not need to be exact.<br />
+</b>
+<strong>101.0651</strong><br />
+<code class="highlighter-rouge">z &lt;- rgamma(n=1000, shape=3, rate=200)</code>, <code class="highlighter-rouge">x &lt;- 1/z</code>, <code class="highlighter-rouge">mean(x)</code><br />
+<em>The actual prior mean for \(\sigma^2\) is \(\frac{b}{a-1}=\frac{200}{2}=100\). The prior variance for \(\sigma^2\) is \(\frac{b^2}{(a-1)^2 (a-2)} = 10,000\).</em><br /></p>
+
+<p><b>
+Restaurants:<br />
+With the \(n=27\) data points, your friend calculates the sample mean \(\overline{y} = 609.7\) and sample variance \(s^2 = \frac{1}{n-1} \sum(y_i - \bar{y})^2 = 401.8\).<br />
+Using the update formulas from Lesson 10.2, she calculates the following posterior distributions:<br />
+\(\sigma^2 \mid \mathbf{y} \sim \text{Inverse-Gamma}(a', b')\)<br />
+\(\mu \mid \sigma^2, \mathbf{y} \sim \text{N}(m', \frac{\sigma^2}{w+n})\)<br />
+where<br />
+\(a' = a + \frac{n}{2} = 3 + \frac{27}{2} = 16.5\)<br />
+\(b' = b + \frac{n-1}{2} s^2 + \frac{wn}{2(w+n)}(\bar{y}-m)^2 = 200 + \frac{27-1}{2} 401.8 + \frac{0.1\cdot 27}{2(0.1+27)}(609.7-500)^2 = 6022.9\)<br />
+\(m' = \frac{n\bar{y} + wm}{w + n} = \frac{27\cdot 609.7 + 0.1\cdot 500}{0.1 + 27} = 609.3\)<br />
+\(w=0.1\), and \(w+n=27.1\).<br />
+To simulate draws from this posterior, begin by drawing values for \(\sigma^2\) from its posterior using the method from the preceding question. Then, plug these values for \(\sigma^2\) into the posterior for \(\mu\) and draw from that normal distribution.<br />
+To simulate 1000 draws in R: <code class="highlighter-rouge">z &lt;- rgamma(1000, shape=16.5, rate=6022.9)</code>, <code class="highlighter-rouge">sig2 &lt;- 1/z</code>, <code class="highlighter-rouge">mu &lt;- rnorm(1000, mean=609.3, sd=sqrt(sig2/27.1))</code><br />
+We can use these simulated draws to help us approximate inferences for \(\mu\) and \(\sigma^2\). For example, we can obtain a 95% equal-tailed credible for \(\mu\) by calculating the quantiles/percentiles of the simulated values.<br />
+In R: <code class="highlighter-rouge">quantile(x=mu, probs=c(0.025, 0.975))</code><br />
+Perform the posterior simulation described above and compute your approximate 95% equal-tailed credible interval for \(\mu\). Based on your simulation, which of the following appears to be the actual interval?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> (245, 619)<br />
+☐ <code class="highlighter-rouge">WRONG</code> (582, 637)<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> (602, 617) <em>This is the actual interval, calculated from the exact marginal posterior (t distribution) for \(\mu\).</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> (608, 610)<br /></p>
+
+<p><b>
+Restaurants:<br />
+You complete your experiment at Restaurant A with \(n=30\) data points, which appear to be normally distributed. You calculate the sample mean \(\overline{y} = 622.8\) and sample variance \(s^2 = \frac{1}{n-1} \sum(y_i - \bar{y})^2 = 403.1\).<br />
+Repeat the analysis from Question 9 using the same priors and draw samples from the posterior distribution of \(\sigma_A^2\) and \(\mu_A\) (where the \(A\) denotes that these parameters are for Restaurant A).<br />
+Treating the data from Restaurant A as independent from Restaurant B, we can now attempt to answer your friend’s original question: is restaurant A more generous? To do so, we can compute posterior probabilities of hypotheses like \(\mu_A &gt; \mu_B\). This is a simple task if we have simulated draws for \(\mu_A\) and \(\mu_B\). For \(i=1, \ldots, N\) (the number of simulations drawn for each parameter), make the comparison \(\mu_A &gt; \mu_B\) using the \(i\)th draw for \(\mu_A\) and \(\mu_B\). Then count how many of these return a TRUE value and divide by \(N\), the total number of simulations.<br />
+In R (using 1000 simulated values): <code class="highlighter-rouge">sum( muA &gt; muB ) / 1000</code> or <code class="highlighter-rouge">mean( muA &gt; muB )</code>.<br />
+Would you conclude that the main dish from restaurant A weighs more than the main dish from restaurant B on average?<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> Yes, the posterior probability that \(\mu_A &gt; \mu_B\) is at least 0.95. <em>This is fairly strong evidence that the mean weight of the dish from Restaurant A is greater than the mean weight of the dish from Restaurant B.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> Yes, the posterior probability that \(\mu_A &gt; \mu_B\) is less than 0.05.<br />
+☐ <code class="highlighter-rouge">WRONG</code> No, the posterior probability that \(\mu_A &gt; \mu_B\) is at least 0.95.<br />
+☐ <code class="highlighter-rouge">WRONG</code> No, the posterior probability that \(\mu_A &gt; \mu_B\) is less than 0.05.<br /></p>
+
+<p><b>
+Suppose we flip a coin five times to estimate \(\theta\), the probability of obtaining heads. We use a Bernoulli likelihood for the data and a non-informative (and improper) Beta(0,0) prior for \(\theta\). We observe the following sequence: (H, H, H, T, H).<br />
+Because we observed at least one H and at least one T, the posterior is proper. What is the posterior distribution for \(\theta\)?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> Beta(1.5, 4.5)<br />
+☐ <code class="highlighter-rouge">WRONG</code> Beta(2,5)<br />
+☐ <code class="highlighter-rouge">WRONG</code> Beta(5,2)<br />
+☐ <code class="highlighter-rouge">WRONG</code> Beta(4.5, 1.5)<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> Beta(4,1)<br />
+☐ <code class="highlighter-rouge">WRONG</code> Beta(1,4)<br />
+<em>We observed four “successes” and one “failure,” and these counts are the parameters of the posterior beta distribution.</em><br /></p>
+
+<p><b>
+Continuing the previous question, what is the posterior mean for \(\theta\)? Round your answer to one decimal place.<br />
+</b>
+<strong>0.8</strong><br />
+<em>This is the same as the MLE, \(\overline{y}\).</em><br /></p>
+
+<p><b>
+Consider again the thermometer calibration problem from Lesson 10.<br />
+Assume a normal likelihood with unknown mean \(\theta\)θ and known variance \(\sigma^2=0.25\). Now use the non-informative (and improper) flat prior for \(\theta\) across all real numbers. This is equivalent to a conjugate normal prior with variance equal to \(\infty\).<br />
+You collect the following \(n=5\) measurements: (94.6, 95.4, 96.2, 94.9, 95.9). What is the posterior distribution for \(\theta\)?<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> \(\text{N}(95.4, 0.05)\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\text{N}(95.4, 0.25)\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\text{N}(96.0, 0.25^2)\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\text{N}(96.0, 0.05^2)\)<br />
+<em>This is \(\text{N}(\overline{y}, \frac{\sigma^2}{n})\).</em><br /></p>
+
+<p><b>
+Which of the following graphs shows the Jeffreys prior for a Bernoulli/binomial success probability \(p\)?<br />
+Hint: The Jeffreys prior in this case is Beta(1/2, 1/2).<br />
+</b>
+<img src="./image5.svg" /><br />
+<em>Beta distributions with parameters between 0 and 1 have a distinct “U” shape.</em><br /></p>
+
+<p><b>
+Scientist A studies the probability of a certain outcome of an experiment and calls it \(\theta\). To be non-informative, he assumes a Uniform(0,1) prior for \(\theta\).<br />
+Scientist B studies the same outcome of the same experiment using the same data, but wishes to model the odds \(\phi = \frac{\theta}{1 - \theta}\). Scientiest B places a uniform distribution on \(\phi\). If she reports her inferences in terms of the probability \(\theta\), will they be equivalent to the inferences made by Scientist A?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> Yes, they both used uniform priors. <em>The uniform prior on \(\theta\) implies the following prior PDF for \(\phi\): \(f(\phi) = \frac{1}{(1+\phi)^2} I_{\{\phi \ge 0 \}}\), which clearly is not the uniform prior used by Scientist B.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> Yes, they used the Jeffreys prior. <em>The Jeffreys prior for \(\theta\) is Beta(1/2, 1/2).</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> No, they are using different parameterizations. <em>They can still obtain equivalent results if they both use the Jeffreys prior.</em><br />
+⚡ <code class="highlighter-rouge">CORRECT</code> No, they did not use the Jeffreys prior.<br />
+<em>The uniform prior on \(\theta\) implies the following prior PDF for \(\phi\): \(f(\phi) = \frac{1}{(1+\phi)^2} I_{\{\phi \ge 0 \}}\), which clearly is not the uniform prior used by Scientist B.</em><br />
+<em>They would obtain equivalent inferences if they both use the Jeffreys prior.</em><br /></p>
+
+<p><b>
+Consider again the golf data from the regression quiz for Questions 1-4.<br />
+The data are found at http://www.stat.ufl.edu/~winner/data/pgalpga2008.dat and consist of season statistics for individual golfers on the United States LPGA and PGA tours. The first column reports each player’s average driving distance in yards. The second column reports the percentage of the player’s drives that finish in the fairway, measuring their accuracy. The third and final column has a 1 to denote a female golfer (on the LPGA tour), and a 2 to denote male golfer (on the PGA tour).<br />
+Now consider a multiple regression on the full data set, including both female and male golfers. Modify the third variable to be a 0 if the golfer is female and 1 if the golfer is male and fit the following regression:<br />
+\(E(y) = b_0 + b_1x_1 + b_2x_2\)<br />
+where \(x_1\) is the average driving distance and \(x_2\) is the indicator that the golfer is male.<br />
+What is the posterior mean estimate of \(b_0\)? Round your answer to the nearest whole number.<br />
+</b>
+<strong>147.335439</strong><br /></p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dat</span><span class="o">=</span><span class="n">read.table</span><span class="p">(</span><span class="s2">"http://www.stat.ufl.edu/~winner/data/pgalpga2008.dat"</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="nb">T</span><span class="p">)</span><span class="w">
+</span><span class="n">dat</span><span class="o">$</span><span class="n">X1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dat</span><span class="o">$</span><span class="n">X1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span><span class="n">attach</span><span class="p">(</span><span class="n">dat</span><span class="p">)</span><span class="w">
+</span><span class="nf">names</span><span class="p">(</span><span class="n">dat</span><span class="p">)</span><span class="w">
+</span><span class="n">mod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lm</span><span class="p">(</span><span class="n">X67.0</span><span class="o">~</span><span class="n">X243.2</span><span class="o">+</span><span class="n">X1</span><span class="p">)</span><span class="w">
+</span><span class="n">summary</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span><span class="w">
+</span><span class="n">coef</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><em>In this case \(b_0\) has no meaningful physical interpretation because it represents the percentage accuracy of a female golfer (\(x_2 = 0\)) who drives the ball 0 yards on average (\(x_1 = 0\)).</em><br /></p>
+
+<p><b>
+Golf data:<br />
+The posterior mean estimates of the other two coefficients are \(\hat{b}_1 = -0.323\), and \(\hat{b}_2 = 8.94\). What is the interpretation of \(\hat{b}_1\)?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> Holding all else constant, being male is associated with a 0.323 decrease in drive accuracy percentage. <em>\(b _1\) is associated with \(x_1\), the driving distance.</em><br />
+⚡ <code class="highlighter-rouge">CORRECT</code> Holding all else constant, each additional yard of distance is associated with a 0.323 decrease in drive accuracy percentage. <em>Remember, we can’t say distance causes loss of accuracy because these are observational data (they were not obtained through a randomized experiment).</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> Holding all else constant, each additional yard of distance is associated with a 0.323 increase in drive accuracy percentage.<br />
+☐ <code class="highlighter-rouge">WRONG</code> Holding all else constant, being male is associated with a 0.323 increase in drive accuracy percentage.<br /></p>
+
+<p><b>
+Golf data:<br />
+The standard error for \(b_1\) (which we can think of as marginal posterior standard deviation in this case) is roughly \(1/10\) times the magnitude of the posterior mean estimate \(\hat{b}_1 = -0.323\). In other words, the posterior mean is more than 10 posterior standard deviations from 0. What does this suggest?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> The posterior probability that \(b_1 &lt; 0\) is very low, suggesting a negative relationship between driving distance and accuracy.<br />
+☐ <code class="highlighter-rouge">WRONG</code> The posterior probability that \(b_1 &lt; 0\) is about 0.5, suggesting no evidence for an association between driving distance and accuracy.<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> The posterior probability that \(b_1 &lt; 0\) is very high, suggesting a negative relationship between driving distance and accuracy.<br /></p>
+
+<p><b>
+Golf data:<br />
+The estimated value of \(b_2\) would typically be interpreted to mean that holding all else constant (for a fixed driving distance), golfers on the PGA tour are about 9% more accurate with their drives on average than golfers on the LPGA tour. However, if you explore the data, you will find that the PGA tour golfers’ average drives are 40+ yards longer than LPGA tour golfers’ average drives, and that the LPGA tour golfers are actually more accurate on average. Thus \(b_2\), while a vital component of the model, is actually a correction for the discrepancy in driving distances. Although model fitting can be easy (especially with software), interpreting the results requires a thoughtful approach.<br />
+It would also be prudent to check that the model fits the data well. One of the primary tools in regression analysis is the residual plot. Residuals are defined as the observed values \(y\) minus their predicted values \(\hat{y}\). Patterns in the plot of \(\hat{y}\) versus residuals, for example, can indicate an inadequacy in the model. These plots are easy to produce.<br />
+In R: <code class="highlighter-rouge">plot(fitted(mod), residuals(mod))</code> where “mod” is the model object fitted with the lm() command.<br />
+Fit the regression and examine the residual plots. Which of the following statements most accurately describes the residual plots for this analysis?<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> The residuals appear to be random and lack any patterns or trends. However, there is at least one outlier (extreme observation) that we may want to investigate. <em>Outliers can strongly influence model estimates. A thorough data analysis might include an investigation into whether this outlier value was due to some error (clerical or otherwise).</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> The residuals appear to be random and lack any patterns or trends. There are no outliers (extreme observations).<br />
+☐ <code class="highlighter-rouge">WRONG</code> The residuals appear to exhibit a curved trend. There is at least one outlier (extreme observation) that we may want to investigate.<br />
+☐ <code class="highlighter-rouge">WRONG</code> The residuals appear to be more spread apart for smaller predicted values \(\hat{y}\). There are no outliers (extreme observations).<br /></p>
+
+        </div>
+    </div>
+</body>
+</html>

@@ -294,7 +294,7 @@ body ul { margin: 0; }
 
 body strong { color: red; }
 
-.scrollbar::-webkit-scrollbar { width: 4px; }
+.scrollbar::-webkit-scrollbar { width: 8px; }
 
 .scrollbar::-webkit-scrollbar-thumb { background-color: #0CC; }
 

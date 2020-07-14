@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bayesian Statistics: Techniques and Models</title>
+    <script id="MathJax-script" async src="../../assets/tex-chtml.js"></script>
+</head>
+<body class='scrollbar'>
+    
+    <div style='display: flex; flex-direction: row; margin: 2vh 2vw 5vh; justify-content: center;'>
+        <div id='sideleft' style='flex: 1; max-width: 20vw'>
+            <div id='sidebar' class='scrollbar'>
+                    
+    <ul>
+    
+        <div style='white-space: nowrap; text-overflow: ellipsis; overflow: hidden !important;'>
+            <a href='/probability-statistics/mcmc-bayesian-statistics/Distributions.pdf' data-tooltip='Common Probability Distributions'>
+                
+                    Common Probability Distributions
+                
+            </a>
+        </div>
+        
+    
+        <div style='white-space: nowrap; text-overflow: ellipsis; overflow: hidden !important;'>
+            <a href='/probability-statistics/mcmc-bayesian-statistics/Lesson 3_ Monte Carlo estimation.html' data-tooltip='Monte Carlo estimation'>
+                
+                    Monte Carlo estimation
+                
+            </a>
+        </div>
+        
+    
+        <div style='white-space: nowrap; text-overflow: ellipsis; overflow: hidden !important;'>
+            <a href='/probability-statistics/mcmc-bayesian-statistics/Background_ Markov chains.html' data-tooltip='Markov Chains'>
+                
+                    Markov Chains
+                
+            </a>
+        </div>
+        
+    
+        <div style='white-space: nowrap; text-overflow: ellipsis; overflow: hidden !important;'>
+            <a href='/probability-statistics/mcmc-bayesian-statistics/Lesson 4_ Metropolis-Hastings.html' data-tooltip='Metropolis-Hastings'>
+                
+                    Metropolis-Hastings
+                
+            </a>
+        </div>
+        
+    
+        <div style='white-space: nowrap; text-overflow: ellipsis; overflow: hidden !important;'>
+            <a href='/probability-statistics/mcmc-bayesian-statistics/Introduction to JAGS.html' data-tooltip='Introduction to JAGS'>
+                
+                    Introduction to JAGS
+                
+            </a>
+        </div>
+        
+    
+        <div style='white-space: nowrap; text-overflow: ellipsis; overflow: hidden !important;'>
+            <a href='/probability-statistics/mcmc-bayesian-statistics/Lesson 5_ Gibbs sampling.html' data-tooltip='Gibbs Sampling'>
+                
+                    Gibbs Sampling
+                
+            </a>
+        </div>
+        
+    
+        <div style='white-space: nowrap; text-overflow: ellipsis; overflow: hidden !important;'>
+            <a href='/probability-statistics/mcmc-bayesian-statistics/Autocorrelation.pdf' data-tooltip='Covariance, Correlation, and Autocorrelation'>
+                
+                    Covariance, Correlation, and Autocorrelation
+                
+            </a>
+        </div>
+        
+    
+        <div style='white-space: nowrap; text-overflow: ellipsis; overflow: hidden !important;'>
+            <a href='/probability-statistics/mcmc-bayesian-statistics/Lesson 6_ Convergence diagnostics.html' data-tooltip='Convergence Diagnostics'>
+                
+                    Convergence Diagnostics
+                
+            </a>
+        </div>
+        
+    
+        <div style='white-space: nowrap; text-overflow: ellipsis; overflow: hidden !important;'>
+            <a href='/probability-statistics/mcmc-bayesian-statistics/' data-tooltip='QUIZZ'>
+                
+                    <b style='color: red'>QUIZZ</b>
+                
+            </a>
+        </div>
+        
+    
+    </ul>
+            </div>
+        </div>
+        <div style='flex: 3; max-width: 72vw; padding-left: 20px;'>
+            <h1 style='text-align: center; text-transform: uppercase;'>Bayesian Statistics: Techniques and Models</h1>
+            <link rel="stylesheet" href="../../assets/style.css" />
+
+<p><b>
+What major challenge do we face with both of the models introduced in non-conjugate models?<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> We have the posterior distribution up to a normalizing constant, but we are unable to integrate it to obtain important quantities, such as the posterior mean or probability intervals. <em>In low dimensional problems with only a few parameters, we can resort to numerical methods for integration, but this solution only works for a narrow set of models.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> The expression derived is only an approximation to the posterior. <em>We actually know the exact posterior distributions up to a normalizing constant, which is enough to uniquely identify them.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> The posterior distribution derived is not a proper probability distribution with a finite integral. <em>Whenever we use a proper prior with a proper model (which is the case here), we will have a proper posterior distribution.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> We have the full posterior distribution, no methods exist for computing important quantities, such as the posterior mean or probability intervals. <em>In these examples, we don’t even have the full expression for the posterior distribution.</em><br /></p>
+
+<p><b>
+Forecasters often use simulations (usually based on a probability model) to approximate the probability of something they are trying to predict (for example, see https://fivethirtyeight.com/). How do they use the simulations to obtain the forecast probability?<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> They simulate the system under study many times and count the fraction of times the event of interest occurs.<br />
+☐ <code class="highlighter-rouge">WRONG</code> They simulate the system under study once. If the event of interest occurs in that simulation, they forecast that it will occur. <em>Monte Carlo estimation relies on taking many samples.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> They calculate the probability directly by integrating the probabilistic model. They then run one simulation, inputting the calculated probability. If the event occurs in the simulation, they forecast that it will occur. <em>Monte Carlo estimation relies on taking many samples.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> They calculate the probability directly within each simulation by integrating the probabilistic model. They then average these probabilities across many simulations. <em>This is a viable approach. However, there is a more basic and common way to use Monte Carlo samples to approximate a probability.</em><br /></p>
+
+<p><b>
+What is the easiest way to increase accuracy of a Monte Carlo estimate?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> Discard samples that appear to be outliers. <em>This practice changes the properties of the sampler, and is no longer guaranteed to produce a reliable answer.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> If sampling multiple variables, keep only the samples for the variable of interest. <em>This is a way to get draws from the marginal distribution of the variable of interest, but it doesn’t increase accuracy.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> Change the random number generator seed. <em>Rejecting simulations until they appear how you want introduces potentially invalidating bias.</em><br />
+⚡ <code class="highlighter-rouge">CORRECT</code> Increase the number of samples simulated. <em>There are other ways to set up Monte Carlo simulations with smaller variance (such as “Rao-Blackwellization”), but they usually require more effort.</em><br /></p>
+
+<h4 id="lession-1-quizz"><strong>Lession 1 Quizz</strong></h4>
+
+<p><b>
+Which objective of statistical modeling is best illustrated by the following example?<br />
+You fit a linear regression of monthly stock values for your company. You use the estimates and recent stock history to calculate a forecast of the stock’s value for the next three months.<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> Quantify uncertainty<br />
+☐ <code class="highlighter-rouge">WRONG</code> Inference<br />
+☐ <code class="highlighter-rouge">WRONG</code> Hypothesis testing<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> Prediction <em>Forecasting is another word for predicting, especially with time series data.</em><br /></p>
+
+<p><b>
+Which objective of statistical modeling is best illustrated by the following example?<br />
+A biologist proposes a treatment to decrease genetic variation in plant size. She conducts an experiment and asks you (the statistician) to analyze the data to conclude whether a 10% decrease in variation has occurred.<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> Quantify uncertainty<br />
+☐ <code class="highlighter-rouge">WRONG</code> Inference<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> Hypothesis testing <em>The scientist has a specific hypothesis in mind and asks you to evaluate the evidence for or against it.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> Prediction<br /></p>
+
+<p><b>
+Which objective of statistical modeling is best illustrated by the following example?<br />
+The same biologist form the previous question asks you how many experiments would be necessary to have a 95% chance at detecting a 10% decrease in plant variation.<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> Quantify uncertainty <em>Most estimates from data come with uncertainty. Statisticians are often called upon to evaluate how much we can trust the results.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> Inference<br />
+☐ <code class="highlighter-rouge">WRONG</code> Hypothesis testing<br />
+☐ <code class="highlighter-rouge">WRONG</code> Prediction<br /></p>
+
+<p><b>
+Which of the following scenarios best illustrates the statistical modeling objective of inference?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> A natural language processing algorithm analyzes the first four words of a sentence and provides words to complete the sentence.<br />
+☐ <code class="highlighter-rouge">WRONG</code> A venture capitalist uses data about several companies to build a model and makes recommendations about which company to invest in next based on growth forecasts.<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> A social scientist collects data and detects positive correlation between sleep deprivation and traffic accidents. <em>Here the social scientist made an inference about the relationship between two variables.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> A model inputs academic performance of 1000 students and predicts which student will be valedictorian after another year of school.<br /></p>
+
+<p><b>
+Which step in the statistical modeling cycle was not followed in the following scenario?<br />
+Susan gathers data recording heights of children and fits a linear regression predicting height from age. To her surprise, the model does not predict well the heights for ages 14-17 (because the growth rate changes with age), both for children included in the original data as well as other children outside the model training data.<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> Plan and properly collect relevant data<br />
+☐ <code class="highlighter-rouge">WRONG</code> Fit the model <em>The scenario does imply that the model was fit. However, it is possible that surprising results could stem from problems fitting the model.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> Use the model <em>Since Susan was predicting heights for children outside the original data set, she was using the model.</em><br />
+⚡ <code class="highlighter-rouge">CORRECT</code> Explore the data <em>This is also an issue of understanding the problem. A linear model is inappropriate in this scenario because human growth is not linear. A scatter plot of the data would quickly reveal this nonlinear relationship.</em><br /></p>
+
+<p><b>
+Which of the following is a possible consequence of failure to plan and properly collect relevant data?<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> Your analysis may produce incomplete or misleading results. <em>Unless there are fundamental problems with the data (e.g., invalid numbers, etc.) statistical models will fit to any data and return results. It is the statistician’s job to make sure the data properly measure what you intend to measure, that the results are valid, and to interpret them.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> You may not be able to visually explore the data.<br />
+☐ <code class="highlighter-rouge">WRONG</code> You will not produce enough data to make conclusions with a sufficient degree of confidence.<br />
+☐ <code class="highlighter-rouge">WRONG</code> Your selected model will not be able to fit the data.<br /></p>
+
+<p><b>
+For Questions 6 and 7, consider the following:<br />
+Xie operates a bakery and wants to use a statistical model to determine how many loaves of bread he should bake each day in preparation for weekday lunch hours. He decides to fit a Poisson model to count the demand for bread. He selects two weeks which have typical business, and for those two weeks, counts how many loaves are sold during the lunch hour each day. He fits the model, which estimates that the daily demand averages 22.3 loaves.<br />
+Over the next month, Xie bakes 23 loaves each day, but is disappointed to find that on most days he has excess bread and on a few days (usually Mondays), he runs out of loaves early.<br />
+Which of the following steps of the modeling process did Xie skip?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> Understand the problem<br />
+☐ <code class="highlighter-rouge">WRONG</code> Postulate a model<br />
+☐ <code class="highlighter-rouge">WRONG</code> Fit the model<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> Check the model and iterate <em>Xie skipped directly from collecting data and fitting the model to using the model for future production. He skipped the steps of exploring the data and checking to see if the model fit adequately. Because the model was lacking, his use of the model produced less desirable results.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> Use the model<br /></p>
+
+<p><b>
+What might you recommend Xie do next to fix this omission and improve his predictive performance?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> Abandon his statistical modeling initiative.<br />
+☐ <code class="highlighter-rouge">WRONG</code> Collect three more weeks of data from his bakery and other bakeries throughout the city. Re-fit the same model to the extra data and follow the results based on more data. <em>Collecting more data is probably a good idea, unless the data are not relevant. Data from other bakeries are fairly relevant, but demand may not be the same as at Xie’s bakery. The problem appears to be with the model, not with the data.</em><br />
+⚡ <code class="highlighter-rouge">CORRECT</code> Plot daily demand and model predictions against the day of the week to check for patterns that may account for the extra variability. Fit and check a new model which accounts for this. <em>Higher demand on Mondays suggests that the time of the week may help explain some of the day-to-day variability in demand. This could be incorporated by fitting different Poisson models for different weekdays, or a Poisson regression incorporating explanatory variables (we will explore these in Lesson 10).</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> Trust the current model and continue to produce 23 loaves daily, since in the long-run average, his error is zero.<br /></p>
+
+<h4 id="lession-2-quizz"><strong>Lession 2 Quizz</strong></h4>
+
+<p><b>
+Which of the following is one major difference between the frequentist and Bayesian approach to modeling data?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> Frequentist models require a guess of parameter values to initialize models while Bayesian models require initial distributions for the parameters.<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> Frequentists treat the unknown parameters as fixed (constant) while Bayesians treat unknown parameters as random variables. <em>The only random variables in frequentist models are the data. The Bayesian paradigm also uses probability to describe one’s uncertainty about unknown model parameters.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> Frequentist models are deterministic (don’t use probability) while Bayesian models are stochastic (based on probability). <em>Both paradigms begin with the same object: a probability model that could have generated the data.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> The frequentist paradigm treats the data as fixed while the Bayesian paradigm considers data to be random. <em>In the frequentist paradigm, data is the only thing considered to be random. Bayesians build a probability model for data, and then condition on the observed data.</em><br /></p>
+
+<p><b>
+Suppose we have a statistical model with unknown parameter \(\theta\)θ, and we assume a normal prior \(\theta \sim \text{N}(\mu_0, \sigma_0^2)\), where \(\mu_0\) is the prior mean and \(\sigma_0^2\) is the prior variance. What does increasing \(\sigma_0^2\) say about our prior beliefs about \(\theta\)?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> Increasing the variance of the prior narrows the range of what we think \(\theta\) might be, indicating greater confidence in our prior mean guess \(\mu_0\).<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> Increasing the variance of the prior widens the range of what we think \(\theta\) might be, indicating less confidence in our prior mean guess \(\mu_0\). <em>This also lowers the “effective sample size” of the prior, so that the data become more influential in determining the posterior for \(\theta\).</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> Increasing the variance of the prior narrows the range of what we think \(\theta\) might be, indicating less confidence in our prior mean guess \(\mu_0\).<br />
+☐ <code class="highlighter-rouge">WRONG</code> Increasing the variance of the prior widens the range of what we think \(\theta\) might be, indicating greater confidence in our prior mean guess \(\mu_0\).<br /></p>
+
+<p><b>
+In the lesson, we presented Bayes’ theorem for the case where parameters are continuous. What is the correct expression for the posterior distribution of \(\theta\) if it is discrete (takes on only specific values)?<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> \(p(\theta_j \mid y) = \frac{ p(y \mid \theta_j) \cdot p(\theta_j) }{ \sum_j p(y \mid \theta_j) \cdot p(\theta_j) }\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(p(\theta \mid y) = \frac{ p(y \mid \theta) \cdot p(\theta) }{ \int p(y \mid \theta) \cdot p(\theta)\, d\theta }\)	<em>This is the discrete version of Bayes’ theorem.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> \(p(\theta) = \int p(\theta \mid y) \cdot p(y) \, dy\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(p(\theta) = \sum_j p(\theta \mid y_j) \cdot p(y_j)\)<br /></p>
+
+<p><b>
+For Questions 4 and 5, refer to the following scenario.<br />
+In the quiz for Lesson 1, we described Xie’s model for predicting demand for bread at his bakery. During the lunch hour on a given day, the number of orders (the response variable) follows a Poisson distribution. All days have the same mean (expected number of orders). Xie is a Bayesian, so he selects a conjugate gamma prior for the mean with shape \(3\) and rate \(1 / 15\). He collects data on Monday through Friday for two weeks.<br />
+Which of the following hierarchical models represents this scenario?<br />
+</b></p>
+
+<p>⚡ <code class="highlighter-rouge">CORRECT</code><br />
+\(y_i \mid \lambda \overset{\text{iid}}{\sim} \text{Pois}(\lambda) \quad \text{for } i = 1, \ldots, 10,\)<br />
+\(\lambda \sim \text{Gamma}(3, 1/15)\)<br />
+<em>The likelihood is Poisson with the same mean for all observations, called \(\lambda\) here. The mean \(\lambda\) has a gamma prior.</em></p>
+
+<p>☐ <code class="highlighter-rouge">WRONG</code> <br />
+\(y_i \mid \lambda_i \overset{\text{ind}}{\sim} \text{Pois}(\lambda_i) \quad \text{for } i = 1, \ldots, 10,\)<br />
+\(\lambda_i \mid \alpha \sim \text{Gamma}(\alpha, 1/15)\)<br />
+\(\alpha \sim \text{Gamma}(3.0, 1.0)\)<br /></p>
+
+<p>☐ <code class="highlighter-rouge">WRONG</code> <br />
+\(y_i \mid \lambda \overset{\text{iid}}{\sim} \text{Pois} ( \lambda ) \quad \text{for } i=1,\ldots,10,\)<br />
+\(\lambda \mid \mu \sim \text{Gamma}(\mu, 1/15)\)<br />
+\(\mu \sim \text{N}(3, 1.0^2)\)<br /></p>
+
+<p>☐ <code class="highlighter-rouge">WRONG</code> <br />
+\(y_i \mid \mu \overset{\text{iid}}{\sim} \text{N} ( \mu, 1.0^2 ) \quad \text{for } i=1,\ldots,10,\)<br />
+\(\mu \sim \text{N}(3, 15^2)\)<br /></p>
+
+<p><b>
+Which of the following graphical depictions represents the model from Xie’s scenario?<br />
+</b>
+<img src="./image2.png" /><br />
+<em>The observed data variables each depend on the mean demand.</em></p>
+
+<p><b>
+Graphical representations of models generally do not identify the distributions of the variables (nodes), but they do reveal the structure of dependence among the variables.<br />
+Identify which of the following hierarchical models is depicted in the graphical representation below.<br />
+<img src="./image1.png" /><br />
+</b></p>
+
+<p>⚡ <code class="highlighter-rouge">CORRECT</code> <br />
+\(x_{i,j} \mid \alpha_j, \beta \overset{\text{ind}}{\sim} \text{Gamma}(\alpha_j, \beta), \quad i = 1,\ldots,n, \quad j=1,\ldots,m\)<br />
+\(\beta \sim \text{Exp}(b_0)\)<br />
+\(\alpha_j \mid \phi \overset{\text{iid}}{\sim} \text{Exp} (\phi), \quad j=1,\ldots,m\)<br />
+\(\phi \sim \text{Exp}(r_0)\)<br />
+<em>\(x_{i,j}\) depends on \(\alpha_j\) and \(\beta\). \(\beta\) doesn’t depend on anything. \(\alpha_j\) depends on \(\phi\).</em><br />
+<em>Notice that the \(x_{i,j}\) variables are independent (denoted \(\overset{\text{ind}}{\sim}\)) rather than independent and identically distributed (\(\overset{\text{iid}}{\sim}\)) because the distribution of \(x_{i,j}\) changes with the index \(j\) (they have different shape parameters \(\alpha_j\)).</em><br /></p>
+
+<p>☐ <code class="highlighter-rouge">WRONG</code> <br />
+\(x_{i,j} \mid \alpha_j, \beta \overset{\text{ind}}{\sim} \text{Gamma}(\alpha_j, \beta), \quad i = 1,\ldots,n, \quad j=1,\ldots,m\)<br />
+\(\beta \sim \text{Exp}(b_0)\)<br />
+\(\alpha_j \sim \text{Exp} (a_0), \quad j=1,\ldots,m\)<br />
+\(\phi \sim \text{Exp}(r_0)\)<br /></p>
+
+<p>☐ <code class="highlighter-rouge">WRONG</code> <br />
+\(x_{i,j} \mid \alpha_i, \beta_j \overset{\text{ind}}{\sim} \text{Gamma}(\alpha_i, \beta_j), \quad i = 1,\ldots,n, \quad j=1,\ldots,m\)<br />
+\(\beta_j \mid \phi \overset{\text{iid}}{\sim} \text{Exp}(\phi), \quad j=1,\ldots,m\)<br />
+\(\alpha_i \mid \phi \overset{\text{iid}}{\sim} \text{Exp} (\phi), \quad i=1,\ldots,n\)<br />
+\(\phi \sim \text{Exp}(r_0)\)<br /></p>
+
+<p>☐ <code class="highlighter-rouge">WRONG</code> <br />
+\(x_{i,j} \mid \alpha, \beta \overset{\text{iid}}{\sim} \text{Gamma}(\alpha, \beta), \quad i = 1,\ldots,n, \quad j=1,\ldots,m\)<br />
+\(\beta \sim \text{Exp}(b_0)\)<br />
+\(\alpha \sim \text{Exp} (a_0)\)<br />
+\(\phi \sim \text{Exp}(r_0)\)<br /></p>
+
+<p><b>
+Consider the following model for a binary outcome \(y\):<br />
+\(y_i \mid \theta_i \overset{\text{ind}}{\sim} \text{Bern}(\theta_i), \quad i=1,\ldots,6\)<br />
+\(\theta_i \mid \alpha \overset{\text{iid}}{\sim} \text{Beta}(\alpha, b_0), \quad i=1,\ldots,6\)<br />
+\(\alpha \sim \text{Exp}(r_0)\)<br />
+where \(\theta_i\) is the probability of success on trial \(i\). What is the expression for the joint distribution of all variables, written as \(p(y_1, \ldots, y_6, \theta_1, \ldots, \theta_6, \alpha)\) and denoted by \(p(\cdots)\)? You may ignore the indicator functions specifying the valid ranges of the variables (although the expressions are technically incorrect without them).<br />
+Hint:<br />
+The PMF for a Bernoulli random variable is \(f_y(y \mid \theta) = \theta^{y} (1-\theta)^{1-y}\) for \(y=0\) or \(y=1\) and \(0 &lt; \theta &lt; 1\).<br />
+The PDF for a Beta random variable is \(f_\theta( \theta \mid \alpha, \beta) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha) \Gamma(\beta)} \theta^{\alpha - 1} (1 - \theta)^{\beta - 1}\) where \(\Gamma()\) is the gamma function, \(0 &lt; \theta &lt; 1\) and \(\alpha, \beta &gt; 0\).<br />
+The PDF for an exponential random variable is \(f_\alpha( \alpha \mid \lambda) = \lambda \exp(-\lambda \alpha)\) for \(\lambda, \alpha &gt; 0\).<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> \(p(\cdots) = \prod_{i=1}^6 \left[ \theta_i^{y_i} (1-\theta_i)^{1-y_i} \frac{\Gamma(\alpha + b_0)}{\Gamma(\alpha) \Gamma(b_0)} \theta_i^{\alpha - 1} (1 - \theta_i)^{b_0 - 1} \right] \cdot r_0 \exp(-r_0 \alpha)\) <em>This expression is proportional to the posterior distribution \(p( \theta_1, \ldots, \theta_6, \alpha \mid y_1, \ldots, y_6 )\). Unfortunately, it does not correspond with a common distribution, so evaluating this posterior would be very challenging (at least until we learn MCMC techniques in the next module).</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> \(p(\cdots) = \prod_{i=1}^6 \left[ \theta_i^{y_i} (1-\theta_i)^{1-y_i} \right] \cdot \frac{\Gamma(\alpha + b_0)}{\Gamma(\alpha) \Gamma(b_0)} \theta^{\alpha - 1} (1 - \theta)^{b_0 - 1} \cdot r_0 \exp(-r_0 \alpha)\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(p(\cdots) = \prod_{i=1}^6 \left[ \theta_i^{y_i} (1-\theta_i)^{1-y_i} \frac{\Gamma(\alpha + b_0)}{\Gamma(\alpha) \Gamma(b_0)} \theta_i^{\alpha - 1} (1 - \theta_i)^{b_0 - 1} r_0 \exp(-r_0 \alpha) \right]\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(p(\cdots) = \prod_{i=1}^6 \left[ \theta_i^{y_i} (1-\theta_i)^{1-y_i} \frac{\Gamma(\alpha + b_0)}{\Gamma(\alpha) \Gamma(b_0)} \theta_i^{\alpha - 1} (1 - \theta_i)^{b_0 - 1} \right]\)<br /></p>
+
+<p><b>
+In a Bayesian model, let \(y\) denote all the data and \(\theta\) denote all the parameters. Which of the following statements about the relationship between the joint distribution of all variables \(p(y, \theta) = p(\cdots)\) and the posterior distribution \(p(\theta \mid y)\) is true?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> Neither is sufficient alone–they are both necessary to make inferences about \(\theta\).<br />
+☐ <code class="highlighter-rouge">WRONG</code> The joint distribution \(p(y,\theta)\) is equal to the posterior distribution times a function \(f(\theta)\) which contains the modification (update) of the prior. <em>The joint distribution is equal to the posterior distribution times the marginal distribution of \(y\), which doesn’t contain \(\theta\).</em><br />
+⚡ <code class="highlighter-rouge">CORRECT</code> They are proportional to each other so that \(p(y, \theta) = c \cdot p(\theta \mid y)\) where \(c\) is a constant number that doesn’t involve \(\theta\) at all. <em>This fact allows us to work with the joint distribution \(p(y, \theta)\) which is usually easier to compute. MCMC methods, which we will learn in the next module, only require us to know the posterior up to proportionality.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> They are actually equal to each other so that \(p(y, \theta) = p(\theta \mid y)\).<br /></p>
+
+<h4 id="lession-3-quizz"><strong>Lession 3 Quizz</strong></h4>
+
+<p><b>
+If a random variable \(X\) follows a standard uniform distribution (\(X \sim \text{Unif}(0,1)\)), then the PDF of \(X\) is \(p(x) = 1\) for \(0 \le x \le 1\).<br />
+We can use Monte Carlo simulation of \(X\) to approximate the following integral: \(\int_0^1 x^2 dx = \int_0^1 x^2 \cdot 1 dx = \int_0^1 x^2 \cdot p(x) dx = \text{E}(X^2)\).<br />
+If we simulate 1000 independent samples from the standard uniform distribution and call them \(x_i^*\) for \(i=1,\ldots,1000\), which of the following calculations will approximate the integral above?<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> \(\frac{1}{1000} \sum_{i=1}^{1000} {x_i^*}^2\) <em>If we want to approximate \(\text{E}(g(X))\) for some function \(g()\), then we need to apply \(g()\) to the samples and then average them. In this example we have \(g(x) = x^2\).</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\frac{1}{1000} \sum_{i=1}^{1000} {(x_i^* - \overline{x^*})}^2\) where \(\overline{x^*}\) is the calculated average of the \(x_i^*\) samples.<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\frac{1}{1000} \sum_{i=1}^{1000} x_i^*\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\left( \frac{1}{1000} \sum_{i=1}^{1000} x_i^* \right)^2\)<br /></p>
+
+<p><b>
+Suppose we simulate 1000 samples from a \(\text{Unif}(0, \pi)\) distribution (which has PDF \(p(x) = \frac{1}{\pi}\) for \(0 \le x \le \pi\)) and call the samples \(x_i^*\) for \(i = 1, \ldots, 1000\).<br />
+If we use these samples to calculate \(\frac{1}{1000} \sum_{i=1}^{1000} \sin( x_i^* )\), what integral are we approximating?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> \(\int_0^1 \sin( x ) dx\)<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> \(\int_0^\pi \frac{ \sin( x ) }{ \pi } dx\) <em>This is \(\text{E}(\sin(X)) = \int_0^\pi \sin(x) \cdot p(x) dx\).</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\int_{-\infty}^\infty \sin( x ) dx\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\int_0^1 \frac{ \sin( x ) }{ \pi } dx\)<br /></p>
+
+<p><b>
+Suppose random variables \(X\) and \(Y\) have a joint probability distribution \(p(X, Y)\). Suppose we simulate 1000 samples from this distribution, which gives us 1000 \((x_i^*, y_i^*)\) pairs.<br />
+If we count how many of these pairs satisfy the condition \(x_i^* &lt; y_i^*\) and divide the result by 1000, what quantity are we approximating via Monte Carlo simulation?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> \(\text{E}( XY)\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\text{Pr}[ \text{E}(X) &lt; \text{E}(Y) ]\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\text{Pr}[ X &lt; \text{E}(Y) ]\)<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> \(\text{Pr}[ X &lt; Y]\) <em>This is also \(\text{E} ( I_{x&lt;y} ) = \int \int I_{x&lt;y} \cdot p(x,y) \, dx \, dy\).</em> <br /></p>
+
+<p><b>
+If we simulate 100 samples from a \(\text{Gamma} (2, 1)\) distribution, what is the approximate distribution of the sample average \(\overline{x^*} = \frac{1}{100} \sum_{i=1}^{100} x_i^*\)?<br />
+Hint: the mean and variance of a \(\text{Gamma}(a,b)\) random variable are \(a / b\) and \(a / b^2\) respectively.<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> \(\text{Gamma}(2, 0.01)\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\text{Gamma}(2, 1)\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\text{N}(2, 2)\)<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> \(\text{N}(2, 0.02)\) <em>Due to the central limit theorem, the approximating distribution is normal with mean equal to the mean of the original variable, and with variance equal to the variance of the original variable divided by the sample size.</em><br /></p>
+
+<p><b>
+For Questions 5 and 6, consider the following scenario:<br />
+Laura keeps record of her loan applications and performs a Bayesian analysis of her success rate \(\theta\). Her analysis yields a \(\text{Beta}(5,3)\) posterior distribution for \(\theta\).<br />
+The posterior mean for \(\theta\) is equal to \(\frac{5}{5+3} = 0.625\). However, Laura likes to think in terms of the odds of succeeding, defined as \(\frac{\theta}{1 - \theta}\), the probability of success divided by the probability of failure.<br />
+Use R to simulate a large number of samples (more than 10,000) from the posterior distribution for \(\theta\) and use these samples to approximate the posterior mean for Laura’s odds of success (\(\text{E}(\frac{\theta}{1-\theta}\)).<br />
+Report your answer to at least one decimal place.<br />
+</b>
+<strong>2.535508</strong><br />
+<em>The posterior distribution of the odds (which you can plot with your samples if you create a new variable for the odds) is heavily skewed right, so the posterior mean for the odds (2.5) is much larger than the odds calculated from the posterior mean of \(\theta\) (\(0.625 / 0.375 \approx 1.667\)). The posterior median of the odds might be a better measure in this case.</em><br /></p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">theta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rbeta</span><span class="p">(</span><span class="m">9999</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="w">
+</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">theta</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">theta</span><span class="p">)</span><span class="w">
+</span><span class="n">mean</span><span class="p">(</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><b>
+Laura also wants to know the posterior probability that her odds of success on loan applications is greater than 1.0 (in other words, better than 50:50 odds).<br />
+Use your Monte Carlo sample from the distribution of \(\theta\) to approximate the probability that \(\frac{\theta}{1-\theta}\) is greater than 1.0.<br />
+Report your answer to at least two decimal places.<br />
+</b>
+<strong>0.7779</strong><br />
+<em>This is also equivalent to the posterior probability that \(\theta &gt; 0.5\).</em><br /></p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">theta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rbeta</span><span class="p">(</span><span class="m">9999</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="w">
+</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">theta</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">theta</span><span class="p">)</span><span class="w">
+</span><span class="n">mean</span><span class="p">(</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="p">)</span><span class="w">
+</span><span class="n">mean</span><span class="p">(</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><b>
+Use a (large) Monte Carlo sample to approximate the 0.3 quantile of the standard normal distribution (\(\text{N}(0,1)\)), the number such that the probability of being less than it is 0.3.<br />
+Use the \(\tt quantile\) function in R. You can of course check your answer using the \(\tt qnorm\) function.<br />
+Report your answer to at least two decimal places.<br />
+</b>
+<strong>-0.5244005</strong></p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">quantile</span><span class="p">(</span><span class="w"> </span><span class="n">rnorm</span><span class="p">(</span><span class="m">9999</span><span class="p">,</span><span class="w"> </span><span class="m">0.0</span><span class="p">,</span><span class="w"> </span><span class="m">1.0</span><span class="p">),</span><span class="w"> </span><span class="m">0.3</span><span class="w"> </span><span class="p">)</span><span class="w">
+</span><span class="n">qnorm</span><span class="p">(</span><span class="m">0.3</span><span class="p">,</span><span class="w"> </span><span class="m">0.0</span><span class="p">,</span><span class="w"> </span><span class="m">1.0</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><b>
+To measure how accurate our Monte Carlo approximations are, we can use the central limit theorem. If the number of samples drawn \(m\) is large, then the Monte Carlo sample mean \(\overline{\theta^*}\) used to estimate \(\text{E}(\theta)\) approximately follows a normal distribution with mean \(\text{E}(\theta)\) and variance \(\text{Var}(\theta) / m\). If we substitute the sample variance for \(\text{Var}(\theta)\), we can get a rough estimate of our Monte Carlo standard error (or standard deviation).<br />
+Suppose we have 100 samples from our posterior distribution for \(\theta\), called \(\theta_i^*\), and that the sample variance of these draws is 5.2. A rough estimate of our Monte Carlo standard error would then be \(\sqrt{ 5.2 / 100 } \approx 0.228\). So our estimate \(\overline{\theta^*}\) is probably within about 0.456 0.456 (two standard errors) of the true \(\text{E}(\theta)\).<br />
+What does the standard error of our Monte Carlo estimate become if we increase our sample size to 5,000? Assume that the sample variance of the draws is still 5.2.<br />
+Report your answer to at least three decimal places.<br />
+</b>
+<strong>0.03224903</strong><br />
+<em>This is just \(\sqrt{5.2 / 5000}\).</em></p>
+
+<h4 id="markov-chains-quizz"><strong>Markov Chains Quizz</strong></h4>
+
+<p><b>
+All but one of the following scenarios describes a valid Markov chain. Which one is not a Markov chain?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> At any given hour, the number of customers entering a grocery store follows a Poisson distribution. The number of customers in the store who leave during that hour also follows a Poisson distribution (only up to as many people are in the store). A clerk reports the total number of customers in the store \(X_t\) at the end of hour \(t\) <em>The distribution of total customers at the end of hour \(t\) will depend only on the number of customers at the end of hour \(t-1\). Past totals from previous hours are irrelevant.</em>.<br />
+☐ <code class="highlighter-rouge">WRONG</code> While driving through a city with square blocks, you roll a six-sided die each time you come to an intersection. If the die shows 1, 2, 3, or 4, then you turn left. If the die shows 5 or 6, you turn right. Each time you reach an intersection, you report your coordinates \(X_t\).<br />
+☐ <code class="highlighter-rouge">WRONG</code> Three friends take turns playing chess with the following rules: the player who sits out the current round plays the winner in the next round. Player A, who has 0.7 probability of winning any game regardless of opponent, keeps track of whether he plays in game \(t\) with an indicator variable \(X_t\).<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> Suppose you have a special savings account which accrues interest according to the following rules: the total amount deposited in a given month will earn \(10(1/2)^{(r-1)}\)% interest in the rrth month after the deposit. For example, if the deposits in January total $100, then you will earn $10 interest in January, $5 interest at the end of February, $2.50 in March, etc. In addition to the interest from January, if you deposit $80 in February, you will earn an additional $8 at the end of February, $4 at the end of March, and so forth. The total amount of money deposited in a given month follows a gamma distribution. Let \(X_t\) be the total dollars in your account, including all deposits and interest up to the end of month \(t\). <em>Because of these particular rules, the total in the account at the end of the previous month does not provide enough information to create a probability distribution for the current month. You need to know the amount deposited in each month to determine how much interest it qualifies for this month. To be a Markov chain, the probability distribution for \(X_{t+1}\) must depend only on \(X_t\) and not the older history \(X_{t-1}, X_{t-2}, \ldots\).</em><br /></p>
+
+<p><b>
+Which of the following gives the transition probability matrix for the chess example in the previous question? The first row and column correspond to \(X=0\) (player A not playing) while the second row and column correspond to \(X=1\) (player A playing).<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> \(\begin{pmatrix} 0 &amp; 1 \\ 0.3 &amp; 0.7 \end{pmatrix}\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\begin{pmatrix} 0.3 &amp; 0 \\ 0.7 &amp; 1 \end{pmatrix}\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\begin{pmatrix} 0.7 &amp; 0 \\ 0.3 &amp; 1 \end{pmatrix}\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\begin{pmatrix} 0 &amp; 0.3 \\ 1 &amp; 0.7 \end{pmatrix}\)<br /></p>
+
+<p><b>
+Continuing the chess example, suppose that the first game is between Players B and C. What is the probability that Player A will play in Game 4? Round your answer to two decimal places.<br />
+</b>
+<strong>0.79</strong><br />
+<em>Since we know Player A will not play in Game 1, the initial distribution is \((1, 0)\). We now matrix multiply this by the transition matrix for three steps into the future, \(Q^3\). This yields the distribution for \(X\) in Game 4.</em><br />
+<em>The distribution for XX in Game 4 in this case is \((1,0) Q^3\) (using the initial distribution and three transitions).</em><br /></p>
+
+<p><b>
+Which of the following is the stationary distribution for \(X\) in the chess example?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> ( .769, .231 )<br />
+☐ <code class="highlighter-rouge">WRONG</code> ( .250, .750 )<br />
+☐ <code class="highlighter-rouge">WRONG</code> ( .750, .250 )<br />
+☐ <code class="highlighter-rouge">WRONG</code> ( 0.0, 1.0 )<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> ( .231, .769 )<br /></p>
+
+<p><b>
+If the players draw from the stationary distribution in Question 4 to decide whether Player A participates in Game 1, what is the probability that Player A will participate in Game 4? Round your answer to two decimal places.<br />
+</b>
+<strong>0.763</strong><br />
+<em>Follow the same procedure as in Question 3, or notice that since we are starting in the stationary distribution, the distribution of \(X\) doesn’t change with transitions.</em><br />
+<em>This is just the stationary probability of Player A playing. If the chain starts in the stationary distribution, the probability of Player A playing in the next game, the game after that, and so forth, is always this stationary probability.</em><br /></p>
+
+        </div>
+    </div>
+</body>
+</html>

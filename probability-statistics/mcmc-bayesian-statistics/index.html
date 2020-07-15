@@ -85,6 +85,42 @@
         
     
         <div style='white-space: nowrap; text-overflow: ellipsis; overflow: hidden !important;'>
+            <a href='./Lesson 7_ Linear regression.html' data-tooltip='Linear regression'>
+                
+                    Linear regression
+                
+            </a>
+        </div>
+        
+    
+        <div style='white-space: nowrap; text-overflow: ellipsis; overflow: hidden !important;'>
+            <a href='./Lesson 8_ ANOVA.html' data-tooltip='ANOVA'>
+                
+                    ANOVA
+                
+            </a>
+        </div>
+        
+    
+        <div style='white-space: nowrap; text-overflow: ellipsis; overflow: hidden !important;'>
+            <a href='./Lesson 8H_ Two Factor ANOVA.html' data-tooltip='Two Factor ANOVA'>
+                
+                    Two Factor ANOVA
+                
+            </a>
+        </div>
+        
+    
+        <div style='white-space: nowrap; text-overflow: ellipsis; overflow: hidden !important;'>
+            <a href='./Lesson 9_ Logistic regression.html' data-tooltip='Logistic regression'>
+                
+                    Logistic regression
+                
+            </a>
+        </div>
+        
+    
+        <div style='white-space: nowrap; text-overflow: ellipsis; overflow: hidden !important;'>
             <a href='./' data-tooltip='QUIZZ'>
                 
                     QUIZZ
@@ -123,6 +159,38 @@ What is the easiest way to increase accuracy of a Monte Carlo estimate?<br />
 ☐ <code class="highlighter-rouge">WRONG</code> If sampling multiple variables, keep only the samples for the variable of interest. <em>This is a way to get draws from the marginal distribution of the variable of interest, but it doesn’t increase accuracy.</em><br />
 ☐ <code class="highlighter-rouge">WRONG</code> Change the random number generator seed. <em>Rejecting simulations until they appear how you want introduces potentially invalidating bias.</em><br />
 ⚡ <code class="highlighter-rouge">CORRECT</code> Increase the number of samples simulated. <em>There are other ways to set up Monte Carlo simulations with smaller variance (such as “Rao-Blackwellization”), but they usually require more effort.</em><br /></p>
+
+<p><b>
+What is the advantage of using a symmetric proposal distribution \(q(\theta^* \mid \theta_{i-1})\) in a random walk Metropolis-Hastings sampler?<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> Symmetry in a random walk yields \(q(\theta^* \mid \theta_{i-1}) = q(\theta_{i-1} \mid \theta^*)\), causing both expressions to drop out of the acceptance calculation which then becomes \(g(\theta^*)\, /\, g(\theta_{i-1})\). <em>This simplifies the calculation of the acceptance ratio. This simpler case is often referred to as just a Metropolis sampler. The Hastings part (for potentially non-symmetric proposal distributions) was added after the original Metropolis algorithm.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> Symmetry in a random walk provides a default choice that will not need to be tweaked for performance. <em>The step size in a symmetric random walk is important to the efficiency of the algorithm, and usually must be selected carefully, even iteratively.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> Symmetry in a random walk yields \(g(\theta^*) = g(\theta_{i-1})\), causing both expressions to drop out of the acceptance calculation which then becomes \(q(\theta_{i-1} \mid \theta^*)\, /\, q(\theta^* \mid \theta_{i-1})\).<br />
+☐ <code class="highlighter-rouge">WRONG</code> Symmetry in a random walk causes the acceptance ratio to be greater than 1. Hence, the candidate is always accepted and we avoid an extra calculation.<br /></p>
+
+<p><b>
+In this demonstration, we set up a Markov chain with transition probability matrix \(\begin{pmatrix} .365 &amp; .635 \\ 1 &amp; 0 \end{pmatrix}\) and stationary distribution \((.612, \, .388)\) where the first state represents \(\theta=\text{fair}\) and the second state represents \(\theta = \text{loaded}\). If we were to simulate this Markov chain for many iterations, approximately what fraction of the time would the chain be in \(\theta = \text{fair}\)?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> .365 <em>This is the transition probability in the chain of moving from \(\theta=\text{fair}\) to \(\theta=\text{fair}\).</em><br />
+⚡ <code class="highlighter-rouge">CORRECT</code> .612 <em>This is the stationary (or marginal) probability that at any given iteration, the state is “fair.” Because we set up this Markov chain using a Metropolis-Hastings algorithm with the posterior distribution as the stationary distribution, this is also the posterior probability that \(\theta = \text{fair}\).</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> .388 <em>This is the stationary probability that \(\theta = \text{loaded}\).</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> .635 <em>This is the transition probability in the chain of moving from \(\theta=\text{fair}\) to \(\theta=\text{loaded}\).</em><br /></p>
+
+<p><b>
+In what way does the Gibbs sampling algorithm simplify our task of updating multiple parameters in MCMC?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> The full conditional distribution eliminates the need to calculate a Metropolis-Hastings acceptance ratio. <em>This is true if the full conditional distribution is a standard distribution that we can easily sample, but this is not always the case.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> It updates all parameters at once, using a joint proposal distribution as part of a Metropolis-Hastings algorithm. <em>This is an alternative to Gibbs sampling.</em><br />
+⚡ <code class="highlighter-rouge">CORRECT</code> It divides the process into updating one parameter at a time using (potentially convenient) full conditional distributions. <em>The price we pay for this convenience is 1) the work required to find full conditional distributions and 2) the sampler may require more iterations to fully explore the posterior distribution (more on this in Lesson 6). It is also possible to run a Gibbs sampler that draws from the “full” conditional distribution of multiple parameters. We would then cycle through and update blocks of parameters.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> Finding full conditional distributions requires less work than finding the unnormalized joint posterior distribution of all parameters. <em>This is sometimes true, especially if we use conjugate priors in hierarchical models. However, one typically finds the full conditionals by starting with the unnormalized joint posterior distribution of all parameters.</em><br /></p>
+
+<p><b>
+If we implement the Gibbs sampler for the model described in this segment, how do we complete an update for \(\mu\)?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> Draw from the inverse-gamma full conditional distribution for \(\mu\). <em>The full conditional distribution for \(\mu\) is the conjugate normal.</em><br />
+⚡ <code class="highlighter-rouge">CORRECT</code> Draw from the normal full conditional distribution for \(\mu\). <em>Since the full conditional distribution is a normal distribution, this update is easy to simulate, and we can do it without drawing a candidate and deciding whether to accept it.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> Draw a candidate \(\mu^*\) from a proposal distribution and use the normal full conditional for \(\mu\) to evaluate the acceptance ratio. <em>This is a valid approach. However, it is much less efficient than simply drawing from the full conditional distribution (which in this case is just a normal distribution) directly.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> Draw a candidate \(\mu^*\) from a proposal distribution and use the full joint posterior for \(\mu\) and \(\sigma^2\) to evaluate the acceptance ratio. <em>This is a valid approach. However, it is much less efficient than simply drawing from the full conditional distribution (which in this case is just a normal distribution) directly.</em><br /></p>
 
 <h4 id="lession-1-quizz"><strong>Lession 1 Quizz</strong></h4>
 
@@ -439,6 +507,350 @@ If the players draw from the stationary distribution in Question 4 to decide whe
 <strong>0.763</strong><br />
 <em>Follow the same procedure as in Question 3, or notice that since we are starting in the stationary distribution, the distribution of \(X\) doesn’t change with transitions.</em><br />
 <em>This is just the stationary probability of Player A playing. If the chain starts in the stationary distribution, the probability of Player A playing in the next game, the game after that, and so forth, is always this stationary probability.</em><br /></p>
+
+<h4 id="lession-4-quizz"><strong>Lession 4 Quizz</strong></h4>
+
+<p><b>
+In which situation would we choose to use a Metropolis-Hastings (or any MCMC) sampler rather than straightforward Monte Carlo sampling?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> The data (likelihood) come from a Markov chain.<br />
+☐ <code class="highlighter-rouge">WRONG</code> Monte Carlo estimation is easier than calculating the integral required to obtain the mean of the target distribution.<br />
+☐ <code class="highlighter-rouge">WRONG</code> The target distribution follows a Markov chain.<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> There is no easy way to simulate independent draws from the target distribution. <em>If we could, straightforward Monte Carlo sampling would be preferable.</em><br /></p>
+
+<p><b>
+If we employed an independent Metropolis-Hastings algorithm (in which the candidate-generating distribution q does not depend on the previous iteration of the chain), what would happen if we skipped the acceptance ratio step and always accepted candidate draws?<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> The resulting sample would be a Monte Carlo simulation from q instead of from the target distribution. <em>Accepting all candidates just means we are simulating from the candidate-generating distribution. The acceptance step in the algorithm acts as a correction, so that the samples reflect the target distribution more than the candidate-generating distribution.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> The chain would explore the posterior distribution very slowly, requiring more samples.<br />
+☐ <code class="highlighter-rouge">WRONG</code> The sampler would become more efficient because we are no longer discarding draws.<br />
+☐ <code class="highlighter-rouge">WRONG</code> Each draw could be considered as a sample from the target distribution.<br /></p>
+
+<p><b>
+If the target distribution \(p(\theta) \propto g(\theta)\) is for a positive-valued random variable so that \(p(\theta)\) contains the indicator function \(I_{\theta &gt; 0}(\theta)\), what would happen if a random walk Metropolis sampler proposed the candidate \(\theta^* = -0.3\)?<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> The candidate would be rejected with probability 1 because \(g(\theta^*) = 0\), yielding an acceptance ratio \(\alpha = 0\). <em>This strategy usually works, but sometimes runs into problems. Another solution is to draw candidates for the logarithm of \(\theta\) (which of course has a different target distribution that you must derive) using normal proposals.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> The candidate would be accepted with probability 1 because \(g(\theta^*) = 0\), yielding an acceptance ratio \(\alpha = \infty\). <em>It is true that \(g(\theta^*) = 0\), but recall that \(g(\theta^*)\) appears in the numerator when we calculate \(\alpha\).</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> The candidate would be accepted with probability \(0.3\) because \(g(\theta^*) = \lvert \theta^* \rvert\), yielding an acceptance ratio \(\alpha = 0.3\).<br />
+☐ <code class="highlighter-rouge">WRONG</code> The candidate would be accepted with probability 1 because \(g(\theta^*) = 0\), yielding an acceptance ratio \(\alpha = 1\).<br /></p>
+
+<p><b>
+Suppose we use a random walk Metropolis sampler with normal proposals (centered on the current value of the chain) to sample from the target distribution whose PDF is shown below. The chain is currently at \(\theta_{i} = 15.0\). Which of the other points, if used as a candidate \(\theta^*\) for the next step, would yield the largest acceptance ratio \(\alpha\)?<br />
+<img src="./image3.svg" /><br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> A) \(\theta^* = 3.1\)<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> B) \(\theta^* = 9.8\) <em>B is the only point with a target density value (close to 0.09) higher than that of \(\theta_i\) (close to 0.04). Since this is a random walk Metropolis sampler with symmetric proposal distribution, the expression for calculating the acceptance ratio for iteration \(i+1\) is \(\alpha = g(\theta^*) / g(\theta_i)\). In this case \(\alpha\) would be close to 2, whereas for A, C, and D, we have \(\alpha &lt; 1\). If point B were proposed, it would be accepted in this case.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> C) \(\theta^* = 20.3\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> D) \(\theta^* = 26.1\)<br /></p>
+
+<p><b>
+Suppose you are using a random walk Metropolis sampler with normal proposals. After sampling the chain for 1000 iterations, you notice that the acceptance rate for the candidate draws is only 0.02. Which corrective action is most likely to help you approach a better acceptance rate (between 0.23 and 0.50)?<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> Decrease the variance of the normal proposal distribution q. <em>A low acceptance rate in a random walk Metropolis sampler usually indicates that the candidate-generating distribution is too wide and is proposing draws too far away from most of the target mass.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> Replace the normal proposal distribution with a uniform proposal distribution centered on the previous value and variance equal to that of the old normal proposal distribution.<br />
+☐ <code class="highlighter-rouge">WRONG</code> Increase the variance of the normal proposal distribution q. <em>A low acceptance rate in a random walk Metropolis sampler usually indicates that the candidate-generating distribution is too wide and is proposing draws too far away from most of the target mass. Increasing the variance would likely make the problem worse.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> Fix the mean of the normal proposal distribution at the last accepted candidate’s value. Use the new mean for all future proposals.<br /></p>
+
+<p><b>
+Suppose we use a random walk Metropolis sampler to sample from the target distribution \(p(\theta) \propto g(\theta)\) and propose candidates \(\theta^*\) using the \(\text{Unif}( \theta_{i-1} - \epsilon, \, \theta_{i-1} + \epsilon)\) distribution where \(\epsilon\) is some positive number and \(\theta_{i-1}\) is the previous iteration’s value of the chain. What is the correct expression for calculating the acceptance ratio \(\alpha\) in this scenario?<br />
+Hint: Notice that the \(\text{Unif}( \theta_{i-1} - \epsilon, \, \theta_{i-1} + \epsilon)\) distribution is centered on the previous value and is symmetric (since the PDF is flat and extends the same distance \epsilonϵ on either side).<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> \(\alpha = \frac{ \text{Unif}(\theta_{i-1} \mid \theta^* - \epsilon, \, \theta^* + \epsilon) }{ \text{Unif}(\theta^* \mid \theta_{i-1} - \epsilon, \, \theta_{i-1} + \epsilon) }\) where \(\text{Unif}(\theta \mid a, b)\) represents the PDF of a \(\text{Unif}(a,b)\) evaluated at \(\theta\).<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\alpha = \frac{ \text{Unif}(\theta^* \mid \theta_{i-1} - \epsilon, \, \theta_{i-1} + \epsilon) }{ \text{Unif}(\theta_{i-1} \mid \theta^* - \epsilon, \, \theta^* + \epsilon) }\) where \(\text{Unif}(\theta \mid a, b)\) represents the PDF of a \(\text{Unif}(a,b)\) evaluated at \(\theta\). <em>Calculation of \(\alpha\) should always include g. Since the proposal distribution is centered on the previous value and is symmetric, the two evaluations of q yield the same number, so they cancel each other. Note also that q evaluated at the candidate should be in the denominator and that q evaluated at the previous iteration should be in the numerator.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\alpha = \frac{ g(\theta_{i-1}) }{ g(\theta^*) }\)<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> \(\alpha = \frac{ g(\theta^*) }{ g(\theta_{i-1}) }\) <em>Since the proposal distribution is centered on the previous value and is symmetric, evaluations of q drop from the calculation of \(\alpha\).</em><br /></p>
+
+<p><b>
+The following code completes one iteration of an algorithm to simulate a chain whose stationary distribution is \(p(\theta) \propto g(\theta)\). Which algorithm is employed here?
+</b></p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># draw candidate</span><span class="w">
+  </span><span class="n">theta_cand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rnorm</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="o">=</span><span class="m">0.0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="o">=</span><span class="m">10.0</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># evaluate log of g with the candidate</span><span class="w">
+  </span><span class="n">lg_cand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lg</span><span class="p">(</span><span class="n">theta</span><span class="o">=</span><span class="n">theta_cand</span><span class="p">)</span><span class="w">
+  
+</span><span class="c1"># evaluate log of g at the current value</span><span class="w">
+  </span><span class="n">lg_now</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lg</span><span class="p">(</span><span class="n">theta</span><span class="o">=</span><span class="n">theta_now</span><span class="p">)</span><span class="w">
+  
+</span><span class="c1"># evaluate log of q at candidate</span><span class="w">
+  </span><span class="n">lq_cand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dnorm</span><span class="p">(</span><span class="n">theta_cand</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="o">=</span><span class="m">0.0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="o">=</span><span class="m">10.0</span><span class="p">,</span><span class="w"> </span><span class="n">log</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+  
+</span><span class="c1"># evaluate log of q at the current value</span><span class="w">
+  </span><span class="n">lq_now</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dnorm</span><span class="p">(</span><span class="n">theta_now</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="o">=</span><span class="m">0.0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="o">=</span><span class="m">10.0</span><span class="p">,</span><span class="w"> </span><span class="n">log</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># calculate the acceptance ratio</span><span class="w">
+  </span><span class="n">lalpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lg_cand</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">lq_now</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">lg_now</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">lq_cand</span><span class="w"> 
+  </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">exp</span><span class="p">(</span><span class="n">lalpha</span><span class="p">)</span><span class="w">
+  
+</span><span class="c1"># draw a uniform variable which will be less than alpha with probability min(1, alpha)</span><span class="w">
+  </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">runif</span><span class="p">(</span><span class="m">1</span><span class="p">)</span><span class="w">
+  
+  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">u</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">alpha</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1"># then accept the candidate</span><span class="w">
+    </span><span class="n">theta_now</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">theta_cand</span><span class="w">
+    </span><span class="n">accpt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">accpt</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="c1"># to keep track of acceptance</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>☐ <code class="highlighter-rouge">WRONG</code> Random walk Metropolis with normal proposal<br />
+☐ <code class="highlighter-rouge">WRONG</code> Random walk Metropolis with uniform proposal<br />
+☐ <code class="highlighter-rouge">WRONG</code> Independent Metropolis-Hastings (q does not condition on the previous value of the chain) with uniform proposal<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> Independent Metropolis-Hastings (q does not condition on the previous value of the chain) with normal proposal <em>Candidates are always drawn from the same \(\text{N}(0, 10^2)\) distribution.</em><br /></p>
+
+<h4 id="lession-5-quizz"><strong>Lession 5 Quizz</strong></h4>
+
+<p><b>
+Which of the following descriptions matches the process of Gibbs sampling for multiple random variables?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> Draw candidates for all \(J\) variables simultaneously using a multivariate proposal distribution. For each variable, calculate the acceptance ratio \(\alpha_j\) using the joint (unnormalized) density. Accept each candidate with probability \(\text{min}\{1,\alpha_j\}\) for \(j=1,\ldots,J\). Repeat this cycle for many iterations.<br />
+☐ <code class="highlighter-rouge">WRONG</code> Cycle through the variables, drawing from a proposal distribution for each variable and accepting the candidate with probability equal to the ratio of the candidate draw to the old value of the variable. Repeat this cycle for many iterations.<br />
+☐ <code class="highlighter-rouge">WRONG</code> Draw candidates for all variables simultaneously using a multivariate proposal distribution. Calculate the acceptance ratio \(\alpha\) using the joint (unnormalized) density. Accept the candidates with probability \(\text{min}\{1,\alpha\}\). Repeat this step for many iterations.<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> Cycle through the variables, drawing a sample from the full conditional distribution of each variable while substituting in the current values of all other variables. Repeat this cycle for many iterations. <em>Gibbs sampling allows us to perform the updates one-at-a-time using full conditional distributions.</em><br /></p>
+
+<p><b>
+Suppose we have a joint probability distribution for four variables, \(p(w,x,y,z)\). Which of the following expresses the full conditional distribution for variable \(x\)?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> \(p(x \mid y)\)<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> \(p(x \mid w, y, z)\) <em>It is the distribution of xx, conditional on all other variables. It is proportional to \(p(w,x,y,z)\), where we consider \(w,y\), and \(z\) as fixed constants.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> \(p(w, y, z \mid x)\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(p(x)\)<br /></p>
+
+<p><b>
+Suppose we have the following joint distribution for \(x, y\), and \(z\):<br />
+\(p(x,y,z) = 5e^{-5z} I_{z\ge0} \frac{\Gamma(z+3)}{\Gamma(z) \Gamma(3)} y^{z-1} (1-y)^{2} I_{0&lt; y&lt; 1} { 10 \choose x} y^x (1-y)^{10-x} I_{x\in\{1,\ldots,10 \}}\)<br />
+The density for the full conditional distribution of zz is proportional to which of the following?<br />
+Hint: The full conditional for zz is proportional to the full joint distribution \(p(x,y,z)\) where \(x\) and \(y\) are just constants.<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> \(p(z \mid x, y) \propto y^{z-1} (1-y)^{2} y^x (1-y)^{10-x} I_{0&lt; y&lt; 1}\)<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> \(p(z \mid x, y) \propto e^{-5z} \frac{\Gamma(z+3)}{\Gamma(z)} y^{z-1} I_{z\ge0}\) <em>This could also be written as \(p(z \mid x, y) = C \cdot e^{-5z} \frac{\Gamma(z+3)}{\Gamma(z)} y^{z-1} I_{z\ge0}\) where \(C\) is some constant number not involving \(z\).</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> \(p(z \mid x, y) \propto { 10 \choose x} y^x (1-y)^{10-x} I_{x\in\{1,\ldots,10 \}}\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(p(z \mid x, y) \propto 5e^{-5z} I_{z\ge0}\)<br /><br />
+​	
+<b>
+The full conditional distribution in Question 3 is not a standard distribution that we can easily sample. Fortunately, it turns out that we can do a Metropolis-Hastings step inside our Gibbs sampler step for \(z\).<br />
+If we employ that strategy in a Gibbs sampler for \(y\) and \(z\) (always conditioning on \(x\)), then the algorithm would look like this:<br />
+</b></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    For iteration i in 1 to m, repeat:
+    1. 
+        a) Draw z* from a proposal distribution q.
+        b) Calculate the acceptance ratio (alpha) using the full
+            conditional distribution for z|x,y and the candidate distribution q, plugging in the previous iteration's value y_{i-1} for y.
+        c) Accept the candidate with probability min{1,alpha} and
+            set the value for z_i accordingly.
+    2. ___________________________.
+    end.
+</code></pre></div></div>
+<p><b>What would go in step 2 to complete the Gibbs sampler?</b><br />
+⚡ <code class="highlighter-rouge">CORRECT</code> Draw \(y_i\) from the full conditional \(p(y \mid x, z)\), plugging in the value \(z_i\) just drawn in step 1 for \(z\). <em>This is just the usual Gibbs step for yy.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> Draw \(y_i\) from the marginal distribution \(p(y)\).<br />
+☐ <code class="highlighter-rouge">WRONG</code> Draw \(y_i\) from the full conditional \(p(y \mid x, z)\), plugging in the candidate \(z^*\) for \(z\).<br />
+☐ <code class="highlighter-rouge">WRONG</code> Draw \(y_i\) from the full conditional \(p(y \mid x, z)\), plugging in the previous iteration’s value \(z_{i-1}\) for \(z\).<br /></p>
+
+<p><b>
+Suppose we have a joint probability distribution for three variables: \(p(x,y,z)\). Identify the algorithm to perform Gibbs sampling for all three variables.<br />
+</b></p>
+
+<p>⚡ <code class="highlighter-rouge">CORRECT</code></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    For iteration i in 1 to m, repeat:
+    1. Draw x_i from the full conditional distribution for
+        x|y,z, plugging in the previous iteration's values
+        y_{i-1}, z_{i-1} for y and z.
+    2. Draw y_i from the full conditional distribution for
+        y|x,z, plugging in the previous iteration's value
+        z_{i-1} for z and this iteration's value x_i for x.
+    3. Draw z_i from the full conditional distribution for
+        z|x,y, plugging in this iteration's values
+        x_i, y_i for x and y.
+    end.
+</code></pre></div></div>
+<p><em>This is an extension of Gibbs sampling to three variables. The algorithm can be expanded to accommodate as many variables as you need.</em></p>
+
+<p>☐ <code class="highlighter-rouge">WRONG</code></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    For iteration i in 1 to m, repeat:
+    1. Draw x_i from the full conditional distribution for
+        x|y,z, plugging in the previous iteration's values
+        y_{i-1}, z_{i-1} for y and z.
+    2. Draw y_i from the full conditional distribution for
+        y|x,z, plugging in the previous iteration's value
+        z_{i-1} for z and this iteration's value x_i for x.
+    3. Draw z_i from the full conditional distribution for
+        z|x,y, plugging in this iteration's values
+        x_i, y_i for x and y.
+    end.
+</code></pre></div></div>
+<p>☐ <code class="highlighter-rouge">WRONG</code></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>For iteration i in 1 to m, repeat:
+  1. Draw candidates x*, y*, z* from a joint proposal
+      distribution q.
+  2. a) i) Calculate the acceptance ratio alpha_x using
+            the full conditional p(x|y,z) and q, plugging in the candidates y*, z* for y and z.
+        ii) Accept x* with probability min{1,alpha_x}
+            and set x_i accordingly.
+     b) i) Calculate the acceptance ratio alpha_y using
+            the full conditional p(y|x,z) and q, plugging in x_i, z* for x and z.
+        ii) Accept y* with probability min{1,alpha_y}
+            and set y_i accordingly.
+     c) i) Calculate the acceptance ratio alpha_z using
+            the full conditional p(z|x,y) and q, plugging in x_i, y_i for x and y.
+        ii) Accept z* with probability min{1,alpha_z}
+            and set z_i accordingly.
+end.
+</code></pre></div></div>
+<p>☐ <code class="highlighter-rouge">WRONG</code></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>For iteration i in 1 to m, repeat:
+
+  1. Draw candidates x*, y*, z* from a joint proposal
+      distribution q.
+  2. a) i) Calculate the acceptance ratio alpha_x using
+            the full conditional p(x|y,z) and q, plugging in the candidates y*, z* for y and z.
+        ii) Accept x* with probability min{1,alpha_x}
+            and set x_i accordingly.
+     b) i) Calculate the acceptance ratio alpha_y using
+            the full conditional p(y|x,z) and q, plugging in x_i, z* for x and z.
+        ii) Accept y* with probability min{1,alpha_y}
+            and set y_i accordingly.
+     c) i) Calculate the acceptance ratio alpha_z using
+            the full conditional p(z|x,y) and q, plugging in x_i, y_i for x and y.
+        ii) Accept z* with probability min{1,alpha_z}
+            and set z_i accordingly.
+end.
+</code></pre></div></div>
+
+<p><b>
+For Questions 6 to 8, consider the example from the lesson where the data are percent change in total personnel since last year for \(n=10\) companies.<br />
+In our model with normal likelihood and unknown mean \(\mu\) and unknown variance \(\sigma^2\), we chose a normal prior for the mean and an inverse-gamma prior for the variance. What was the major advantage of selecting these particular priors?<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> Each prior was conjugate in the case where the other parameter was known, causing the full conditional distributions to come from the same distribution families as the priors (and therefore easy to sample). <em>In hierarchical models, selecting conjugate priors at any level will result in a simple Gibbs update for the parameter involved.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> Because these priors are conjugate for their respective parameters, they guarantee the most accurate posterior distribution possible for the given likelihood. <em>Conjugate priors are valuable because they lead to convenient computation. They typically only approximate your prior beliefs. The term “accurate posterior” is subject to interpretation.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> These priors allowed us to bypass MCMC, providing a joint conjugate posterior for \(\mu\) and \(\sigma^2\).<br />
+☐ <code class="highlighter-rouge">WRONG</code> Because these priors are conjugate for their respective parameters, they guarantee the smallest possible Monte Carlo standard error for posterior mean estimates. <em>Conjugate priors are valuable because they lead to convenient computation. They typically only approximate your prior beliefs. While it is true that some choices of prior may cause significant computing challenges and lead to high Monte Carlo error, there are no guarantees that conjugate priors yield low Monte Carlo errors. Those depend on the sampling algorithm and length of your Markov chain.</em><br /></p>
+
+<p><b>
+Suppose we repeat the analysis for \(n=6\) companies in another industry and the data are <code class="highlighter-rouge">y = c(-0.2, -1.5, -5.3, 0.3, -0.8, -2.2)</code>:<br />
+Re-run the Gibbs sampler in R for these new data (5000 iterations using the same priors and initial values as in the Lesson) and report the posterior mean for \(\mu\). Round your answer to two decimal places.<br />
+</b>
+<strong>-0.9976</strong></p>
+
+<p><b>
+An industry expert is surprised by your results from Question 7 and insists that growth in this sector should be positive on average. To accommodate this expert’s prior beliefs, you adjust the prior for \muμ to be normal with a mean 1.0 and variance 1.0. This is a fairly informative and optimistic prior (the prior probability that \(\mu &gt; 0\) is about 0.84).<br />
+What happens to the posterior mean of \(\mu\)? Re-run the analysis on the new data with this new prior. Again, use 5000 iterations and the same prior for \(\sigma^2\) and initial values as before).<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> The posterior mean for \(\mu\) is less than \(-0.25\), suggesting that despite the optimistic prior, the data strongly favor estimating growth to be negative in this industry.<br />
+☐ <code class="highlighter-rouge">WRONG</code> The posterior mean for \(\mu\) is between \(-0.25\) and \(0.25\), suggesting that the data are not as optimistic about growth as the prior, but we are inconclusive about whether growth is positive or negative.<br />
+☐ <code class="highlighter-rouge">WRONG</code> The posterior mean for \(\mu\) is between \(0.25\) and \(1.0\), suggesting that the data are not informative enough to contradict this expert’s opinion.<br />
+☐ <code class="highlighter-rouge">WRONG</code> The posterior mean for \(\mu\) is above \(1.0\), suggesting that the optimistic prior was actually not optimistic enough.<br /></p>
+
+<h4 id="lession-6-quizz"><strong>Lession 6 Quizz</strong></h4>
+
+<p><b>
+Why is it important to check your MCMC output for convergence before using the samples for inference?<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> If the chain has not reached its stationary distribution (the target/posterior), your samples will not reflect that distribution. <em>Monte Carlo samples from the incorrect distribution will likely produce misleading results.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> Pre-convergence MCMC samples are useless.<br />
+☐ <code class="highlighter-rouge">WRONG</code> Convergence diagnostics provide a guarantee that your inferences are accurate.<br />
+☐ <code class="highlighter-rouge">WRONG</code> You can cut your Monte Carlo error by a factor of two if you strategically select which samples to retain.<br /></p>
+
+<p><b>
+Which of the following trace plots illustrates a chain that appears to have converged?<br />
+</b>
+<img src="./image4.svg" /><br />
+<em>This chain shows no obvious trends or jumps, and appears to be moving around freely in what we anticipate is the target distribution.</em></p>
+
+<p><b>
+The trace plot below was generated by a random walk Metropolis sampler, where candidates were drawn from a normal proposal distribution with mean equal to the previous iteration’s value, and a fixed variance. Based on this result, what action would you recommend taking next?<br />
+<img src="./image5.svg" /><br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> The step size of the proposals is too large. Increase the variance of the normal proposal distribution and re-run the chain.<br />
+☐ <code class="highlighter-rouge">WRONG</code> The step size of the proposals is too large. Decrease the variance of the normal proposal distribution and re-run the chain.<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> The step size of the proposals is too small. Increase the variance of the normal proposal distribution and re-run the chain. <em>In other words, it takes too long for the chain to explore the posterior distribution. This is less of a problem if you run a very long chain, but it is best to use a more efficient proposal distribution if possible.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> The step size of the proposals is too small. Decrease the variance of the normal proposal distribution and re-run the chain.<br /></p>
+
+<p><b>
+Suppose you have multiple MCMC chains from multiple initial values and they appear to traverse the same general area back and forth, but struggle from moderate (or high) autocorrelation. Suppose also that adjusting the proposal distribution q is not an option. Which of the following strategies is likely to help increase confidence in your Monte Carlo estimates?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> Discard fewer burn-in samples to increase your Monte Carlo effective sample size.<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> Run the chains for many more iterations and check for convergence on the larger time scale. <em>Proper MCMC algorithms come with a theoretical guarantee of eventual convergence to the target distribution. Chains with very high autocorrelation may require an impractical number of iterations, but it is worth checking to see if a longer chain yields acceptable results.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> Add more chains from more initial values to see if that reduces autocorrelation. <em>Running multiple chains is helpful, especially to increase confidence that you are exploring the correct space, but unlikely to reduce autocorrelation.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> Retain only the 80% of samples closest to the maximum likelihood estimate.<br /></p>
+
+<p><b>
+Each of the following plots reports estimated autocorrelation from a MCMC chain with 10,000 iterations. Which will yield the lowest Monte Carlo effective sample size?<br />
+</b>
+<img src="./image6.svg" /><br />
+<em>High autocorrelation leads to low MCMC effective sample size.</em></p>
+
+<p><b>
+The following trace plot shows four chains with distinct initial values. Of the choices given, what is the lowest number of samples you would comfortably recommend to discard as burn-in?<br />
+<img src="./image7.svg" /><br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> A: 50 iterations<br />
+☐ <code class="highlighter-rouge">WRONG</code> B: 150 iterations <em>The chains appear to be just reaching the same space around iteration 150. It is good to let them continue to burn in a little longer before retaining samples.</em><br />
+⚡ <code class="highlighter-rouge">CORRECT</code> C: 400 iterations <em>The chains have been exploring the same space for some time now, and it is probably pretty safe to start retaining samples.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> D: 700 iterations<br /></p>
+
+<p><b>
+Suppose the Gelman and Rubin diagnostic computed from multiple chains reports a scale reduction factor much higher than 1.0, say 8.0. What is the recommended action?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> Thin the chain by discarding every eighth sample.<br />
+☐ <code class="highlighter-rouge">WRONG</code> Discontinue use of the model, since there is little hope of reaching the stationary distribution.<br />
+☐ <code class="highlighter-rouge">WRONG</code> Use the samples for inference as this high scale reduction factor indicates convergence. <em>A high scale reduction factor indicates that the chains are not yet exploring the same space, so we need to provide them more iterations to converge.</em><br />
+⚡ <code class="highlighter-rouge">CORRECT</code> Continue running the chain for many more iterations. <em>A high scale reduction factor indicates that the chains are not yet exploring the same space, so we need to provide them more iterations to converge.</em><br /></p>
+
+<p><b>
+Which of the following Monte Carlo statistics would require the largest MCMC effective sample size to estimate reliably? Assume the target distribution is unimodal (has only one peak).<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> Median of the target distribution<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> 97.5 percentile of the target distribution <em>The outer edges of the distribution are sampled less frequently and therefore susceptible to changes between simulations. The Raftery and Lewis diagnostic can help you decide how many iterations you need to reliably estimate outer quantiles of the target distribution.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> 15 percentile of the target distribution<br />
+☐ <code class="highlighter-rouge">WRONG</code> Mean of the target distribution <em>For most distributions (excluding the extremely skewed), the mean is located near the center of the distribution, which is sampled frequently and easy to estimate.</em><br /></p>
+
+<h4 id="mcmc-quizz"><strong>MCMC Quizz</strong></h4>
+
+<p><b>
+For Questions 1 through 3, consider the following model for data that take on values between 0 and 1:<br />
+\(x_i \mid \alpha, \beta \overset{\text{iid}}{\sim} \text{Beta}(\alpha, \beta) \, , \quad i = 1, \ldots, n,\)<br />
+\(\alpha \sim \text{Gamma}(a, b)\)<br />
+\(\beta \sim \text{Gamma}(r, s)\)<br />
+where \(\alpha\) and \(\beta\) are independent a priori. Which of the following gives the full conditional density for \(\alpha\) up to proportionality?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> \(p( \alpha \mid \beta, x) \propto \frac{ \Gamma(\alpha + \beta)^n }{ \Gamma(\alpha)^n \Gamma(\beta)^n } \left[ \prod_{i=1}^n x_i \right]^{\alpha - 1} \left[ \prod_{i=1}^n (1-x_i) \right]^{\beta - 1} \alpha^{a-1} e^{-b\alpha} \beta^{r-1} e^{-s\beta} I_{(0 &lt; \alpha &lt; 1)} I_{(0 &lt; \beta &lt; 1)}\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(p( \alpha \mid \beta, x) \propto \frac{ \Gamma(\alpha + \beta)^n }{ \Gamma(\alpha)^n } \left[ \prod_{i=1}^n x_i \right]^{\alpha - 1} \alpha^{a-1} e^{-b\alpha} I_{(0 &lt; \alpha &lt; 1)}\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(p( \alpha \mid \beta, x) \propto \left[ \prod_{i=1}^n x_i \right]^{\alpha - 1} \alpha^{a-1} e^{-b\alpha} I_{(\alpha &gt; 0)}\)<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> \(p( \alpha \mid \beta, x) \propto \frac{ \Gamma(\alpha + \beta)^n }{ \Gamma(\alpha)^n } \left[ \prod_{i=1}^n x_i \right]^{\alpha - 1} \alpha^{a-1} e^{-b\alpha} I_{(\alpha &gt; 0)}\) <em>When we treat the data and \(\beta\) as known constants, the full joint distribution of all quantities x\(, \alpha\), and \(\beta\) is proportional to this expression when viewed as a function of \(\alpha\).</em><br /></p>
+
+<p><b>
+Suppose we want posterior samples for \(\alpha\) from the model in Question 1. What is our best option?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> The full conditional for \(\alpha\) is proportional to a common distribution which we can sample directly, so we can draw from that.<br />
+☐ <code class="highlighter-rouge">WRONG</code> The joint posterior for \(\alpha\) and \(\beta\) is a common probability distribution which we can sample directly. Thus we can draw Monte Carlo samples for both parameters and keep the samples for \(\alpha\).<br />
+☐ <code class="highlighter-rouge">WRONG</code> The full conditional for \(\alpha\) is not a proper distribution (it doesn’t integrate to 1), so we cannot sample from it.<br />
+⚡ <code class="highlighter-rouge">CORRECT</code> The full conditional for \(\alpha\) is not proportional to any common probability distribution, and the marginal posterior for \(\beta\) is not any easier, so we will have to resort to a Metropolis-Hastings sampler. <em>Another option is to approximate the posterior distribution for \(\alpha\) by considering a set of discrete values such as \(0.1, 0.2, \ldots, 0.9\) etc. You could use a discrete uniform prior, or discrete prior probabilities proportional to the beta prior evaluated at these specific values. Either way, the full conditional distribution for \alphaα looks like the discrete version of Bayes’ theorem, which is easy to compute.</em><br /></p>
+
+<p><b>
+If we elect to use a Metropolis-Hastings algorithm to draw posterior samples for \(\alpha\), the Metropolis-Hastings candidate acceptance ratio is computed using the full conditional for \(\alpha\) as<br />
+\(\frac{ \Gamma(\alpha)^n \Gamma(\alpha^*+\beta)^n \left[ \prod_{i=1}^n x_i \right]^{\alpha^*} {\alpha^*}^{a-1} e^{-b\alpha^*} q(\alpha^* | \alpha) I_{\alpha^* &gt; 0} } { \Gamma(\alpha^*)^n \Gamma(\alpha+\beta)^n \left[ \prod_{i=1}^n x_i \right]^{\alpha} {\alpha}^{a-1} e^{-b\alpha} q(\alpha | \alpha^*) I_{\alpha &gt; 0} }\)<br />
+where \(\alpha^*\) is a candidate value drawn from proposal distribution \(q(\alpha^* | \alpha)\). Suppose that instead of the full conditional for \(\alpha\), we use the full joint posterior distribution of \(\alpha\) and \(\beta\) and simply plug in the current (or known) value of \(\beta\). What is the Metropolis-Hastings ratio in this case?<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> \(\frac{ \Gamma(\alpha)^n \Gamma(\alpha^*+\beta)^n \left[ \prod_{i=1}^n x_i \right]^{\alpha^*} {\alpha^*}^{a-1} e^{-b\alpha^*} q(\alpha^* | \alpha) I_{\alpha^* &gt; 0} } { \Gamma(\alpha^*)^n \Gamma(\alpha+\beta)^n \left[ \prod_{i=1}^n x_i \right]^{\alpha} {\alpha}^{a-1} e^{-b\alpha} q(\alpha | \alpha^*) I_{\alpha &gt; 0} }\) <em>All of the terms involving only \(\beta\) are identical in the numerator and denominator, and thus cancel out. The acceptance ratio is the same whether we use the full joint posterior or the full conditional in a Gibbs sampler.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\frac{ \Gamma(\alpha^* + \beta)^n \left[ \prod_{i=1}^n x_i \right]^{\alpha^*- 1} \left[ \prod_{i=1}^n (1-x_i) \right]^{\beta - 1} {\alpha^*}^{a-1} e^{-b\alpha^*} \beta^{r-1} e^{-s\beta} q(\alpha | \alpha^*) I_{(0 &lt; \alpha^*)} I_{(0 &lt; \beta )} }{ \Gamma(\alpha^*)^n \Gamma(\beta)^n q(\alpha^* | \alpha) }\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \(\frac{ \Gamma(\alpha)^n \Gamma(\alpha^*+\beta)^n \left[ \prod_{i=1}^n x_i \right]^{\alpha^*} q(\alpha^* | \alpha) I_{\alpha^* &gt; 0} } { \Gamma(\alpha^*)^n \Gamma(\alpha+\beta)^n \left[ \prod_{i=1}^n x_i \right]^{\alpha} q(\alpha | \alpha^*) I_{\alpha &gt; 0} }\)<br />
+☐ <code class="highlighter-rouge">WRONG</code> \({\alpha^*}^{a-1} e^{-b\alpha^*} q(\alpha^* | \alpha) I_{\alpha^* &gt; 0} \over {\alpha}^{a-1} e^{-b\alpha} q(\alpha | \alpha^*) I_{\alpha &gt; 0}\)<br /></p>
+
+<p><b>
+For Questions 4 and 5, re-run the Metropolis-Hastings algorithm from Lesson 4 to draw posterior samples from the model for mean company personnel growth for six new companies: (-0.2, -1.5, -5.3, 0.3, -0.8, -2.2). Use the same prior as in the lesson.<br />
+Below are four possible values for the standard deviation of the normal proposal distribution in the algorithm. Which one yields the best sampling results?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> 0.5 <em>Run the sampler once for each of these proposal distributions and look at the acceptance rate for the candidate draws. We want this to be between 0.22 and 0.5.</em><br />
+⚡ <code class="highlighter-rouge">CORRECT</code> 1.5 <em>The candidate acceptance rate for this proposal distribution is about 0.3 which yields good results.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> 3.0<br />
+☐ <code class="highlighter-rouge">WRONG</code> 4.0<br /></p>
+
+<p><b>
+Report the posterior mean point estimate for \(\mu\), the mean growth, using these six data points. Round your answer to two decimal places.<br />
+</b>
+<strong>-1.427798</strong><br />
+<em>The sample mean of the six points is -1.62. Clearly the prior has some influence on this estimate.</em><br /></p>
+
 
         </div>
     </div>

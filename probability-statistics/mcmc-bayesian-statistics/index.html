@@ -394,6 +394,34 @@ If we have three predictor variables \(x_i = ( x_{1,i}, x_{2,i}, x_{3,i} )\), wh
 ☐ <code class="highlighter-rouge">WRONG</code> \(y_i \mid x_i, \beta \overset{\text{ind}}{\sim} \text{Bern} \left( \exp[ -( \beta_0 + \beta_1 x_{1,i} + \beta_2 x_{2,i} + \beta_3 x_{3,i}) ] \right)\)<br />
 ☐ <code class="highlighter-rouge">WRONG</code> \(y_i \mid x_i, \beta \overset{\text{ind}}{\sim} \text{Bern} \left( \beta_0 + \beta_1 x_{1,i} + \beta_2 x_{2,i} + \beta_3 x_{3,i} \right)\)<br /></p>
 
+<p><b>
+If we have three predictor variables \(x_i = ( x_{1,i}, x_{2,i}, x_{3,i} )\), what would the likelihood part of the hierarchical representation of a Poisson regression with logarithmic link look like?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> \(y_i \mid x_i, \beta \overset{\text{ind}}{\sim} \text{Pois} \left( \log[ \beta_0 + \beta_1 x_{1,i} + \beta_2 x_{2,i} + \beta_3 x_{3,i} ] \right)\) <em>Double check the form of the inverse link function.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> \(y_i \mid x_i, \beta \overset{\text{ind}}{\sim} \text{Pois} \left( \beta_0 + \beta_1 x_{1,i} + \beta_2 x_{2,i} + \beta_3 x_{3,i} \right)\) <em>This would be the model if we used no link function.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> \(y_i \mid x_i, \beta \overset{\text{ind}}{\sim} \text{Pois} \left( \exp[ - ( \beta_0 + \beta_1 x_{1,i} + \beta_2 x_{2,i} + \beta_3 x_{3,i} ) ] \right)\) <em>Double check the form of the inverse link function.</em><br />
+⚡ <code class="highlighter-rouge">CORRECT</code> \(y_i \mid x_i, \beta \overset{\text{ind}}{\sim} \text{Pois} \left( \exp[ \beta_0 + \beta_1 x_{1,i} + \beta_2 x_{2,i} + \beta_3 x_{3,i} ] \right)\) <em>Here we incorporated the (inverse) link function directly into the likelihood rather than writing it with two lines.</em><br /></p>
+
+<p><b>
+Suppose we have normal data that are hierarchically organized in three groups and we model them as:<br />
+\(y_i \mid g_i, \mu_{g_i}, \sigma^2 \overset{\text{ind}}{\sim} \text{N} ( \mu_{g_i} , \sigma^2 )\, , \quad g_i \in \{ 1, 2, 3 \},\)<br />
+\(\mu_g \overset{\text{iid}}{\sim} \text{N} (\eta, \tau^2) \, , \quad g = 1,2,3.\)<br />
+How do we distinguish between a hierarchical model and a cell means ANOVA model here?<br />
+Note: Technically, this is already a hierarchical model, as it has two levels (which means that technically all models which have any prior are hierarchical). However, for our purposes, we define a hierarchical model as having more than two levels.<br />
+</b>
+⚡ <code class="highlighter-rouge">CORRECT</code> To create a hierarchical model, place prior distributions on one (or both) of \(\eta\) and \(\tau^2\). In an ANOVA model, these hyperparameters would be fixed. <em>Furthermore, in an ANOVA model, the \(\mu\) parameters don’t need to be iid. They can each have their own fixed prior. ANOVA models are still useful if we have no reason to believe that the data within groups are correlated. For example, if we ran an experiment and the groups were randomly assigned, we might still consider observations in the same group to be independent.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> In an ANOVA model, we would fix \(\eta\) and \(\tau^2\) at the same value for all three groups. In a hierarchical model, we would fix \(\eta\) and \(\tau^2\) at different values for each group (so the \(\mu\) parameters would no longer be iid.). <em>To create a hierarchical model, we need another layer of priors. In an ANOVA model we could fix \(\eta\) and \(\tau^2\) at the same value for all three groups or at different values.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> To create an ANOVA model, place prior distributions on one (or both) of \(\eta\) and \(\tau^2\). In a hierarchical model, these hyperparameters would be fixed. <em>Hierarchical models require another layer of priors.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> In a hierarchical model, we would fix \(\eta\) and \(\tau^2\) at the same value for all three groups. In an ANOVA model, we would fix \(\eta\) and \(\tau^2\) at different values for each group (so the \(\mu\) parameters would no longer be iid.). <em>To create a hierarchical model, we need another layer of priors. In an ANOVA model we could fix \(\eta\) and \(\tau^2\) at the same value for all three groups or at different values.</em><br /></p>
+
+<p><b>
+This segment introduced the “random intercept” linear model. Previously, we placed a prior distribution on the intercept of linear models (so that could also be considered random). What further distinguishes the new hierarchical intercepts as “random”?<br />
+</b>
+☐ <code class="highlighter-rouge">WRONG</code> Inference for hierarchical intercepts are not tractable, so we draw them from a common prior distribution. <em>Recall what it means to be a hierarchical model.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> We do not know the values of the intercepts, so we designate them as random. <em>Recall what it means to be a hierarchical model.</em><br />
+☐ <code class="highlighter-rouge">WRONG</code> We do not know the values of the intercepts, so we select random values for them. <em>Recall what it means to be a hierarchical model.</em><br />
+⚡ <code class="highlighter-rouge">CORRECT</code> Multiple intercepts come from a common probability distribution, which we also want to estimate. <em>Early development of “random intercepts” was based on non-Bayesian literature, in which linear model intercepts were considered fixed, unknown constants. The extension was to assign a probability distribution to them, introducing a hierarchy. This naturally fits into the Bayesian paradigm.</em><br /></p>
+
 <h4 id="lession-1-quizz"><strong>Lession 1 Quizz</strong></h4>
 
 <p><b>

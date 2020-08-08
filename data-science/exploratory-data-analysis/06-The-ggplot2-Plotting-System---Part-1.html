@@ -374,12 +374,6 @@ summary {
 <li>A “third” graphics system for R (along with <strong>base</strong> and <strong>lattice</strong>)</li>
 <li>Available from CRAN via <code>install.packages()</code></li>
 <li>Web site: <a href="http://ggplot2.org" class="uri">http://ggplot2.org</a> (better documentation)</li>
-</ul>
-<hr />
-</div>
-<div id="what-is-ggplot2-1" class="section level2">
-<h2>What is ggplot2?</h2>
-<ul>
 <li>Grammar of graphics represents an abstraction of graphics ideas/objects</li>
 <li>Think “verb”, “noun”, “adjective” for graphics</li>
 <li>Allows for a “theory” of graphics on which to build new graphics and graphics objects</li>
@@ -404,12 +398,6 @@ summary {
 <li>Start with blank canvas and build up from there</li>
 <li>Start with <code>plot</code> function (or similar)</li>
 <li>Use annotation functions to add/modify (<code>text</code>, <code>lines</code>, <code>points</code>, <code>axis</code>)</li>
-</ul>
-<hr />
-</div>
-<div id="plotting-systems-in-r-base-1" class="section level2">
-<h2>Plotting Systems in R: Base</h2>
-<ul>
 <li>Convenient, mirrors how we think of building plots and analyzing data</li>
 <li>Can’t go back once plot has started (i.e. to adjust margins); need to plan in advance</li>
 <li>Difficult to “translate” to others once a new plot has been created (no graphical “language”)
@@ -426,12 +414,6 @@ summary {
 <li>Most useful for conditioning types of plots: Looking at how <span class="math inline">\(y\)</span> changes with <span class="math inline">\(x\)</span> across levels of <span class="math inline">\(z\)</span></li>
 <li>Things like margins/spacing set automatically because entire plot is specified at once</li>
 <li>Good for putting many many plots on a screen</li>
-</ul>
-<hr />
-</div>
-<div id="plotting-systems-in-r-lattice-1" class="section level2">
-<h2>Plotting Systems in R: Lattice</h2>
-<ul>
 <li>Sometimes awkward to specify an entire plot in a single function call</li>
 <li>Annotation in plot is not intuitive</li>
 <li>Use of panel functions and subscripts difficult to wield and requires intense preparation</li>
@@ -455,12 +437,6 @@ summary {
 <li>Works much like the <code>plot</code> function in base graphics system</li>
 <li>Looks for data in a data frame, similar to lattice, or in the parent environment</li>
 <li>Plots are made up of <em>aesthetics</em> (size, shape, color) and <em>geoms</em> (points, lines)</li>
-</ul>
-<hr />
-</div>
-<div id="the-basics-qplot-1" class="section level2">
-<h2>The Basics: <code>qplot()</code></h2>
-<ul>
 <li>Factors are important for indicating subsets of the data (if they are to have different properties); they should be <strong>labeled</strong></li>
 <li>The <code>qplot()</code> hides what goes on underneath, which is okay for most operations</li>
 <li><code>ggplot()</code> is the core function and very flexible for doing things <code>qplot()</code> cannot do</li>

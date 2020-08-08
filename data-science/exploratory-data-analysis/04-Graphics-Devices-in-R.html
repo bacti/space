@@ -383,12 +383,6 @@ summary {
 <li><p>On Windows the screen device is launched with <code>windows()</code></p></li>
 <li><p>On Unix/Linux the screen device is launched with <code>x11()</code></p></li>
 </ul></li>
-</ul>
-<hr />
-</div>
-<div id="what-is-a-graphic-device" class="section level2">
-<h2>What is a Graphic Device?</h2>
-<ul>
 <li><p>When making a plot, you need to consider how the plot will be used to determine what device the plot should be sent to.</p>
 <ul>
 <li>The list of devices is found in <code>?Devices</code>; there are also devices created by users on CRAN</li>
@@ -418,10 +412,6 @@ summary {
 <pre class="r"><code>library(datasets)
 with(faithful, plot(eruptions, waiting))  ## Make plot appear on screen device
 title(main = &quot;Old Faithful Geyser data&quot;)  ## Annotate with a title</code></pre>
-<hr />
-</div>
-<div id="how-does-a-plot-get-created-1" class="section level2">
-<h2>How Does a Plot Get Created?</h2>
 <p>The second approach to plotting is most commonly used for file devices:</p>
 <ol style="list-style-type: decimal">
 <li><p>Explicitly launch a graphics device</p></li>
@@ -447,10 +437,6 @@ dev.off()  ## Close the PDF file device
 <li><p><code>win.metafile</code>: Windows metafile format (only on Windows)</p></li>
 <li><p><code>postscript</code>: older format, also resizes well, usually portable, can be used to create encapsulated postscript files; Windows systems often don’t have a postscript viewer</p></li>
 </ul>
-<hr />
-</div>
-<div id="graphics-file-devices-1" class="section level2">
-<h2>Graphics File Devices</h2>
 <p>Bitmap formats</p>
 <ul>
 <li><p><code>png</code>: bitmapped format, good for line drawings or images with solid colors, uses lossless compression (like the old GIF format), most web browsers can read this format natively, good for plotting many many many points, does not resize well</p></li>

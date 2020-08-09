@@ -504,12 +504,12 @@ print(p2)</code></pre>
 ##  $ x      : num [1:53940] 3.95 3.89 4.05 4.2 4.34 3.94 3.95 4.07 3.87 4 ...
 ##  $ y      : num [1:53940] 3.98 3.84 4.07 4.23 4.35 3.96 3.98 4.11 3.78 4.05 ...
 ##  $ z      : num [1:53940] 2.43 2.31 2.31 2.63 2.75 2.48 2.47 2.53 2.49 2.39 ...</code></pre>
-<p>So the data frame contains 10 pieces of information for each of 53940 diamonds. Run the R command table with diamonds$color as an argument.</p>
+<p>So the data frame contains 10 pieces of information for each of 53940 diamonds. Run the R command table with <code>diamonds$color</code> as an argument.</p>
 <pre class="r"><code>table(diamonds$color)</code></pre>
 <pre><code>## 
 ##     D     E     F     G     H     I     J 
 ##  6775  9797  9542 11292  8304  5422  2808</code></pre>
-<p>We see 7 colors each represented by a letter. Now run the R command table with two arguments, diamonds<span class="math inline">\(color and diamonds\)</span>cut.</p>
+<p>We see 7 colors each represented by a letter. Now run the R command table with two arguments, <code>diamonds$color</code> and <code>diamonds$cut</code>.</p>
 <pre class="r"><code>table(diamonds$color,diamonds$cut)</code></pre>
 <pre><code>##    
 ##     Fair Good Very Good Premium Ideal

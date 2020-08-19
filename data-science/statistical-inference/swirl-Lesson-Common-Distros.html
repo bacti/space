@@ -412,12 +412,12 @@ Hint: <span class="math inline">\(E(X^2)=p\)</span> and <span class="math inline
 ☐ <span class="math inline">\(p(p-1)\)</span><br />
 ☐ <span class="math inline">\(p^2*(1-p)^2\)</span></p>
 <p>Binomial random variables are obtained as the sum of iid Bernoulli trials. Specifically, let <span class="math inline">\(X_1, ..., X_n\)</span> be iid Bernoulli(p) random variables; then <span class="math inline">\(X = X_1 + X_2 + ... + X_n\)</span> is a binomial random variable. Binomial random variables represent the number of successes, k, out of n independent Bernoulli trials. Each of the trials has probability p.</p>
-<p>The PMF of a binomial random variable X is the function representing the probability that X=x. In other words, that there are x successes out of n independent trials. Which of the following represents the PMF of a binomial distribution? Here x, the number of successes, goes from 0 to n, the number of trials, and choose(n,x) represents the binomial coefficient ‘n choose x’ which is the number of ways x successes out of n trials can occur regardless of order.<br />
-Hint: To take the value x, the random variable X must have x ‘successes’. Each of these occurs with probability p. It also must have <span class="math inline">\(n-x\)</span> ‘failures’, each of which occurs with probability <span class="math inline">\(1-p\)</span>. We don’t care about the order in which the successes and failures occur so we have to multiply by choose(n,x).<br />
-⚡ <span class="math inline">\(choose(n,x) * p^x * (1-p)^{n-x}\)</span><br />
-☐ <span class="math inline">\(choose(n,x) * p^{n-x} * (1-p)^x\)</span><br />
+<p>The PMF of a binomial random variable X is the function representing the probability that X=x. In other words, that there are x successes out of n independent trials. Which of the following represents the PMF of a binomial distribution? Here x, the number of successes, goes from 0 to n, the number of trials, and <span class="math inline">\(n \choose x\)</span> represents the binomial coefficient ‘n choose x’ which is the number of ways x successes out of n trials can occur regardless of order.<br />
+Hint: To take the value x, the random variable X must have x ‘successes’. Each of these occurs with probability p. It also must have <span class="math inline">\(n-x\)</span> ‘failures’, each of which occurs with probability <span class="math inline">\(1-p\)</span>. We don’t care about the order in which the successes and failures occur so we have to multiply by <span class="math inline">\(n \choose x\)</span>.<br />
+⚡ <span class="math inline">\({n \choose x} * p^x * (1-p)^{n-x}\)</span><br />
+☐ <span class="math inline">\({n \choose x} * p^{n-x} * (1-p)^x\)</span><br />
 ☐ <span class="math inline">\(p^x\)</span><br />
-☐ <span class="math inline">\(choose(n,x) * p*x*(1-p)*(1-x)\)</span></p>
+☐ <span class="math inline">\({n \choose x} * p*x*(1-p)*(1-x)\)</span></p>
 <p>Suppose we were going to flip a biased coin 5 times. The probability of tossing a head is .8 and a tail .2. What is the probability that you’ll toss at least 3 heads.</p>
 <pre class="r"><code>0.94208</code></pre>
 <pre><code>## [1] 0.94208</code></pre>

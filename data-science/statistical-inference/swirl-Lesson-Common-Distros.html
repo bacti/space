@@ -392,28 +392,28 @@ Hint: When x=1, which of the given expressions yields p?<br />
 ☐ <span class="math inline">\(p^{1-x} *(1-p)*(1-x)\)</span><br />
 ☐ <span class="math inline">\(p*(1-p)\)</span><br />
 ☐ <span class="math inline">\(x*(1-x)\)</span></p>
-<p>Recall the definition of the expectation of a random variable. Suppose we have a Bernoulli random variable and, as before, the probability it equals 1 (a success) is p and probability it equals 0 (a failure) is 1-p. What is its mean?<br />
-Hint: Add the two terms x*p(x) where x equals 0 and 1 respectively.<br />
+<p>Recall the definition of the expectation of a random variable. Suppose we have a Bernoulli random variable and, as before, the probability it equals 1 (a success) is p and probability it equals 0 (a failure) is <span class="math inline">\(1-p\)</span>. What is its mean?<br />
+Hint: Add the two terms <span class="math inline">\(x*p(x)\)</span> where x equals 0 and 1 respectively.<br />
 ⚡ <span class="math inline">\(p\)</span><br />
 ☐ <span class="math inline">\(1-p\)</span><br />
 ☐ <span class="math inline">\(p^2\)</span><br />
 ☐ <span class="math inline">\(p(1-p)\)</span></p>
-<p>Given the same Bernoulli random variable above, which of the following represents E(X^2)<br />
-Hint: Add the two terms x^2*p(x) where x equals 0 and 1 respectively.<br />
+<p>Given the same Bernoulli random variable above, which of the following represents <span class="math inline">\(E(X^2)\)</span><br />
+Hint: Add the two terms <span class="math inline">\(x^2*p(x)\)</span> where x equals 0 and 1 respectively.<br />
 ☐ <span class="math inline">\(p(1-p)\)</span><br />
 ☐ <span class="math inline">\(p^2\)</span><br />
 ☐ <span class="math inline">\((1-p)^2\)</span><br />
 ⚡ <span class="math inline">\(p\)</span><br />
 ☐ <span class="math inline">\(1-p\)</span></p>
-<p>Use the answers of the last two questions to find the variance of the Bernoulli random variable. Recall Var = E(X<sup>2)-(E(X))</sup>2<br />
-Hint: E(X^2)=p and E(X)=p, so Var=p-p^2. Rewrite this expression by factoring out the p.<br />
+<p>Use the answers of the last two questions to find the variance of the Bernoulli random variable. Recall <span class="math inline">\(Var = E(X^2)-E(X)^2\)</span><br />
+Hint: <span class="math inline">\(E(X^2)=p\)</span> and <span class="math inline">\(E(X)=p\)</span>, so <span class="math inline">\(Var=p-p^2\)</span>. Rewrite this expression by factoring out the <span class="math inline">\(p\)</span>.<br />
 ⚡ <span class="math inline">\(p(1-p)\)</span><br />
 ☐ <span class="math inline">\(p^2-p\)</span><br />
 ☐ <span class="math inline">\(p(p-1)\)</span><br />
-☐ $p^2*(1-p)^2 $</p>
-<p>Binomial random variables are obtained as the sum of iid Bernoulli trials. Specifically, let X_1, …, X_n be iid Bernoulli(p) random variables; then X = X_1 + X_2 + … X_n is a binomial random variable. Binomial random variables represent the number of successes, k, out of n independent Bernoulli trials. Each of the trials has probability p.</p>
+☐ <span class="math inline">\(p^2*(1-p)^2\)</span></p>
+<p>Binomial random variables are obtained as the sum of iid Bernoulli trials. Specifically, let <span class="math inline">\(X_1, ..., X_n\)</span> be iid Bernoulli(p) random variables; then <span class="math inline">\(X = X_1 + X_2 + ... + X_n\)</span> is a binomial random variable. Binomial random variables represent the number of successes, k, out of n independent Bernoulli trials. Each of the trials has probability p.</p>
 <p>The PMF of a binomial random variable X is the function representing the probability that X=x. In other words, that there are x successes out of n independent trials. Which of the following represents the PMF of a binomial distribution? Here x, the number of successes, goes from 0 to n, the number of trials, and choose(n,x) represents the binomial coefficient ‘n choose x’ which is the number of ways x successes out of n trials can occur regardless of order.<br />
-Hint: To take the value x, the random variable X must have x ‘successes’. Each of these occurs with probability p. It also must have n-x ‘failures’, each of which occurs with probability (1-p). We don’t care about the order in which the successes and failures occur so we have to multiply by choose(n,x).<br />
+Hint: To take the value x, the random variable X must have x ‘successes’. Each of these occurs with probability p. It also must have <span class="math inline">\(n-x\)</span> ‘failures’, each of which occurs with probability <span class="math inline">\(1-p\)</span>. We don’t care about the order in which the successes and failures occur so we have to multiply by choose(n,x).<br />
 ⚡ <span class="math inline">\(choose(n,x) * p^x * (1-p)^{n-x}\)</span><br />
 ☐ <span class="math inline">\(choose(n,x) * p^{n-x} * (1-p)^x\)</span><br />
 ☐ <span class="math inline">\(p^x\)</span><br />

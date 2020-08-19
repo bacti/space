@@ -422,7 +422,7 @@ Hint: To take the value x, the random variable X must have x ‘successes’. Ea
 <pre class="r"><code>sum(sapply(3:5, function(x) nrow(gtools::combinations(5, x)) * 0.8 ^ x * 0.2 ^ (5 - x)))</code></pre>
 <pre><code>## [1] 0.94208</code></pre>
 <p>Now you can verify your answer with the R function pbinom. The quantile is 2, the size is 5, the prob is .8 and the lower.tail is FALSE. Try it now.</p>
-<pre class="r"><code>pbinom(2,size=5,prob=.8,lower.tail=FALSE)</code></pre>
+<pre class="r"><code>pbinom(2, size = 5, prob = .8, lower.tail = FALSE)</code></pre>
 <pre><code>## [1] 0.94208</code></pre>
 <p>Another very common distribution is the normal or Gaussian. It has a complicated density function involving its mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>. The key fact of the density formula is that when plotted, it forms a bell shaped curve, symmetric about its mean <span class="math inline">\(\mu\)</span>. The variance <span class="math inline">\(\sigma^2\)</span> corresponds to the width of the bell, the higher the variance, the fatter the bell. We denote a normally distributed random variable X as <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>.</p>
 <p>When <span class="math inline">\(\mu = 0\)</span> and <span class="math inline">\(\sigma = 1\)</span> the resulting distribution is called the standard normal distribution and it is often labeled Z.</p>
@@ -480,25 +480,25 @@ Hint: 2.5% of the area falls to the right of the quantile of the 97.5 percentile
 <p>The converse is also true. If Z is standard normal, i.e., Z N(0,1), then the random variable X defined as <span class="math inline">\(X = \mu + \sigma*Z\)</span> is normally distributed with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>, i.e., <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span></p>
 <p>These formulae allow you to easily compute quantiles (and thus percentiles) for ANY normally distributed variable if you know its mean and variance. We’ll show how to find the 97.5th percentile of a normal distribution with mean 3 and variance 4.</p>
 <p>Again, we can use R’s qnorm function and simply specify the mean and standard deviation (the square root of the variance). Do this now. Find the 97.5th percentile of a normal distribution with mean 3 and standard deviation 2.</p>
-<pre class="r"><code>qnorm(.975,mean=3,sd=2)</code></pre>
+<pre class="r"><code>qnorm(.975, mean = 3, sd = 2)</code></pre>
 <pre><code>## [1] 6.919928</code></pre>
 <p>Let’s check it using the formula above, <span class="math inline">\(X = \mu + \sigma*Z\)</span>. Here we’ll use the 97.5th percentile for the standard normal as the value Z in the formula. Recall that we previously calculated this to be 1.96. Let’s multiply this by the standard deviation of the given normal distribution (2) and add in its mean (3) to see if we get a result close to the one qnorm gave us.</p>
-<pre class="r"><code>6.92</code></pre>
+<pre class="r"><code>1.96 * 2 + 3</code></pre>
 <pre><code>## [1] 6.92</code></pre>
 <p>Suppose you have a normal distribution with mean 1020 and standard deviation of 50 and you want to compute the probability that the associated random variable X &gt; 1200. The easiest way to do this is to use R’s pnorm function in which you specify the quantile (1200), the mean (1020) and standard deviation (50). You also must specify that the lower.tail is FALSE since we’re asking for a probability that the random variable is greater than our quantile. Do this now.</p>
-<pre class="r"><code>pnorm(1200,mean=1020,sd=50,lower.tail=FALSE)</code></pre>
+<pre class="r"><code>pnorm(1200, mean = 1020, sd = 50, lower.tail = FALSE)</code></pre>
 <pre><code>## [1] 0.0001591086</code></pre>
 <p>Alternatively, we could use the formula above to transform the given distribution to a standard normal. We compute the number of standard deviations the specified number (1200) is from the mean with <span class="math inline">\(Z = (X -\mu)/\sigma\)</span>. This is our new quantile. We can then use the standard normal distribution and the default values of pnorm. Remember to specify that lower.tail is FALSE. Do this now.</p>
-<pre class="r"><code>pnorm((1200-1020)/50,lower.tail=FALSE)</code></pre>
+<pre class="r"><code>pnorm((1200 - 1020) / 50, lower.tail = FALSE)</code></pre>
 <pre><code>## [1] 0.0001591086</code></pre>
 <p>For practice, using the same distribution, find the 75% percentile. Use qnorm and specify the probability (.75), the mean (1020) and standard deviation (50). Since we want to include the left part of the curve we can use the default lower.tail=TRUE.</p>
-<pre class="r"><code>qnorm(.75,mean=1020,sd=50)</code></pre>
+<pre class="r"><code>qnorm(.75, mean = 1020, sd = 50)</code></pre>
 <pre><code>## [1] 1053.724</code></pre>
-<p>Note that R functions pnorm and qnorm are inverses. What would you expect pnorm(qnorm(.53)) to return?</p>
-<pre class="r"><code>.53</code></pre>
+<p>Note that R functions pnorm and qnorm are inverses. What would you expect <code>pnorm(qnorm(.53))</code> to return?</p>
+<pre class="r"><code>pnorm(qnorm(.53))</code></pre>
 <pre><code>## [1] 0.53</code></pre>
-<p>How about qnorm(pnorm(.53))?</p>
-<pre class="r"><code>.53</code></pre>
+<p>How about <code>qnorm(pnorm(.53))</code>?</p>
+<pre class="r"><code>qnorm(pnorm(.53))</code></pre>
 <pre><code>## [1] 0.53</code></pre>
 <p>Now let’s talk about our last common distribution, the Poisson. This is, as Wikipedia tells us, “a discrete probability distribution that expresses the probability of a given number of events occurring in a fixed interval of time and/or space if these events occur with a known average rate and independently of the time since the last event.”</p>
 <p>In other words, the Poisson distribution models counts or number of event in some interval of time. From Wikipedia, “Any variable that is Poisson distributed only takes on integer values.”</p>
@@ -506,14 +506,14 @@ Hint: 2.5% of the area falls to the right of the quantile of the 97.5 percentile
 <p>The mean and variance of the Poisson distribution are both <span class="math inline">\(\lambda\)</span>.</p>
 <p>Poisson random variables are used to model rates such as the rate of hard drive failures. We write <span class="math inline">\(X \sim Poisson(\lambda*t)\)</span> where <span class="math inline">\(\lambda\)</span> is the expected count per unit of time and t is the total monitoring time.</p>
 <p>For example, suppose the number of people that show up at a bus stop is Poisson with a mean of 2.5 per hour, and we want to know the probability that at most 3 people show up in a 4 hour period. We use the R function ppois which returns a probability that the random variable is less than or equal to 3. We only need to specify the quantile (3) and the mean (2.5 * 4). We can use the default parameters, lower.tail=TRUE and log.p=FALSE. Try it now.</p>
-<pre class="r"><code>ppois(3,2.5 * 4)</code></pre>
+<pre class="r"><code>ppois(q = 3, lambda = 2.5 * 4)</code></pre>
 <pre><code>## [1] 0.01033605</code></pre>
 <p>Finally, the Poisson distribution approximates the binomial distribution in certain cases. Recall that the binomial distribution is the discrete distribution of the number of successes, k, out of n independent binary trials, each with probability p. If n is large and p is small then the Poisson distribution with <span class="math inline">\(\lambda\)</span> equal to n*p is a good approximation to the binomial distribution.</p>
 <p>To see this, use the R function pbinom to estimate the probability that you’ll see at most 5 successes out of 1000 trials each of which has probability .01. As before, you can use the default parameter values (lower.tail=TRUE and log.p=FALSE) and just specify the quantile, size, and probability.</p>
-<pre class="r"><code>pbinom(5,1000,.01)</code></pre>
+<pre class="r"><code>pbinom(q = 5, size = 1000, prob = .01)</code></pre>
 <pre><code>## [1] 0.06613951</code></pre>
 <p>Now use the function ppois with quantile equal to 5 and <span class="math inline">\(\lambda\)</span> equal to n*p to see if you get a similar result.</p>
-<pre class="r"><code>ppois(5,1000*.01)</code></pre>
+<pre class="r"><code>ppois(q = 5, lambda = 1000 * .01)</code></pre>
 <pre><code>## [1] 0.06708596</code></pre>
 <p>See how they’re close? Pretty cool, right? This worked because n was large (1000) and p was small (.01).</p>
 <p>Congrats! You’ve concluded this uncommon lesson on common distributions.</p>

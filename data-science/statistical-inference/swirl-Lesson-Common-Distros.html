@@ -419,7 +419,8 @@ Hint: To take the value x, the random variable X must have x ‘successes’. Ea
 ☐ <span class="math inline">\(p^x\)</span><br />
 ☐ <span class="math inline">\({n \choose x} * p*x*(1-p)*(1-x)\)</span></p>
 <p>Suppose we were going to flip a biased coin 5 times. The probability of tossing a head is .8 and a tail .2. What is the probability that you’ll toss at least 3 heads.</p>
-<pre class="r"><code>sum(sapply(3:5, function(x) nrow(gtools::combinations(5, x)) * 0.8 ^ x * 0.2 ^ (5 - x)))</code></pre>
+<pre class="r"><code># sum(sapply(3:5, function(x) nrow(gtools::combinations(5, x)) * 0.8 ^ x * 0.2 ^ (5 - x)))
+sum(sapply(3:5, function(x) choose(5, x) * 0.8 ^ x * 0.2 ^ (5 - x)))</code></pre>
 <pre><code>## [1] 0.94208</code></pre>
 <p>Now you can verify your answer with the R function pbinom. The quantile is 2, the size is 5, the prob is .8 and the lower.tail is FALSE. Try it now.</p>
 <pre class="r"><code>pbinom(2, size = 5, prob = .8, lower.tail = FALSE)</code></pre>

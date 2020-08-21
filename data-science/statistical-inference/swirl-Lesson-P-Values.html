@@ -470,14 +470,14 @@ Hint: The p-value is about .035 which is greater than <span class="math inline">
 ☐ Reject<br />
 ⚡ Fail to reject</p>
 <p>For the other side of the test we want the probability that <span class="math inline">\(X\le7\)</span>, again out of a sample of size 8 with probability .5. Again, we use pbinom, this time with an argument of 7 and lower.tail=TRUE. Try this now.</p>
-<pre class="r"><code>pbinom(7,size=8,prob=.5,lower.tail=TRUE)</code></pre>
+<pre class="r"><code>pbinom(q = 7, size = 8, prob = .5, lower.tail = TRUE)</code></pre>
 <pre><code>## [1] 0.9960938</code></pre>
-<p>So it’s pretty likely (probability .996) that out of 8 children you’ll have at most 7 girls. The p value of this two sided test is 2<em>the smaller of the two one-sided values. In this case the lower value is .035, so 2</em>.035 is the p-value for this two-sided test.</p>
+<p>So it’s pretty likely (probability .996) that out of 8 children you’ll have at most 7 girls. The p value of this two sided test is <code>2 * the smaller of the two one-sided values</code>. In this case the lower value is <code>.035</code>, so <code>2 * .035</code> is the p-value for this two-sided test.</p>
 <p>Now a final example using a Poisson distribution. Remember that this is discrete and it involves counts or rates of counts. The example from the slides involves rates of infections in a hospital.</p>
 <p>Suppose that the hospital has an infection rate of 10 infections per 100 person/days at risk. This is a rate of 0.1. Assume that an infection rate of 0.05 is the benchmark. This is our <span class="math inline">\(\alpha\)</span> level, recognize it? With this model, could the observed rate (.1) be larger than the benchmark 0.05 by chance or does it indicate a problem?</p>
 <p>In other words, <span class="math inline">\(H_0\)</span> says that <span class="math inline">\(\lambda = 0.05\)</span> so <span class="math inline">\(\lambda_0 * 100 = 5\)</span>, and <span class="math inline">\(H_a\)</span> says that <span class="math inline">\(\lambda &gt; 0.05\)</span>. Is <span class="math inline">\(H_0\)</span> true and our observed rate (.1) is just a fluke OR should we reject <span class="math inline">\(H_0\)</span> ?</p>
 <p>As before, R has the handy function ppois, which returns probabilities for Poisson distributions. We want the probability of seeing at least 9 infections using a <span class="math inline">\(\lambda\)</span> value of 5 and lower.tail=FALSE. As when we used pbinom we have to use 9 as the argument since we’re looking for a probability of a value greater than the argument. Try this now.</p>
-<pre class="r"><code>ppois(9,5,lower.tail=FALSE)</code></pre>
+<pre class="r"><code>ppois(q = 9, lambda = 5, lower.tail = FALSE)</code></pre>
 <pre><code>## [1] 0.03182806</code></pre>
 <p>We see a probability of about .03. Should we reject or fail to reject <span class="math inline">\(H_0\)</span>? (Remember those helpful pictures with shaded areas. Smaller areas mean smaller probabilities and vice versa.)<br />
 Hint: Remember the picture of areas. The probability .03 is less than the benchmark of .05.<br />
